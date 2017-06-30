@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
-  
+  <title>平湖烟雨</title>
+  <subtitle>Never give up</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://xiangyu520.top/"/>
   <updated>2017-06-30T13:33:16.155Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://xiangyu520.top/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>项昱</name>
     
   </author>
   
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2017/06/30/hello-world/"/>
-    <id>http://yoursite.com/2017/06/30/hello-world/</id>
+    <link href="http://xiangyu520.top/2017/06/30/hello-world/"/>
+    <id>http://xiangyu520.top/2017/06/30/hello-world/</id>
     <published>2017-06-30T13:33:16.155Z</published>
     <updated>2017-06-30T13:33:16.155Z</updated>
     
