@@ -262,11 +262,13 @@ $(document).ready(function(){
       a = $('#asidepart'),
       c = $('.closeaside'),
       o = $('.openaside');
+
   c.click(function(){
     a.addClass('fadeOut').css('display', 'none');
     o.css('display', 'block').addClass('fadeIn');
     m.addClass('moveMain');
   });
+
   o.click(function(){
     o.css('display', 'none').removeClass('beforeFadeIn');
     a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
