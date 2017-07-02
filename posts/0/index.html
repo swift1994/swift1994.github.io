@@ -11,15 +11,16 @@
     
 
     
-    <meta name="description" content="Java">
-<meta property="og:type" content="website">
+    <meta name="description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat 现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错前提下载安装xshell（具体如何是使用xshell请自行Google） 和xftp1 部署jdk     查看系统是否安装了jdk  [root@localhost ~]#">
+<meta property="og:type" content="article">
 <meta property="og:title" content="平湖烟雨">
-<meta property="og:url" content="http://www.xiangyu520.top/index.html">
+<meta property="og:url" content="http://www.xiangyu520.top/posts/0/index.html">
 <meta property="og:site_name" content="平湖烟雨">
-<meta property="og:description" content="Java">
+<meta property="og:description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat 现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错前提下载安装xshell（具体如何是使用xshell请自行Google） 和xftp1 部署jdk     查看系统是否安装了jdk  [root@localhost ~]#">
+<meta property="og:updated_time" content="2017-07-02T08:49:05.400Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="平湖烟雨">
-<meta name="twitter:description" content="Java">
+<meta name="twitter:description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat 现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错前提下载安装xshell（具体如何是使用xshell请自行Google） 和xftp1 部署jdk     查看系统是否安装了jdk  [root@localhost ~]#">
 
     
     <link rel="alternative" href="/atom.xml" title="平湖烟雨" type="application/atom+xml">
@@ -222,12 +223,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/posts/0/" title="" itemprop="url"></a>
@@ -243,9 +242,16 @@
 </span>
   </p>
 </header>
-    <div class="article-content">
-        
-        <p>  阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</p>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>  阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</p>
 <p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错<br>前提下载安装xshell（具体如何是使用xshell请自行Google） 和xftp<br>1 部署jdk<br>     查看系统是否安装了jdk</p>
 <p> [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java<br> 出现或者不出现以下内容<br>java version “1.7.0_24”<br>OpenJDK Runtime Environment (build 1.7.0_24-b18)<br>OpenJDK HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)<br>进一步查看JDK信息：<br>[root@localhost ~]# rpm -qa | grep java<br>tzdata-java-2012c-1.el6.noarch<br>java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64<br>卸载OpenJDK，执行以下操作：<br>[root@localhost ~]# rpm -e –nodeps tzdata-java-2012c-1.el6.noarch（解压jdk）<br>[root@localhost ~]# rpm -e –nodeps java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
 <p>若出现以上以上情况，按照以上步骤操作完后，用xftp上传jdk-7-linux-i586.rpm或者jdk-8u25-linux-x64.tar.gz（具体jdk版本看你自己选择，在Oracle官网上下载  ）到xftp上的/usr/local</p>
@@ -276,14 +282,9 @@
 <p>#把localhost这条记录的host改为 %； 意思是root可以由任何主机登录mysql，网上很多写法，都没有and host=’localhost’这个条件，经常报错。<br>update user set host = ‘%’ where user = ‘root’ and host=’localhost’;</p>
 <p>#再次查询，可以看到host有3个；%；127.0.0.1；izxxxxxxxdz；其实user表的主键是user字段和host字段的联合主键。<br>select host, user from user;</p>
 <p>#保险起见，重启mysql，Navicat Premium连接正常！万岁！<br>/etc/init.d/mysqld restart</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
@@ -291,24 +292,31 @@
 
 
 
-
-<div class="comments-count">
+	<div class="article-share" id="share">
 	
-</div>
+	  <div data-url="http://www.xiangyu520.top/posts/0/" data-title="平湖烟雨" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
 
 </footer>
 
-
-    </article>
-
-
-
-
+   	       
+	</article>
+	
+	
 
 
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -458,12 +466,89 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
 
 
 
@@ -534,4 +619,4 @@ var _hmt = _hmt || [];
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
