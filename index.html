@@ -224,82 +224,40 @@
     <div id="container">
       <div id="main">
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+  
+<article class="post-expand post"" itemprop="articleBody">
+<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/posts/0/" title="" itemprop="url"></a>
   </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="项昱" target="_blank" itemprop="author">项昱</a>
-		
-  <p class="article-time">
-    <time datetime="2017-06-30T13:33:16.155Z" itemprop="datePublished"> 发表于 2017-06-30</time>
-    <span id="busuanzi_container_page_pv">
-    总阅读<span id="busuanzi_value_page_pv"></span>次
-</span>
-  </p>
 </header>
-    <div class="article-content">
+    <div style="padding: 0.5em 0.5em 0.5em 0.8em">
+    
+        <a href="/posts/0/" title="" itemprop="url">
+      
         
-        <p>  阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</p>
-<p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错<br>前提下载安装xshell（具体如何是使用xshell请自行Google） 和xftp<br>1 部署jdk<br>     查看系统是否安装了jdk</p>
-<p> [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java<br> 出现或者不出现以下内容<br>java version “1.7.0_24”<br>OpenJDK Runtime Environment (build 1.7.0_24-b18)<br>OpenJDK HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)<br>进一步查看JDK信息：<br>[root@localhost ~]# rpm -qa | grep java<br>tzdata-java-2012c-1.el6.noarch<br>java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64<br>卸载OpenJDK，执行以下操作：<br>[root@localhost ~]# rpm -e –nodeps tzdata-java-2012c-1.el6.noarch（解压jdk）<br>[root@localhost ~]# rpm -e –nodeps java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
-<p>若出现以上以上情况，按照以上步骤操作完后，用xftp上传jdk-7-linux-i586.rpm或者jdk-8u25-linux-x64.tar.gz（具体jdk版本看你自己选择，在Oracle官网上下载  ）到xftp上的/usr/local</p>
-<p>安装jdk（JDK默认安装在/usr/java中）：<br>[root@localhost  ~]#cd /usr/local (cd 空格后路径是你刚刚上传到xftp的路径，不要搞错了，我上是传到/usr/local，这一点很多博客文档都没说清楚，导致很多初学者会具体操作时出错)<br>[root@localhost ckb]# rpm -ivh jdk-7-linux-i586.rpm或者[root@localhost ckb]#tar –zxvf jdk-8u25-linux-x64.tar.gz</p>
-<p>验证安装<br>执行以下操作，查看信息是否正常：<br>[root@localhost bin]# java<br>[root@localhost bin]# javac<br>[root@localhost bin]# java -version<br>java version “1.7.0_45”<br>Java(TM) SE Runtime Environment (build 1.7.0_45-b18)<br>Java HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)</p>
-<p>配置环境变量<br>我的机器安装完jdk-7-linux-i586.rpm后不用配置环境变量也可以正常执行javac、java –version操作，因此我没有进行JDK环境变量的配置。但是为了以后的不适之需，这里还是记录一下怎么进行配置，操作如下：<br>修改系统环境变量文件<br>vi + /etc/profile<br>执行之后 按”i”建，INSERT出现表示可以编辑<br>向文件里面追加以下内容：</p>
-<p>在光标处添加<br>JAVA_HOME=/usr/java/jdk1.7.0_45<br>JRE_HOME=/usr/java/jdk1.7.0_45/jre<br>PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin<br>CLASSPATH=:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib<br>export JAVA_HOME JRE_HOME PATH CLASSPATH</p>
-<p>（然后按Esc退出，”:”符+ wq保存并退出）</p>
-<p>使修改生效<br>[root@localhost ~]# source /etc/profile   //使修改立即生效<br>[root@localhost ~]# echo $PATH   //查看PATH值<br>查看系统环境状态<br>[root@localhost ~]# echo $PATH<br>/usr/lib/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/java/jdk1.7.0_45/bin:<br>/usr/java/jdk1.7.0_45/jre/bin:/home/ckb/bin</p>
-<p>二、    部署tomcat(与配置jdk类似)</p>
-<p>在tomcat官网上下载 apache-tomcat-8.0.15.tar.gz并上传到/usr/local</p>
-<p>[root@localhost ~]#cd /usr/local</p>
-<p>[root@localhost local]#tar –zxvf apache-tomcat-8.0.15.tar.gz<br>初始化配置：<br>[root@localhost ~]#vi catalina.sh //设置环境变量<br>末行添加：<br>JAVA_HOME=/usr/java<br>CATALINA_HOME=/usr/local/apache-tomcat-8.0.15<br>export JAVA_HOME PATH<br>（然后按Esc退出，”:”符+ wq保存并退出）<br>2、启动tomcat<br>进入tomcat/bin目录<br>[root@localhost ~]#cd /usr/local/apache-tomcat-8.0.15/lib</p>
-<p>[root@localhost bin] #  ./startup.sh<br>[root@localhost bin] # ./shutdown.sh //关闭tomcat</p>
-<p>启动之后就可以在浏览器输入你的公网ip:8080（tomcat默认端口），看到tomcat页面。</p>
-<p>三  配置mysql（我的这里参考了<a href="http://blog.csdn.net/sapce_fish/article/details/51619830?locationNum=12&amp;fps=1这篇博客，版本为mysql.x86_64" target="_blank" rel="external">http://blog.csdn.net/sapce_fish/article/details/51619830?locationNum=12&amp;fps=1这篇博客，版本为mysql.x86_64</a> 5.1.73-7.el6，当然你也可以安装其他版本）<br>安装mysql；特别注意：网上很多安装mysql的文章，都是不行的！！！！</p>
-<p>#我喜欢在home目录操作命令<br>cd /home</p>
-<p>#查看所有以mysql开头的软件<br>yum list mysql*</p>
-<p>#安装mysql<br>yum install mysql-server* -y</p>
-<p>#启动mysql<br>/etc/init.d/mysqld start</p>
-<p>#设定mysql自动启动，我亲自重启了ECS，确实ok<br>chkconfig mysqld on</p>
-<p>#复制mysql的配置文件到etc目录，提示是否覆盖，选择y<br>cp /usr/share/mysql/my-medium.cnf   /etc/my.cnf</p>
-<p>#重新设定mysql密码，默认密码是【空】，输入新密码，注意提问，是否删除匿名账户？【y】  是否禁止远程登录？【n】是否移除test数据库?【y】是否重载权限文件【y】<br>mysql_secure_installation</p>
-<p>#重启mysql，此时用本机Navicat Premium还是连不上mysql的！<br>/etc/init.d/mysqld restart</p>
-<p>#用命令访问mysql<br>mysql -u root -p</p>
-<p>#使用mysql数据库<br>use mysql;</p>
-<p>#查询当前用户情况，显示有3条记录，127.0.0.1；localhost；izxxxxxxxdz；其中最后这个是ECS主机名<br>select host, user from user;  </p>
-<p>#把localhost这条记录的host改为 %； 意思是root可以由任何主机登录mysql，网上很多写法，都没有and host=’localhost’这个条件，经常报错。<br>update user set host = ‘%’ where user = ‘root’ and host=’localhost’;</p>
-<p>#再次查询，可以看到host有3个；%；127.0.0.1；izxxxxxxxdz；其实user表的主键是user字段和host字段的联合主键。<br>select host, user from user;</p>
-<p>#保险起见，重启mysql，Navicat Premium连接正常！万岁！<br>/etc/init.d/mysqld restart</p>
-
+         
+               <p itemprop="description" >阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat
+现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错前提下载安装xshell（具体如何是使用xshell请自行Google） 和xftp1 部署jdk     查看系统是否安装了jdk
+ [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -q</p>
+            
         
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+        </a>
+   </div>    
+<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
 </div>
 
 
-
-
 <div class="comments-count">
-	
+    
 </div>
 
 </footer>
-
-
-    </article>
+</article>
 
 
 
