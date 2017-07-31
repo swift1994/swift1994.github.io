@@ -89,11 +89,11 @@
   </entry>
   
   <entry>
-    <title></title>
-    <link href="http://www.xiangyu520.top/uncategorized/2017/07/31/Java%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%B8%80%EF%BC%89.html"/>
-    <id>http://www.xiangyu520.top/uncategorized/2017/07/31/Java面试题（一）.html</id>
+    <title>Java面试题总结（一）</title>
+    <link href="http://www.xiangyu520.top/Java%E9%9D%A2%E8%AF%95/2017/07/31/Java%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%B8%80%EF%BC%89.html"/>
+    <id>http://www.xiangyu520.top/Java面试/2017/07/31/Java面试题（一）.html</id>
     <published>2017-07-31T09:54:57.108Z</published>
-    <updated>2017-07-31T11:09:12.457Z</updated>
+    <updated>2017-07-31T11:28:09.219Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="Java面试题总结（一）"><a href="#Java面试题总结（一）" class="headerlink" title="Java面试题总结（一）"></a><strong>Java面试题总结（一）</strong></h1><embed src="http://music.163.com/style/swf/widget.swf?sid=20744792&type=2&auto=1&width=278&height=32" width="298" height="52" allownetworking="all">
 <h2 id="1、Spring-MVC的工作原理是怎样的？"><a href="#1、Spring-MVC的工作原理是怎样的？" class="headerlink" title="1、Spring MVC的工作原理是怎样的？"></a>1、Spring MVC的工作原理是怎样的？</h2><p>客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。</p>
@@ -226,10 +226,14 @@
     
     <summary type="html">
     
-      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/assets/css/DPlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/as
+      Java面试题总结（一）
     
     </summary>
     
+      <category term="Java面试" scheme="http://www.xiangyu520.top/categories/Java%E9%9D%A2%E8%AF%95/"/>
+    
+    
+      <category term="Java面试" scheme="http://www.xiangyu520.top/tags/Java%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
