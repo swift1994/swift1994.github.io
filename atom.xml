@@ -22,7 +22,7 @@
     <published>2017-07-31T10:17:05.421Z</published>
     <updated>2017-07-31T10:34:14.257Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat"><a href="#阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat" class="headerlink" title="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat"></a>阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</h1><p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错</p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><h1 id="阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat"><a href="#阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat" class="headerlink" title="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat"></a>阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</h1><p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错</p>
 <p><strong>前提</strong>下载安装xshell（具体如何是使用xshell请自行Google）和xftp</p>
 <h4 id="1-部署jdk"><a href="#1-部署jdk" class="headerlink" title="1 部署jdk"></a>1 部署jdk</h4><pre><code>查看系统是否安装了jdk
 </code></pre><p> [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java</p>
@@ -81,7 +81,7 @@
     
     <summary type="html">
     
-      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/assets/css/DPlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/as
+      &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/assets/css/DPlayer.min.css&quot;&gt;&lt;script src=&quot;/as
     
     </summary>
     
@@ -93,10 +93,10 @@
     <link href="http://www.xiangyu520.top/uncategorized/2017/07/31/Java%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%B8%80%EF%BC%89.html"/>
     <id>http://www.xiangyu520.top/uncategorized/2017/07/31/Java面试题（一）.html</id>
     <published>2017-07-31T09:54:57.108Z</published>
-    <updated>2017-07-31T11:02:12.854Z</updated>
+    <updated>2017-07-31T11:08:08.674Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><embed src="http://music.163.com/style/swf/widget.swf?sid=20744792&type=2&auto=1&width=278&height=32" width="298" height="52" allownetworking="all">
-<h1 id="Java面试题总结（一）"><a href="#Java面试题总结（一）" class="headerlink" title="Java面试题总结（一）"></a><strong>Java面试题总结（一）</strong></h1><h2 id="1、Spring-MVC的工作原理是怎样的？"><a href="#1、Spring-MVC的工作原理是怎样的？" class="headerlink" title="1、Spring MVC的工作原理是怎样的？"></a>1、Spring MVC的工作原理是怎样的？</h2><p>客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。</p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><h1 id="Java面试题总结（一）"><a href="#Java面试题总结（一）" class="headerlink" title="Java面试题总结（一）"></a><strong>Java面试题总结（一）</strong></h1><embed src="http://music.163.com/style/swf/widget.swf?sid=20744792&type=2&auto=1&width=278&height=32" width="298" height="52" allownetworking="all">
+<h2 id="1、Spring-MVC的工作原理是怎样的？"><a href="#1、Spring-MVC的工作原理是怎样的？" class="headerlink" title="1、Spring MVC的工作原理是怎样的？"></a>1、Spring MVC的工作原理是怎样的？</h2><p>客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。</p>
 <p>DispatcherServlet收到请求后，将根据请求的信息（包括URL、HTTP协议方法、请求头、请求参数、Cookie等）以及HandlerMapping的配置找到处理该请求的Handler（任何一个对象都可以作为请求的Handler）。在这个地方Spring会通过HandlerAdapter（一个适配器，它用统一的接口对各种Handler中的方法进行调用。）对该处理器进行封装。</p>
 <p>Handler完成对用户请求的处理后，会返回一个ModelAndView（包含了数据模型以及相应的视图的信息）对象给DispatcherServlet。</p>
 <p>DispatcherServlet还要借助ViewResolver完成从逻辑视图到真实视图对象的解析工作。</p>
@@ -226,7 +226,7 @@
     
     <summary type="html">
     
-      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/assets/css/DPlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/as
+      &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/assets/css/DPlayer.min.css&quot;&gt;&lt;script src=&quot;/as
     
     </summary>
     
