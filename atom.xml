@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangyu520.top/"/>
-  <updated>2017-08-01T02:36:15.672Z</updated>
+  <updated>2017-08-01T02:39:30.961Z</updated>
   <id>http://www.xiangyu520.top/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.xiangyu520.top/MySQL/2017/08/01/MySQL%E7%9A%84%E6%80%A7%E8%83%BD%E5%92%8C%E4%BC%B8%E7%BC%A9%E6%80%A7%E4%BC%98%E5%8C%96.html"/>
     <id>http://www.xiangyu520.top/MySQL/2017/08/01/MySQL的性能和伸缩性优化.html</id>
     <published>2017-08-01T02:20:37.202Z</published>
-    <updated>2017-08-01T02:36:15.672Z</updated>
+    <updated>2017-08-01T02:39:30.961Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h4 id="1、选择-InnoDB-作为存储引擎"><a href="#1、选择-InnoDB-作为存储引擎" class="headerlink" title="1、选择 InnoDB 作为存储引擎"></a>1、选择 InnoDB 作为存储引擎</h4><ul>
 <li>大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。</li>
