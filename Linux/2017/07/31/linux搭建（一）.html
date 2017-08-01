@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java -">
+    <meta name="description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 1 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java">
 <meta name="keywords" content="Linux搭建">
 <meta property="og:type" content="article">
 <meta property="og:title" content="centOS环境搭建（一）">
 <meta property="og:url" content="http://www.xiangyu520.top/Linux/2017/07/31/linux搭建（一）.html">
 <meta property="og:site_name" content="平湖烟雨">
-<meta property="og:description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java -">
-<meta property="og:updated_time" content="2017-08-01T02:31:56.605Z">
+<meta property="og:description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 1 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java">
+<meta property="og:updated_time" content="2017-08-01T02:37:43.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centOS环境搭建（一）">
-<meta name="twitter:description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java -">
+<meta name="twitter:description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 1 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java">
 
     
     <link rel="alternative" href="/atom.xml" title="平湖烟雨" type="application/atom+xml">
@@ -247,26 +247,26 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat"><span class="toc-number">1.</span> <span class="toc-text">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#部署jdk"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">部署jdk</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#安装jdk（JDK默认安装在-usr-java中）："><span class="toc-number">1.0.0.1.1.</span> <span class="toc-text">安装jdk（JDK默认安装在/usr/java中）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#验证安装"><span class="toc-number">1.0.0.1.2.</span> <span class="toc-text">验证安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#配置环境变量"><span class="toc-number">1.0.0.1.3.</span> <span class="toc-text">配置环境变量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、部署tomcat-与配置jdk类似"><span class="toc-number">1.0.1.</span> <span class="toc-text">二、部署tomcat(与配置jdk类似)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#启动tomcat"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">启动tomcat</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-配置mysql"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">三  配置mysql</span></a></li></ol></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat"><span class="toc-number">1.</span> <span class="toc-text">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-部署jdk"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1 部署jdk</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-安装jdk（JDK默认安装在-usr-java中）："><span class="toc-number">1.0.0.1.1.</span> <span class="toc-text">2 安装jdk（JDK默认安装在/usr/java中）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-验证安装"><span class="toc-number">1.0.0.1.2.</span> <span class="toc-text">3 验证安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-配置环境变量"><span class="toc-number">1.0.0.1.3.</span> <span class="toc-text">4 配置环境变量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、部署tomcat-与配置jdk类似"><span class="toc-number">1.0.1.</span> <span class="toc-text">二、部署tomcat(与配置jdk类似)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#启动tomcat"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">启动tomcat</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-配置mysql"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">三  配置mysql</span></a></li></ol></li></ol></li></ol></li></ol>
 		
 		</div>
 		
 		<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat"><a href="#阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat" class="headerlink" title="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat"></a>阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</h1><p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错</p>
 <p><strong>前提</strong>下载安装xshell（具体如何是使用xshell请自行Google）和xftp</p>
-<h4 id="部署jdk"><a href="#部署jdk" class="headerlink" title="部署jdk"></a>部署jdk</h4><pre><code>查看系统是否安装了jdk
+<h4 id="1-部署jdk"><a href="#1-部署jdk" class="headerlink" title="1 部署jdk"></a>1 部署jdk</h4><pre><code>查看系统是否安装了jdk
 </code></pre><p> [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java</p>
 <p> 出现或者不出现以下内容：</p>
 <p>java version “1.7.0_24”<br>OpenJDK Runtime Environment (build 1.7.0_24-b18)<br>OpenJDK HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)</p>
 <p>进一步查看JDK信息：<br>[root@localhost ~]# rpm -qa | grep java<br>tzdata-java-2012c-1.el6.noarch<br>java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
 <p>卸载OpenJDK，执行以下操作：<br>[root@localhost ~]# rpm -e –nodeps tzdata-java-2012c-1.el6.noarch（解压jdk）<br>[root@localhost ~]# rpm -e –nodeps java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
 <p>若出现以上以上情况，按照以上步骤操作完后，用xftp上传jdk-7-linux-i586.rpm或者jdk-8u25-linux-x64.tar.gz（具体jdk版本看你自己选择，在Oracle官网上下载  ）到xftp上的/usr/local</p>
-<h5 id="安装jdk（JDK默认安装在-usr-java中）："><a href="#安装jdk（JDK默认安装在-usr-java中）：" class="headerlink" title="安装jdk（JDK默认安装在/usr/java中）："></a>安装jdk（JDK默认安装在/usr/java中）：</h5><p>[root@localhost  ~]#cd /usr/local (cd 空格后路径是你刚刚上传到xftp的路径，<strong>不要搞错了，我上是传到/usr/local</strong>，这一点很多博客文档都没说清楚，导致很多初学者会具体操作时出错)<br>[root@localhost ckb]# rpm -ivh jdk-7-linux-i586.rpm或者[root@localhost ckb]#tar –zxvf jdk-8u25-linux-x64.tar.gz</p>
-<h5 id="验证安装"><a href="#验证安装" class="headerlink" title="验证安装"></a>验证安装</h5><p>执行以下操作，查看信息是否正常：</p>
+<h5 id="2-安装jdk（JDK默认安装在-usr-java中）："><a href="#2-安装jdk（JDK默认安装在-usr-java中）：" class="headerlink" title="2 安装jdk（JDK默认安装在/usr/java中）："></a>2 安装jdk（JDK默认安装在/usr/java中）：</h5><p>[root@localhost  ~]#cd /usr/local (cd 空格后路径是你刚刚上传到xftp的路径，<strong>不要搞错了，我上是传到/usr/local</strong>，这一点很多博客文档都没说清楚，导致很多初学者会具体操作时出错)<br>[root@localhost ckb]# rpm -ivh jdk-7-linux-i586.rpm或者[root@localhost ckb]#tar –zxvf jdk-8u25-linux-x64.tar.gz</p>
+<h5 id="3-验证安装"><a href="#3-验证安装" class="headerlink" title="3 验证安装"></a>3 验证安装</h5><p>执行以下操作，查看信息是否正常：</p>
 <p>[root@localhost bin]# java</p>
 <p>[root@localhost bin]# javac</p>
 <p>[root@localhost bin]# java -version</p>
 <p>java version “1.7.0_45”<br>Java(TM) SE Runtime Environment (build 1.7.0_45-b18)<br>Java HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)</p>
-<h5 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h5><p>我的机器安装完jdk-7-linux-i586.rpm后不用配置环境变量也可以正常执行javac、java –version操作，因此我没有进行JDK环境变量的配置。</p>
+<h5 id="4-配置环境变量"><a href="#4-配置环境变量" class="headerlink" title="4 配置环境变量"></a>4 配置环境变量</h5><p>我的机器安装完jdk-7-linux-i586.rpm后不用配置环境变量也可以正常执行javac、java –version操作，因此我没有进行JDK环境变量的配置。</p>
 <p>但是为了以后的不适之需，这里还是记录一下怎么进行配置，操作如下：<br>修改系统环境变量文件<br>vi + /etc/profile<br>执行之后 按”i”建，INSERT出现表示可以编辑<br>向文件里面追加以下内容：</p>
 <p>在光标处添加<br>JAVA_HOME=/usr/java/jdk1.7.0_45</p>
 <p>JRE_HOME=/usr/java/jdk1.7.0_45/jre</p>
@@ -369,7 +369,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat"><span class="toc-number">1.</span> <span class="toc-text">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#部署jdk"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">部署jdk</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#安装jdk（JDK默认安装在-usr-java中）："><span class="toc-number">1.0.0.1.1.</span> <span class="toc-text">安装jdk（JDK默认安装在/usr/java中）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#验证安装"><span class="toc-number">1.0.0.1.2.</span> <span class="toc-text">验证安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#配置环境变量"><span class="toc-number">1.0.0.1.3.</span> <span class="toc-text">配置环境变量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、部署tomcat-与配置jdk类似"><span class="toc-number">1.0.1.</span> <span class="toc-text">二、部署tomcat(与配置jdk类似)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#启动tomcat"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">启动tomcat</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-配置mysql"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">三  配置mysql</span></a></li></ol></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat"><span class="toc-number">1.</span> <span class="toc-text">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-部署jdk"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1 部署jdk</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-安装jdk（JDK默认安装在-usr-java中）："><span class="toc-number">1.0.0.1.1.</span> <span class="toc-text">2 安装jdk（JDK默认安装在/usr/java中）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-验证安装"><span class="toc-number">1.0.0.1.2.</span> <span class="toc-text">3 验证安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-配置环境变量"><span class="toc-number">1.0.0.1.3.</span> <span class="toc-text">4 配置环境变量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、部署tomcat-与配置jdk类似"><span class="toc-number">1.0.1.</span> <span class="toc-text">二、部署tomcat(与配置jdk类似)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#启动tomcat"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">启动tomcat</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-配置mysql"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">三  配置mysql</span></a></li></ol></li></ol></li></ol></li></ol>
  
   </div>
 
@@ -413,15 +413,15 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux搭建/" title="Linux搭建">Linux搭建<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Java面试/" title="Java面试">Java面试<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/MySQL优化/" title="MySQL优化">MySQL优化<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux搭建/" title="Linux搭建">Linux搭建<sup>1</sup></a></li>
 			
 		
 		</ul>
