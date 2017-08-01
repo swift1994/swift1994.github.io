@@ -11,19 +11,17 @@
     
 
     
-    <meta name="description" content="MySQL的性能和伸缩性优化 1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的">
+    <meta name="description" content="MySQL的性能和伸缩性优化1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的空">
 <meta name="keywords" content="MySQL优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL的性能和伸缩性优化">
 <meta property="og:url" content="http://www.xiangyu520.top/MySQL/2017/08/01/MySQL的性能和伸缩性优化.html">
 <meta property="og:site_name" content="平湖烟雨">
-<meta property="og:description" content="MySQL的性能和伸缩性优化 1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的">
-<meta property="og:image" content="c:/Users/Public/Pictures/Sample%20Pictures/swan-1908290.jpg">
-<meta property="og:updated_time" content="2017-08-01T02:22:13.514Z">
+<meta property="og:description" content="MySQL的性能和伸缩性优化1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的空">
+<meta property="og:updated_time" content="2017-08-01T02:26:59.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL的性能和伸缩性优化">
-<meta name="twitter:description" content="MySQL的性能和伸缩性优化 1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的">
-<meta name="twitter:image" content="c:/Users/Public/Pictures/Sample%20Pictures/swan-1908290.jpg">
+<meta name="twitter:description" content="MySQL的性能和伸缩性优化1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的空">
 
     
     <link rel="alternative" href="/atom.xml" title="平湖烟雨" type="application/atom+xml">
@@ -249,12 +247,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL的性能和伸缩性优化"><span class="toc-number">1.</span> <span class="toc-text">MySQL的性能和伸缩性优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、选择-InnoDB-作为存储引擎"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1、选择 InnoDB 作为存储引擎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、优化数据库结构"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">2、优化数据库结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、InnoDB-的-Change-Buffering-特性"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">3、InnoDB 的 Change Buffering 特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、InnoDB-页面压缩"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">4、InnoDB 页面压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、使用批量数据导入"><span class="toc-number">1.0.0.5.</span> <span class="toc-text">5、使用批量数据导入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、SQL-语句优化"><span class="toc-number">1.0.0.6.</span> <span class="toc-text">6、SQL 语句优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、优化存储结构"><span class="toc-number">1.0.0.7.</span> <span class="toc-text">7、优化存储结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、优化-InnoDB-磁盘-I-O"><span class="toc-number">1.0.0.8.</span> <span class="toc-text">8、优化 InnoDB 磁盘 I/O</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9、MySQL-的内存分配"><span class="toc-number">1.0.0.9.</span> <span class="toc-text">9、MySQL 的内存分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、日常维护"><span class="toc-number">1.0.0.10.</span> <span class="toc-text">10、日常维护</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#文章摘录链接"><span class="toc-number">1.0.0.10.0.1.</span> <span class="toc-text">文章摘录链接</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL的性能和伸缩性优化"><span class="toc-number">1.</span> <span class="toc-text">MySQL的性能和伸缩性优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、选择-InnoDB-作为存储引擎"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1、选择 InnoDB 作为存储引擎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、优化数据库结构"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">2、优化数据库结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、InnoDB-的-Change-Buffering-特性"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">3、InnoDB 的 Change Buffering 特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、InnoDB-页面压缩"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">4、InnoDB 页面压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、使用批量数据导入"><span class="toc-number">1.0.0.5.</span> <span class="toc-text">5、使用批量数据导入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、SQL-语句优化"><span class="toc-number">1.0.0.6.</span> <span class="toc-text">6、SQL 语句优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、优化存储结构"><span class="toc-number">1.0.0.7.</span> <span class="toc-text">7、优化存储结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、优化-InnoDB-磁盘-I-O"><span class="toc-number">1.0.0.8.</span> <span class="toc-text">8、优化 InnoDB 磁盘 I/O</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9、MySQL-的内存分配"><span class="toc-number">1.0.0.9.</span> <span class="toc-text">9、MySQL 的内存分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、日常维护"><span class="toc-number">1.0.0.10.</span> <span class="toc-text">10、日常维护</span></a></li></ol></li></ol></li></ol></li></ol>
 		
 		</div>
 		
-		<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="MySQL的性能和伸缩性优化"><a href="#MySQL的性能和伸缩性优化" class="headerlink" title="MySQL的性能和伸缩性优化"></a>MySQL的性能和伸缩性优化</h1><p><img src="C:\Users\Public\Pictures\Sample Pictures\swan-1908290.jpg" alt="image"></p>
-<h4 id="1、选择-InnoDB-作为存储引擎"><a href="#1、选择-InnoDB-作为存储引擎" class="headerlink" title="1、选择 InnoDB 作为存储引擎"></a>1、选择 InnoDB 作为存储引擎</h4><ul>
+		<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="MySQL的性能和伸缩性优化"><a href="#MySQL的性能和伸缩性优化" class="headerlink" title="MySQL的性能和伸缩性优化"></a>MySQL的性能和伸缩性优化</h1><h4 id="1、选择-InnoDB-作为存储引擎"><a href="#1、选择-InnoDB-作为存储引擎" class="headerlink" title="1、选择 InnoDB 作为存储引擎"></a>1、选择 InnoDB 作为存储引擎</h4><ul>
 <li>大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。</li>
 </ul>
 <h4 id="2、优化数据库结构"><a href="#2、优化数据库结构" class="headerlink" title="2、优化数据库结构"></a>2、优化数据库结构</h4><ul>
@@ -265,9 +262,10 @@
 <li><p>对于 InnoDB 表，主键所在的列在每个辅助索引条目中都是可复制的，因此如果有很多辅助索引，那么一个短的主键可以节省大量空间。</p>
 </li>
 <li><p>仅创建你需要改进查询性能的索引。索引有助于检索，但是会增加插入和更新操作的执行时间。</p>
-<h4 id="3、InnoDB-的-Change-Buffering-特性"><a href="#3、InnoDB-的-Change-Buffering-特性" class="headerlink" title="3、InnoDB 的 Change Buffering 特性"></a>3、InnoDB 的 Change Buffering 特性</h4></li>
-<li><p>InnoDB 提供了 change buffering 的配置，可减少维护辅助索引所需的磁盘 I/O。大规模的数据库可能会遇到大量的表操作和大量的 I/O，以保证辅助索引保持最新。当相关页面不在缓冲池里面时，InnoDB 的 change buffer 将会更改缓存到辅助索引条目，从而避免因不能立即从磁盘读取页面而导致耗时的 I/O 操作。当页面被加载到缓冲池时，缓冲的更改将被合并，更新的页面之后会刷新到磁盘。这样做可提高性能，适用于 MySQL 5.5 及更高版本。</p>
 </li>
+</ul>
+<h4 id="3、InnoDB-的-Change-Buffering-特性"><a href="#3、InnoDB-的-Change-Buffering-特性" class="headerlink" title="3、InnoDB 的 Change Buffering 特性"></a>3、InnoDB 的 Change Buffering 特性</h4><ul>
+<li>InnoDB 提供了 change buffering 的配置，可减少维护辅助索引所需的磁盘 I/O。大规模的数据库可能会遇到大量的表操作和大量的 I/O，以保证辅助索引保持最新。当相关页面不在缓冲池里面时，InnoDB 的 change buffer 将会更改缓存到辅助索引条目，从而避免因不能立即从磁盘读取页面而导致耗时的 I/O 操作。当页面被加载到缓冲池时，缓冲的更改将被合并，更新的页面之后会刷新到磁盘。这样做可提高性能，适用于 MySQL 5.5 及更高版本。</li>
 </ul>
 <h4 id="4、InnoDB-页面压缩"><a href="#4、InnoDB-页面压缩" class="headerlink" title="4、InnoDB 页面压缩"></a>4、InnoDB 页面压缩</h4><ul>
 <li><p>InnoDB 支持对表进行页面级的压缩。当写入数据页的时候，会有特定的压缩算法对其进行压缩。压缩后的数据会写入磁盘，其打孔机制会释放页面末尾的空块。如果压缩失败，数据会按原样写入。表和索引都会被压缩，因为索引通常是数据库总大小中占比很大的一部分，压缩可以显著节约内存，I/O 或处理时间，这样就达到了提高性能和伸缩性的目的。它还可以减少内存和磁盘之间传输的数据量。MySQL 5.1 及更高版本支持该功能。</p>
@@ -316,7 +314,8 @@
 <li><p>定期刷新缓存和缓冲区以降低碎片化。使用 OPTIMIZE TABLE 语句重新组织表并压缩任何可能被浪费的空间。</p>
 </li>
 </ul>
-<h6 id="文章摘录链接"><a href="#文章摘录链接" class="headerlink" title="文章摘录链接"></a><a href="http://mp.weixin.qq.com/s/Jj7NJBV0ErZlx4zS_N1TrQ" target="_blank" rel="external">文章摘录链接</a></h6>  
+<pre><code>###### [文章摘录链接](http://mp.weixin.qq.com/s/Jj7NJBV0ErZlx4zS_N1TrQ)
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -371,7 +370,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL的性能和伸缩性优化"><span class="toc-number">1.</span> <span class="toc-text">MySQL的性能和伸缩性优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、选择-InnoDB-作为存储引擎"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1、选择 InnoDB 作为存储引擎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、优化数据库结构"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">2、优化数据库结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、InnoDB-的-Change-Buffering-特性"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">3、InnoDB 的 Change Buffering 特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、InnoDB-页面压缩"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">4、InnoDB 页面压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、使用批量数据导入"><span class="toc-number">1.0.0.5.</span> <span class="toc-text">5、使用批量数据导入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、SQL-语句优化"><span class="toc-number">1.0.0.6.</span> <span class="toc-text">6、SQL 语句优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、优化存储结构"><span class="toc-number">1.0.0.7.</span> <span class="toc-text">7、优化存储结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、优化-InnoDB-磁盘-I-O"><span class="toc-number">1.0.0.8.</span> <span class="toc-text">8、优化 InnoDB 磁盘 I/O</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9、MySQL-的内存分配"><span class="toc-number">1.0.0.9.</span> <span class="toc-text">9、MySQL 的内存分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、日常维护"><span class="toc-number">1.0.0.10.</span> <span class="toc-text">10、日常维护</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#文章摘录链接"><span class="toc-number">1.0.0.10.0.1.</span> <span class="toc-text">文章摘录链接</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL的性能和伸缩性优化"><span class="toc-number">1.</span> <span class="toc-text">MySQL的性能和伸缩性优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、选择-InnoDB-作为存储引擎"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1、选择 InnoDB 作为存储引擎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、优化数据库结构"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">2、优化数据库结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、InnoDB-的-Change-Buffering-特性"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">3、InnoDB 的 Change Buffering 特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、InnoDB-页面压缩"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">4、InnoDB 页面压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、使用批量数据导入"><span class="toc-number">1.0.0.5.</span> <span class="toc-text">5、使用批量数据导入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、SQL-语句优化"><span class="toc-number">1.0.0.6.</span> <span class="toc-text">6、SQL 语句优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、优化存储结构"><span class="toc-number">1.0.0.7.</span> <span class="toc-text">7、优化存储结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、优化-InnoDB-磁盘-I-O"><span class="toc-number">1.0.0.8.</span> <span class="toc-text">8、优化 InnoDB 磁盘 I/O</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9、MySQL-的内存分配"><span class="toc-number">1.0.0.9.</span> <span class="toc-text">9、MySQL 的内存分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、日常维护"><span class="toc-number">1.0.0.10.</span> <span class="toc-text">10、日常维护</span></a></li></ol></li></ol></li></ol></li></ol>
  
   </div>
 
@@ -415,11 +414,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Java面试/" title="Java面试">Java面试<sup>1</sup></a></li>
+				<li><a href="/tags/MySQL优化/" title="MySQL优化">MySQL优化<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MySQL优化/" title="MySQL优化">MySQL优化<sup>1</sup></a></li>
+				<li><a href="/tags/Java面试/" title="Java面试">Java面试<sup>1</sup></a></li>
 			
 		
 			
