@@ -1,17 +1,103 @@
+<!DOCTYPE html>
 
- <!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
+
+
   
-    <title>MySQL的性能和伸缩性优化 | 平湖烟雨</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="项昱">
-    
 
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
     
-    <meta name="description" content="1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的空间最小化，表的主键应尽可能短">
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL优化," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="平湖烟雨" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的空间最小化，表的主键应尽可能短">
 <meta name="keywords" content="MySQL优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL的性能和伸缩性优化">
@@ -23,235 +109,244 @@
 <meta name="twitter:title" content="MySQL的性能和伸缩性优化">
 <meta name="twitter:description" content="1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的空间最小化，表的主键应尽可能短">
 
-    
-    <link rel="alternative" href="/atom.xml" title="平湖烟雨" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/jacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css">
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.xiangyu520.top/MySQL/2017/08/01/MySQL的性能和伸缩性优化.html"/>
+
+
+
+
+
+  <title>MySQL的性能和伸缩性优化 | 平湖烟雨</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/haha.jpg" alt="平湖烟雨" title="平湖烟雨"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="平湖烟雨">平湖烟雨</a></h1>
-				<h2 class="blog-motto">Never give up</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">首页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/about">关于</a></li>
-					
-						<li><a href="/tags">标签</a></li>
-					
-						<li><a href="/categories">分类</a></li>
-					
-					<li>
- 					
-						<form class="search" action="http://baidu.com/search" target="_blank">
-							<label>Search</label>
-						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
-						</form>
-					
-					</li>
-					<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
-    function c() {
-        var e = document.createElement("link");
-        e.setAttribute("type", "text/css");
-        e.setAttribute("rel", "stylesheet");
-        e.setAttribute("href", f);
-        e.setAttribute("class", l);
-        document.body.appendChild(e)
-    }
- 
-    function h() {
-        var e = document.getElementsByClassName(l);
-        for (var t = 0; t < e.length; t++) {
-            document.body.removeChild(e[t])
-        }
-    }
- 
-    function p() {
-        var e = document.createElement("div");
-        e.setAttribute("class", a);
-        document.body.appendChild(e);
-        setTimeout(function() {
-            document.body.removeChild(e)
-        }, 100)
-    }
- 
-    function d(e) { return {
-            height : e.offsetHeight,
-            width : e.offsetWidth
-        }
-    }
- 
-    function v(i) {
-        var s = d(i);
-        return s.height > e && s.height < n && s.width > t && s.width < r
-    }
- 
-    function m(e) {
-        var t = e;
-        var n = 0;
-        while (!!t) {
-            n += t.offsetTop;
-            t = t.offsetParent
-        }
-        return n
-    }function g() {
-        var e = document.documentElement;
-        if (!!window.innerWidth) {
-            return window.innerHeight
-        } else if (e && !isNaN(e.clientHeight)) {
-            return e.clientHeight
-        }
-        return 0
-    }
- 
-    function y() {
-        if (window.pageYOffset) {
-            return window.pageYOffset
-        }
-        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
-    }
- 
-    function E(e) {
-        var t = m(e);
-        return t >= w && t <= b + w
-    }
- 
-    function S() {
-        var e = document.createElement("audio");
-        e.setAttribute("class", l);
-        e.src = i;
-        e.loop = false;
-        e.addEventListener("canplay", function() {
-            setTimeout(function() {
-                x(k)
-            }, 500);
-            setTimeout(function() {
-                N();
-                p();
-                for (var e = 0; e < O.length; e++) {
-                    T(O[e])
-                }
-            }, 15500)
-        }, true);
-        e.addEventListener("ended", function() {
-            N();
-            h()
-        }, true);
-        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
-        document.body.appendChild(e);
-        e.play()
-    }
- 
-    function x(e) {
-        e.className += " " + s + " " + o
-    }
- 
-    function T(e) {e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
-    }
- 
-    function N() {
-        var e = document.getElementsByClassName(s);
-        var t = new RegExp("\\b" + s + "\\b");
-        for (var n = 0; n < e.length; ) {
-            e[n].className = e[n].className.replace(t, "")
-        }
-    }
- 
-    var e = 30;
-    var t = 30;
-    var n = 350;
-    var r = 350;
-    var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
-    var s = "mw-harlem_shake_me";
-    var o = "im_first";
-    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
-    var a = "mw-strobe_light";
-    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
-    var l = "mw_added_css";
-    var b = g();
-    var w = y();
-    var C = document.getElementsByTagName("*");
-    var k = null;
-    for (var L = 0; L < C.length; L++) {
-        var A = C[L]; if (v(A)) {
-            if (E(A)) {
-                k = A;
-                break
-            }
-        }
-    }
-    if (A === null) {
-        console.warn("Could not find a node of the right size. Please try a different page.");
-        return
-    }
-    c();
-    S();
-    var O = [];
-    for (var L = 0; L < C.length; L++) {
-        var A = C[L];
-        if (v(A)) {
-            O.push(A)
-        }
-    }
-})()    '>High一下</a> </li>
-				</ul>
-			</nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
   
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
+  
     
-      <a href="/MySQL/2017/08/01/MySQL的性能和伸缩性优化.html" title="MySQL的性能和伸缩性优化" itemprop="url">MySQL的性能和伸缩性优化</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="项昱" target="_blank" itemprop="author">项昱</a>
-		
-  <p class="article-time">
-    <time datetime="2017-08-01T02:20:37.202Z" itemprop="datePublished"> 发表于 2017-08-01</time>
-    <span id="busuanzi_container_page_pv">
-    总阅读<span id="busuanzi_value_page_pv"></span>次
-</span>
-  </p>
-</header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、选择-InnoDB-作为存储引擎"><span class="toc-number">1.</span> <span class="toc-text">1、选择 InnoDB 作为存储引擎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、优化数据库结构"><span class="toc-number">2.</span> <span class="toc-text">2、优化数据库结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、InnoDB-的-Change-Buffering-特性"><span class="toc-number">3.</span> <span class="toc-text">3、InnoDB 的 Change Buffering 特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、InnoDB-页面压缩"><span class="toc-number">4.</span> <span class="toc-text">4、InnoDB 页面压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、使用批量数据导入"><span class="toc-number">5.</span> <span class="toc-text">5、使用批量数据导入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、SQL-语句优化"><span class="toc-number">6.</span> <span class="toc-text">6、SQL 语句优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、优化存储结构"><span class="toc-number">7.</span> <span class="toc-text">7、优化存储结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、优化-InnoDB-磁盘-I-O"><span class="toc-number">8.</span> <span class="toc-text">8、优化 InnoDB 磁盘 I/O</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9、MySQL-的内存分配"><span class="toc-number">9.</span> <span class="toc-text">9、MySQL 的内存分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、日常维护"><span class="toc-number">10.</span> <span class="toc-text">10、日常维护</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#文章摘录链接"><span class="toc-number">10.0.1.</span> <span class="toc-text">文章摘录链接</span></a></li></ol></li></ol></li></ol>
-		
-		</div>
-		
-		<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h4 id="1、选择-InnoDB-作为存储引擎"><a href="#1、选择-InnoDB-作为存储引擎" class="headerlink" title="1、选择 InnoDB 作为存储引擎"></a>1、选择 InnoDB 作为存储引擎</h4><ul>
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">平湖烟雨</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Never give up</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.xiangyu520.top/MySQL/2017/08/01/MySQL的性能和伸缩性优化.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="项昱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="平湖烟雨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL的性能和伸缩性优化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-01T10:20:37+08:00">
+                2017-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h4 id="1、选择-InnoDB-作为存储引擎"><a href="#1、选择-InnoDB-作为存储引擎" class="headerlink" title="1、选择 InnoDB 作为存储引擎"></a>1、选择 InnoDB 作为存储引擎</h4><ul>
 <li>大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。</li>
 </ul>
 <h4 id="2、优化数据库结构"><a href="#2、优化数据库结构" class="headerlink" title="2、优化数据库结构"></a>2、优化数据库结构</h4><ul>
@@ -314,402 +409,368 @@
 <li><p>定期刷新缓存和缓冲区以降低碎片化。使用 OPTIMIZE TABLE 语句重新组织表并压缩任何可能被浪费的空间。</p>
 </li>
 </ul>
-<h6 id="文章摘录链接"><a href="#文章摘录链接" class="headerlink" title="文章摘录链接"></a><a href="http://mp.weixin.qq.com/s/Jj7NJBV0ErZlx4zS_N1TrQ" target="_blank" rel="external">文章摘录链接</a></h6>  
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/MySQL优化/">MySQL优化</a>
-  </div>
-
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://www.xiangyu520.top/MySQL/2017/08/01/MySQL的性能和伸缩性优化.html" data-title="MySQL的性能和伸缩性优化 | 平湖烟雨" data-tsina="null" class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
-
-<div class="next">
-<a href="/Linux/2017/07/31/linux搭建（一）.html"  title="centOS环境搭建（一）">
- <strong>下一篇：</strong><br/> 
- <span>centOS环境搭建（一）
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-
-
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、选择-InnoDB-作为存储引擎"><span class="toc-number">1.</span> <span class="toc-text">1、选择 InnoDB 作为存储引擎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、优化数据库结构"><span class="toc-number">2.</span> <span class="toc-text">2、优化数据库结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、InnoDB-的-Change-Buffering-特性"><span class="toc-number">3.</span> <span class="toc-text">3、InnoDB 的 Change Buffering 特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、InnoDB-页面压缩"><span class="toc-number">4.</span> <span class="toc-text">4、InnoDB 页面压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、使用批量数据导入"><span class="toc-number">5.</span> <span class="toc-text">5、使用批量数据导入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、SQL-语句优化"><span class="toc-number">6.</span> <span class="toc-text">6、SQL 语句优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、优化存储结构"><span class="toc-number">7.</span> <span class="toc-text">7、优化存储结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、优化-InnoDB-磁盘-I-O"><span class="toc-number">8.</span> <span class="toc-text">8、优化 InnoDB 磁盘 I/O</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9、MySQL-的内存分配"><span class="toc-number">9.</span> <span class="toc-text">9、MySQL 的内存分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、日常维护"><span class="toc-number">10.</span> <span class="toc-text">10、日常维护</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#文章摘录链接"><span class="toc-number">10.0.1.</span> <span class="toc-text">文章摘录链接</span></a></li></ol></li></ol></li></ol>
- 
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
-
-  
-<div class="github-card">
-<p class="asidetitle">Github 名片</p>
-<div class="github-card" data-github="swift1994" data-theme="medium"></div>
-<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
-</div>
-
-
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/面试/" title="面试">面试<sup>1</sup></a></li>
-		  
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/Java面试/" title="Java面试">Java面试<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MySQL优化/" title="MySQL优化">MySQL优化<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux搭建/" title="Linux搭建">Linux搭建<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-  
-
-
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
-</div>
-
-  <div class="weiboshow">
-  <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=&dpc=1"></iframe>
-</div>
-
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hello ,I&#39;m Yu Xiang in Hangzhou. <br/>
-			Stay hungary,stay foolish.</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		<a href="http://weibo.com/1206344496@qq.com" target="_blank" class="icon-weibo" title="微博"></a>
-		
-		
-		<a href="https://github.com/swift1994" target="_blank" class="icon-github" title="github"></a>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<a href="mailto:1206344496@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
-		
-	</div>
-			
-		
-
-		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
-		
-		<a href="/about" target="_blank" title="项昱">项昱</a>
-		
-		
-		</p>
-</div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-<span id="busuanzi_container_site_pv">
-      Total visits: <span id="busuanzi_value_site_pv"></span>
-</span>
-<span id="busuanzi_container_site_uv">
-    You are Visiter No.<span id="busuanzi_value_site_uv"></span>
-</span></footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
+<h6 id="文章摘录链接"><a href="#文章摘录链接" class="headerlink" title="文章摘录链接"></a><a href="http://mp.weixin.qq.com/s/Jj7NJBV0ErZlx4zS_N1TrQ" target="_blank" rel="external">文章摘录链接</a></h6>
       
-      $('#toc.toc-aside').css('display', 'none');
+    </div>
+
+    <div>
+      
         
-    }
-  });
-});
-</script>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL优化/" rel="tag"># MySQL优化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Linux/2017/07/31/linux搭建（一）.html" rel="next" title="centOS环境搭建（一）">
+                <i class="fa fa-chevron-left"></i> centOS环境搭建（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="项昱" />
+          <p class="site-author-name" itemprop="name">项昱</p>
+           
+              <p class="site-description motion-element" itemprop="description">Java</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、选择-InnoDB-作为存储引擎"><span class="nav-number">1.</span> <span class="nav-text">1、选择 InnoDB 作为存储引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、优化数据库结构"><span class="nav-number">2.</span> <span class="nav-text">2、优化数据库结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、InnoDB-的-Change-Buffering-特性"><span class="nav-number">3.</span> <span class="nav-text">3、InnoDB 的 Change Buffering 特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、InnoDB-页面压缩"><span class="nav-number">4.</span> <span class="nav-text">4、InnoDB 页面压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、使用批量数据导入"><span class="nav-number">5.</span> <span class="nav-text">5、使用批量数据导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、SQL-语句优化"><span class="nav-number">6.</span> <span class="nav-text">6、SQL 语句优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、优化存储结构"><span class="nav-number">7.</span> <span class="nav-text">7、优化存储结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、优化-InnoDB-磁盘-I-O"><span class="nav-number">8.</span> <span class="nav-text">8、优化 InnoDB 磁盘 I/O</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、MySQL-的内存分配"><span class="nav-number">9.</span> <span class="nav-text">9、MySQL 的内存分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10、日常维护"><span class="nav-number">10.</span> <span class="nav-text">10、日常维护</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#文章摘录链接"><span class="nav-number">10.0.1.</span> <span class="nav-text">文章摘录链接</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">项昱</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
 
 <script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
   }
-}); 
 </script>
 
 
 
-<!-- Analytics Begin -->
 
 
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 
 
 
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
-	</div>
-	<script src="/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
+  
 
 
-<!-- MathJax End -->
 
-<!-- Tiny_search Begin -->
 
-<!-- Tiny_search End -->
 
-  </body>
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
 </html>
