@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangyu520.top/"/>
-  <updated>2017-08-01T02:26:59.145Z</updated>
+  <updated>2017-08-01T02:28:40.840Z</updated>
   <id>http://www.xiangyu520.top/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://www.xiangyu520.top/MySQL/2017/08/01/MySQL%E7%9A%84%E6%80%A7%E8%83%BD%E5%92%8C%E4%BC%B8%E7%BC%A9%E6%80%A7%E4%BC%98%E5%8C%96.html"/>
     <id>http://www.xiangyu520.top/MySQL/2017/08/01/MySQL的性能和伸缩性优化.html</id>
     <published>2017-08-01T02:20:37.202Z</published>
-    <updated>2017-08-01T02:26:59.145Z</updated>
+    <updated>2017-08-01T02:28:40.840Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="MySQL的性能和伸缩性优化"><a href="#MySQL的性能和伸缩性优化" class="headerlink" title="MySQL的性能和伸缩性优化"></a>MySQL的性能和伸缩性优化</h1><h4 id="1、选择-InnoDB-作为存储引擎"><a href="#1、选择-InnoDB-作为存储引擎" class="headerlink" title="1、选择 InnoDB 作为存储引擎"></a>1、选择 InnoDB 作为存储引擎</h4><ul>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h4 id="1、选择-InnoDB-作为存储引擎"><a href="#1、选择-InnoDB-作为存储引擎" class="headerlink" title="1、选择 InnoDB 作为存储引擎"></a>1、选择 InnoDB 作为存储引擎</h4><ul>
 <li>大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。</li>
 </ul>
 <h4 id="2、优化数据库结构"><a href="#2、优化数据库结构" class="headerlink" title="2、优化数据库结构"></a>2、优化数据库结构</h4><ul>
@@ -183,9 +183,9 @@
     <link href="http://www.xiangyu520.top/%E9%9D%A2%E8%AF%95/2017/07/31/Java%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%B8%80%EF%BC%89.html"/>
     <id>http://www.xiangyu520.top/面试/2017/07/31/Java面试题（一）.html</id>
     <published>2017-07-31T09:54:57.108Z</published>
-    <updated>2017-07-31T11:34:42.501Z</updated>
+    <updated>2017-08-01T02:28:33.064Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="Java面试题总结（一）"><a href="#Java面试题总结（一）" class="headerlink" title="Java面试题总结（一）"></a><strong>Java面试题总结（一）</strong></h1><h2 id="1、Spring-MVC的工作原理是怎样的？"><a href="#1、Spring-MVC的工作原理是怎样的？" class="headerlink" title="1、Spring MVC的工作原理是怎样的？"></a>1、Spring MVC的工作原理是怎样的？</h2><p>客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。</p>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2 id="1、Spring-MVC的工作原理是怎样的？"><a href="#1、Spring-MVC的工作原理是怎样的？" class="headerlink" title="1、Spring MVC的工作原理是怎样的？"></a>1、Spring MVC的工作原理是怎样的？</h2><p>客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。</p>
 <p>DispatcherServlet收到请求后，将根据请求的信息（包括URL、HTTP协议方法、请求头、请求参数、Cookie等）以及HandlerMapping的配置找到处理该请求的Handler（任何一个对象都可以作为请求的Handler）。在这个地方Spring会通过HandlerAdapter（一个适配器，它用统一的接口对各种Handler中的方法进行调用。）对该处理器进行封装。</p>
 <p>Handler完成对用户请求的处理后，会返回一个ModelAndView（包含了数据模型以及相应的视图的信息）对象给DispatcherServlet。</p>
 <p>DispatcherServlet还要借助ViewResolver完成从逻辑视图到真实视图对象的解析工作。</p>
