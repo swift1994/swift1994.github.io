@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>平湖烟雨</title>
-  <subtitle>Never give up</subtitle>
+  <title>老于丢在种水稻</title>
+  
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangyu520.top/"/>
@@ -9,7 +9,7 @@
   <id>http://www.xiangyu520.top/</id>
   
   <author>
-    <name>项昱</name>
+    <name>Neo</name>
     <email>robertneon94@gmail.com</email>
   </author>
   
