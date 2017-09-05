@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangyu520.top/"/>
-  <updated>2017-09-05T11:08:26.485Z</updated>
+  <updated>2017-09-05T11:13:58.703Z</updated>
   <id>http://www.xiangyu520.top/</id>
   
   <author>
@@ -16,15 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://www.xiangyu520.top/uncategorized/2017/09/05/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3ArrayList.html"/>
-    <id>http://www.xiangyu520.top/uncategorized/2017/09/05/深入理解ArrayList.html</id>
+    <title>深入理解ArrayList</title>
+    <link href="http://www.xiangyu520.top/Java/2017/09/05/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3ArrayList.html"/>
+    <id>http://www.xiangyu520.top/Java/2017/09/05/深入理解ArrayList.html</id>
     <published>2017-09-05T11:11:10.279Z</published>
-    <updated>2017-09-05T11:08:26.485Z</updated>
+    <updated>2017-09-05T11:13:58.703Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="深入理解ArrayList"><a href="#深入理解ArrayList" class="headerlink" title="深入理解ArrayList"></a>深入理解ArrayList</h1><p>标签（空格分隔）： Java</p>
-<hr>
-<blockquote>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><blockquote>
 <p><strong>ArrayList概述</strong></p>
 </blockquote>
 <p>ArrayList是List接口的可变数组的实现。实现了所有可选列表操作，并允许包括 null 在内的所有元素。除了实现 List 接口外，此类还提供一些方法来操作内部用来存储列表的数组的大小。</p>
@@ -214,6 +212,10 @@ Java代码
     
     </summary>
     
+      <category term="Java" scheme="http://www.xiangyu520.top/categories/Java/"/>
+    
+    
+      <category term="Java面试" scheme="http://www.xiangyu520.top/tags/Java%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
