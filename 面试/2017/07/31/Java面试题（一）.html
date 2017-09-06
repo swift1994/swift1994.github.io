@@ -95,18 +95,18 @@
 
 
 
-<meta name="description" content="1 Spring MVC的工作原理是怎样的？客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。 DispatcherServlet收到请求后，将根据请求的信息（包括URL、HTTP协议方法、请求头、请求参数、Cookie等）以及HandlerMapping的配置找到处理该请求的Handler（任何一个对象都可以作为请求的H">
+<meta name="description" content="1 Spring MVC的工作原理是怎样的？客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。 DispatcherServlet收到请求后，将根据请求的信息（包括URL、HTTP协议方法、请求头、请求参数、Cookie等）以及HandlerMapping的配置找到处理该请求的Handler（任何一个对象都可以作为请求的Han">
 <meta name="keywords" content="Java面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java面试题总结（一）">
 <meta property="og:url" content="http://www.xiangyu520.top/面试/2017/07/31/Java面试题（一）.html">
 <meta property="og:site_name" content="老于丢的水稻田">
-<meta property="og:description" content="1 Spring MVC的工作原理是怎样的？客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。 DispatcherServlet收到请求后，将根据请求的信息（包括URL、HTTP协议方法、请求头、请求参数、Cookie等）以及HandlerMapping的配置找到处理该请求的Handler（任何一个对象都可以作为请求的H">
+<meta property="og:description" content="1 Spring MVC的工作原理是怎样的？客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。 DispatcherServlet收到请求后，将根据请求的信息（包括URL、HTTP协议方法、请求头、请求参数、Cookie等）以及HandlerMapping的配置找到处理该请求的Handler（任何一个对象都可以作为请求的Han">
 <meta property="og:image" content="e:/java/2199827-3c88e62d92c1cfda.png">
-<meta property="og:updated_time" content="2017-08-01T02:39:22.949Z">
+<meta property="og:updated_time" content="2017-09-06T09:51:24.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java面试题总结（一）">
-<meta name="twitter:description" content="1 Spring MVC的工作原理是怎样的？客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。 DispatcherServlet收到请求后，将根据请求的信息（包括URL、HTTP协议方法、请求头、请求参数、Cookie等）以及HandlerMapping的配置找到处理该请求的Handler（任何一个对象都可以作为请求的H">
+<meta name="twitter:description" content="1 Spring MVC的工作原理是怎样的？客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。 DispatcherServlet收到请求后，将根据请求的信息（包括URL、HTTP协议方法、请求头、请求参数、Cookie等）以及HandlerMapping的配置找到处理该请求的Handler（任何一个对象都可以作为请求的Han">
 <meta name="twitter:image" content="e:/java/2199827-3c88e62d92c1cfda.png">
 
 
@@ -450,6 +450,7 @@
 <p>DispatcherServlet还要借助ViewResolver完成从逻辑视图到真实视图对象的解析工作。</p>
 <p>当得到真正的视图对象后，DispatcherServlet会利用视图对象对模型数据进行渲染。</p>
 <p>客户端得到响应，可能是一个普通的HTML页面，也可以是XML或JSON字符串，还可以是一张图片或者一个PDF文件。</p>
+<a id="more"></a>
 <h2><span id="2-什么是ioc和didi是如何实现的">2 什么是IoC和DI？DI是如何实现的？</span></h2><p>IoC叫控制反转，是Inversion of Control的缩写，DI（Dependency Injection）叫依赖注入，是对IoC更简单的诠释。</p>
 <p>控制反转是把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的”控制反转”就是对组件对象控制权的转移，从程序代码本身转移到了外部容器，由容器来创建对象并管理对象之间的依赖关系。</p>
 <p>依赖注入的基本原则是应用组件不应该负责查找资源或者其他依赖的协作对象。配置对象的工作应该由容器负责，查找资源的逻辑应该从应用组件的代码中抽取出来，交给容器来完成。DI是对IoC更准确的描述，即组件之间的依赖关系由容器在运行期决定，形象的来说，即由容器动态的将某种依赖关系注入到组件之中。</p>
@@ -767,10 +768,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -812,7 +813,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">1 Spring MVC的工作原理是怎样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">2 什么是IoC和DI？DI是如何实现的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">3 MyBatis中使用#和$书写占位符有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">4 JSP有9个内置对象：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">5 讲解JSP中的四种作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">6 你的项目中使用过哪些JSTL标签？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">7 Jsp指令有那些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">8 会话跟踪技术有那些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">9 Session与cookie的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">10.</span> <span class="nav-text">10 创建socket通讯的步骤？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">11.</span> <span class="nav-text">11 什么是事务？事务有那些特点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">12.</span> <span class="nav-text">12 聚集索引与非聚集索引有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">13.</span> <span class="nav-text">13 Java API解析xml主要有两种方式；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">14.</span> <span class="nav-text">14 Sql中delete与truncate的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">15.</span> <span class="nav-text">15 过滤器有哪些作用和用法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">16.</span> <span class="nav-text">16 监听器有哪些作用和用法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">17.</span> <span class="nav-text">17 简述JVM内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">18.</span> <span class="nav-text">18 JVM内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">19.</span> <span class="nav-text">19 String对象的intern()是干什么的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">20.</span> <span class="nav-text">20 你对static了解多少</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1 Spring MVC的工作原理是怎样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2 什么是IoC和DI？DI是如何实现的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3 MyBatis中使用#和$书写占位符有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4 JSP有9个内置对象：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5 讲解JSP中的四种作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">6 你的项目中使用过哪些JSTL标签？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">7 Jsp指令有那些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">8 会话跟踪技术有那些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">9 Session与cookie的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">10 创建socket通讯的步骤？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">11 什么是事务？事务有那些特点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">12 聚集索引与非聚集索引有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">13 Java API解析xml主要有两种方式；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">14 Sql中delete与truncate的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">15 过滤器有哪些作用和用法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">16 监听器有哪些作用和用法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">17 简述JVM内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">18 JVM内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">19 String对象的intern()是干什么的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">20 你对static了解多少</span></a></li></ol></div>
             
 
           </div>

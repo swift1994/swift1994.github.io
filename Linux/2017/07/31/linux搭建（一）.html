@@ -95,17 +95,17 @@
 
 
 
-<meta name="description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 1 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java">
+<meta name="description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 1 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java -">
 <meta name="keywords" content="Linux搭建">
 <meta property="og:type" content="article">
 <meta property="og:title" content="centOS环境搭建（一）">
 <meta property="og:url" content="http://www.xiangyu520.top/Linux/2017/07/31/linux搭建（一）.html">
 <meta property="og:site_name" content="老于丢的水稻田">
-<meta property="og:description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 1 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java">
-<meta property="og:updated_time" content="2017-08-01T02:37:43.112Z">
+<meta property="og:description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 1 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java -">
+<meta property="og:updated_time" content="2017-09-06T09:52:19.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centOS环境搭建（一）">
-<meta name="twitter:description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 1 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java">
+<meta name="twitter:description" content="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 1 部署jdk查看系统是否安装了jdk  [root@localhost ~]# java -">
 
 
 
@@ -445,8 +445,7 @@
         <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1><span id="阿里云ecs服务器centos65安装jdkmysqltomcat">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></h1><p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错</p>
 <p><strong>前提</strong>下载安装xshell（具体如何是使用xshell请自行Google）和xftp</p>
 <h4><span id="1-部署jdk">1 部署jdk</span></h4><pre><code>查看系统是否安装了jdk
-</code></pre><p> [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java</p>
-<p> 出现或者不出现以下内容：</p>
+</code></pre><p> [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java<br> <a id="more"></a><br> 出现或者不出现以下内容：</p>
 <p>java version “1.7.0_24”<br>OpenJDK Runtime Environment (build 1.7.0_24-b18)<br>OpenJDK HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)</p>
 <p>进一步查看JDK信息：<br>[root@localhost ~]# rpm -qa | grep java<br>tzdata-java-2012c-1.el6.noarch<br>java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
 <p>卸载OpenJDK，执行以下操作：<br>[root@localhost ~]# rpm -e –nodeps tzdata-java-2012c-1.el6.noarch（解压jdk）<br>[root@localhost ~]# rpm -e –nodeps java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
@@ -698,10 +697,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -743,7 +742,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">1 部署jdk</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.1.1.</span> <span class="nav-text">2 安装jdk（JDK默认安装在/usr/java中）：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.1.2.</span> <span class="nav-text">3 验证安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.1.3.</span> <span class="nav-text">4 配置环境变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">二、部署tomcat(与配置jdk类似)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">启动tomcat</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">三  配置mysql</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">1 部署jdk</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-text">2 安装jdk（JDK默认安装在/usr/java中）：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-text">3 验证安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-text">4 配置环境变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">二、部署tomcat(与配置jdk类似)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-text">启动tomcat</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">三  配置mysql</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
