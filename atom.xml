@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangyu520.top/"/>
-  <updated>2017-09-06T13:15:26.403Z</updated>
+  <updated>2017-09-06T13:17:27.628Z</updated>
   <id>http://www.xiangyu520.top/</id>
   
   <author>
@@ -20,11 +20,10 @@
     <link href="http://www.xiangyu520.top/Java/2017/09/06/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3HashMap.html"/>
     <id>http://www.xiangyu520.top/Java/2017/09/06/深入理解HashMap.html</id>
     <published>2017-09-06T13:10:53.817Z</published>
-    <updated>2017-09-06T13:15:26.403Z</updated>
+    <updated>2017-09-06T13:17:27.628Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h3><span id="hashmap概述">HashMap概述：</span></h3><p>HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
-<h3><span id="1-hashmap的数据结构">1、hashmap的数据结构</span></h3><p>要知道hashmap是什么，首先要搞清楚它的数据结构，在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，hashmap也不例外。Hashmap实际上是一个数组和链表的结合体（在数据结构中，一般称之为“链表散列“），请看下图（横排表示数组，纵排表示数组元素实际上是一个链表）。 </p>
-<p><img src="E:\blog\hexo\themes\next\source\images\1.jpeg" alt="image"></p>
+<h3><span id="1-hashmap的数据结构">1、hashmap的数据结构</span></h3><p>要知道hashmap是什么，首先要搞清楚它的数据结构，在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，hashmap也不例外。Hashmap实际上是一个数组和链表的结合体（在数据结构中，一般称之为“链表散列“），请看下图（横排表示数组，纵排表示数组元素实际上是一个链表）。<br><a id="more"></a><br><img src="E:\blog\hexo\themes\next\source\images\1.jpeg" alt="image"></p>
 <p>从图中我们可以看到一个hashmap就是一个数组结构，当新建一个hashmap的时候，就会初始化一个数组。我们来看看java代码： </p>
 <p>Java代码  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1. /** </div><div class="line">2.      * The table, resized as necessary. Length MUST Always be a power of two. </div><div class="line">3.      *  FIXME 这里需要注意这句话，至于原因后面会讲到 </div><div class="line">4.      */  </div><div class="line">5.     transient Entry[] table;</div></pre></td></tr></table></figure>
@@ -55,7 +54,8 @@
     
     <summary type="html">
     
-      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/assets/css/DPlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/as
+      &lt;h3 id=&quot;HashMap概述：&quot;&gt;&lt;a href=&quot;#HashMap概述：&quot; class=&quot;headerlink&quot; title=&quot;HashMap概述：&quot;&gt;&lt;/a&gt;HashMap概述：&lt;/h3&gt;&lt;p&gt;HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。&lt;/p&gt;
+&lt;h3 id=&quot;1、hashmap的数据结构&quot;&gt;&lt;a href=&quot;#1、hashmap的数据结构&quot; class=&quot;headerlink&quot; title=&quot;1、hashmap的数据结构&quot;&gt;&lt;/a&gt;1、hashmap的数据结构&lt;/h3&gt;&lt;p&gt;要知道hashmap是什么，首先要搞清楚它的数据结构，在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，hashmap也不例外。Hashmap实际上是一个数组和链表的结合体（在数据结构中，一般称之为“链表散列“），请看下图（横排表示数组，纵排表示数组元素实际上是一个链表）。&lt;br&gt;
     
     </summary>
     
