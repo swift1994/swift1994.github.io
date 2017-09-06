@@ -114,7 +114,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -138,6 +138,8 @@
 
 
 
+
+<div class="top-scroll-bar"></div>
 
   <title>MySQL的性能和伸缩性优化 | 老于丢的水稻田</title>
   
@@ -174,7 +176,7 @@
     
   
 
-  <div class="container sidebar-position-right page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -406,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,556
+                  1,550
                 </span>
               
 
@@ -440,10 +442,10 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h4 id="1、选择-InnoDB-作为存储引擎"><a href="#1、选择-InnoDB-作为存储引擎" class="headerlink" title="1、选择 InnoDB 作为存储引擎"></a>1、选择 InnoDB 作为存储引擎</h4><ul>
+        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h4><span id="1-选择-innodb-作为存储引擎">1、选择 InnoDB 作为存储引擎</span></h4><ul>
 <li>大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。</li>
 </ul>
-<h4 id="2、优化数据库结构"><a href="#2、优化数据库结构" class="headerlink" title="2、优化数据库结构"></a>2、优化数据库结构</h4><ul>
+<h4><span id="2-优化数据库结构">2、优化数据库结构</span></h4><ul>
 <li><p>组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。</p>
 </li>
 <li><p>设计数据表应尽量使其占用的空间最小化，表的主键应尽可能短。</p>
@@ -453,17 +455,17 @@
 <li><p>仅创建你需要改进查询性能的索引。索引有助于检索，但是会增加插入和更新操作的执行时间。</p>
 </li>
 </ul>
-<h4 id="3、InnoDB-的-Change-Buffering-特性"><a href="#3、InnoDB-的-Change-Buffering-特性" class="headerlink" title="3、InnoDB 的 Change Buffering 特性"></a>3、InnoDB 的 Change Buffering 特性</h4><ul>
+<h4><span id="3-innodb-的-change-buffering-特性">3、InnoDB 的 Change Buffering 特性</span></h4><ul>
 <li>InnoDB 提供了 change buffering 的配置，可减少维护辅助索引所需的磁盘 I/O。大规模的数据库可能会遇到大量的表操作和大量的 I/O，以保证辅助索引保持最新。当相关页面不在缓冲池里面时，InnoDB 的 change buffer 将会更改缓存到辅助索引条目，从而避免因不能立即从磁盘读取页面而导致耗时的 I/O 操作。当页面被加载到缓冲池时，缓冲的更改将被合并，更新的页面之后会刷新到磁盘。这样做可提高性能，适用于 MySQL 5.5 及更高版本。</li>
 </ul>
-<h4 id="4、InnoDB-页面压缩"><a href="#4、InnoDB-页面压缩" class="headerlink" title="4、InnoDB 页面压缩"></a>4、InnoDB 页面压缩</h4><ul>
+<h4><span id="4-innodb-页面压缩">4、InnoDB 页面压缩</span></h4><ul>
 <li><p>InnoDB 支持对表进行页面级的压缩。当写入数据页的时候，会有特定的压缩算法对其进行压缩。压缩后的数据会写入磁盘，其打孔机制会释放页面末尾的空块。如果压缩失败，数据会按原样写入。表和索引都会被压缩，因为索引通常是数据库总大小中占比很大的一部分，压缩可以显著节约内存，I/O 或处理时间，这样就达到了提高性能和伸缩性的目的。它还可以减少内存和磁盘之间传输的数据量。MySQL 5.1 及更高版本支持该功能。</p>
 </li>
 <li><p><strong>注意</strong>，页面压缩并不能支持共享表空间中的表。共享表空间包括系统表空间、临时表空间和常规表空间。</p>
 </li>
 </ul>
-<h4 id="5、使用批量数据导入"><a href="#5、使用批量数据导入" class="headerlink" title="5、使用批量数据导入"></a>5、使用批量数据导入</h4><p>在主键上使用已排序的数据源进行批量数据的导入可加快数据插入的过程。否则，可能需要在其他行之间插入行以维护排序，这会导致磁盘 I/O 变高，进而影响性能，增加页的拆分。关闭自动提交的模式也是有好处的，因为它会为每个插入执行日志刷新到磁盘。在批量插入期间临时转移唯一键和外键检查也可显著降低磁盘 I/O。对于新建的表，最好的做法是在批量导入后创建外键/唯一键约束。</p>
-<h4 id="6、SQL-语句优化"><a href="#6、SQL-语句优化" class="headerlink" title="6、SQL 语句优化"></a>6、SQL 语句优化</h4><ul>
+<h4><span id="5-使用批量数据导入">5、使用批量数据导入</span></h4><p>在主键上使用已排序的数据源进行批量数据的导入可加快数据插入的过程。否则，可能需要在其他行之间插入行以维护排序，这会导致磁盘 I/O 变高，进而影响性能，增加页的拆分。关闭自动提交的模式也是有好处的，因为它会为每个插入执行日志刷新到磁盘。在批量插入期间临时转移唯一键和外键检查也可显著降低磁盘 I/O。对于新建的表，最好的做法是在批量导入后创建外键/唯一键约束。</p>
+<h4><span id="6-sql-语句优化">6、SQL 语句优化</span></h4><ul>
 <li><p>为了提升查询的速度，可以为 WHERE 字句中使用的列添加索引。此外，不要将主键索引用于太多或太长的列，因为这些列值在辅助索引进行复制的时候会增加读取所需要的 I/O 资源并占用缓存。</p>
 </li>
 <li><p>如果索引包含了不必要的数据，通过 I/O 读取这些数据并进行缓存就会减弱服务器的性能和伸缩性。也不要为不必要的列使用唯一键索引，因为它会禁用 change buffering。应该使用常规索引代替。</p>
@@ -475,19 +477,19 @@
 <li><p>调整缓存区域的大小和属性，比如 InnoDB 缓冲池，MySQL 查询缓存等，这样会通过从内存而非从硬盘获取数据而让重复的查询变得更快。</p>
 </li>
 </ul>
-<h4 id="7、优化存储结构"><a href="#7、优化存储结构" class="headerlink" title="7、优化存储结构"></a>7、优化存储结构</h4><ul>
+<h4><span id="7-优化存储结构">7、优化存储结构</span></h4><ul>
 <li><p>对于大型的表，或者包含大量重复文本或数值数据的表，应该考虑使用 COMPRESSED(压缩的) 行格式。这样只需要较少的 I/O 就可以把数据取到缓冲池，或执行全表扫描。</p>
 </li>
 <li><p>一旦你的数据达到稳定的大小，或者增长的表增加了几十或几百兆字节，就应该考虑使用 OPTIMIZE TABLE 语句重新组织表并压缩浪费的空间。对重新组织后的表进行全表扫描所需要的 I/O 会更少。</p>
 </li>
 </ul>
-<h4 id="8、优化-InnoDB-磁盘-I-O"><a href="#8、优化-InnoDB-磁盘-I-O" class="headerlink" title="8、优化 InnoDB 磁盘 I/O"></a>8、优化 InnoDB 磁盘 I/O</h4><ul>
+<h4><span id="8-优化-innodb-磁盘-io">8、优化 InnoDB 磁盘 I/O</span></h4><ul>
 <li><p>增加 InnoDB 缓冲池大小可以让查询从缓冲池访问而不是通过磁盘 I/O 访问。通过调整系统变量 innodb_flush_method 来调整清除缓冲的指标使其达到最佳水平。</p>
 </li>
 <li><p>使用其它存储设备配置 RAID</p>
 </li>
 </ul>
-<h4 id="9、MySQL-的内存分配"><a href="#9、MySQL-的内存分配" class="headerlink" title="9、MySQL 的内存分配"></a>9、MySQL 的内存分配</h4><ul>
+<h4><span id="9-mysql-的内存分配">9、MySQL 的内存分配</span></h4><ul>
 <li><p>在为 MySQL 分配足够的内存之前，请考虑不同领域对 MySQL 的内存需求。</p>
 </li>
 <li><p>要考虑的关键领域是：并发连接 —— 对于大量并发连接，排序和临时表将需要大量内存。在撰写本文时，对于处理 3000+ 并发连接的数据库，16GB 到 32GB的 RAM 是足够的。</p>
@@ -495,7 +497,7 @@
 <li><p>内存碎片可以消耗大约 10％ 或更多的内存。像 innodb_buffer_pool_size、key_buffer_size、query_cache_size 等缓存和缓冲区要消耗大约 80％ 的已分配内存。</p>
 </li>
 </ul>
-<h4 id="10、日常维护"><a href="#10、日常维护" class="headerlink" title="10、日常维护"></a>10、日常维护</h4><ul>
+<h4><span id="10-日常维护">10、日常维护</span></h4><ul>
 <li><p>定期检查慢的查询日志并优化查询机制以有效使用缓存来减少磁盘 I/O。优化它们，以扫描最少的行数，而不是进行全表扫描。</p>
 </li>
 <li><p>其他可以帮助 DBA 检查和分析性能的日志包括：错误日志、常规查询日志、二进制日志、DDL日志（元数据日志）。</p>
@@ -503,7 +505,7 @@
 <li><p>定期刷新缓存和缓冲区以降低碎片化。使用 OPTIMIZE TABLE 语句重新组织表并压缩任何可能被浪费的空间。</p>
 </li>
 </ul>
-<h6 id="文章摘录链接"><a href="#文章摘录链接" class="headerlink" title="文章摘录链接"></a><a href="http://mp.weixin.qq.com/s/Jj7NJBV0ErZlx4zS_N1TrQ" target="_blank" rel="external">文章摘录链接</a></h6>
+<h6><span id="文章摘录链接"></span></h6>
       
     </div>
 <div style="text-align:center;color: #ccc;font-size:14px;">---------------- The End ----------------</div>
@@ -693,10 +695,10 @@
             
             
             <div class="site-state-item site-state-categories">
-              
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
@@ -724,323 +726,6 @@
 
         <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="G" target="_blank" title="0">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  0
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="i" target="_blank" title="1">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  1
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="2">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  2
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="H" target="_blank" title="3">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  3
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="u" target="_blank" title="4">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  4
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="b" target="_blank" title="5">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  5
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="：" target="_blank" title="6">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  6
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="h" target="_blank" title="7">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  7
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="8">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  8
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="9">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  9
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="p" target="_blank" title="10">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  10
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="s" target="_blank" title="11">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  11
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href=":" target="_blank" title="12">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  12
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="/" target="_blank" title="13">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  13
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="/" target="_blank" title="14">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  14
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="g" target="_blank" title="15">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  15
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="i" target="_blank" title="16">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  16
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="17">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  17
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="h" target="_blank" title="18">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  18
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="u" target="_blank" title="19">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  19
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="b" target="_blank" title="20">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  20
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="." target="_blank" title="21">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  21
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="c" target="_blank" title="22">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  22
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="o" target="_blank" title="23">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  23
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="m" target="_blank" title="24">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  24
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="/" target="_blank" title="25">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  25
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="s" target="_blank" title="26">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  26
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="w" target="_blank" title="27">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  27
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="i" target="_blank" title="28">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  28
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="f" target="_blank" title="29">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  29
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="30">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  30
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="1" target="_blank" title="31">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  31
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="9" target="_blank" title="32">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  32
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="9" target="_blank" title="33">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  33
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="4" target="_blank" title="34">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  34
-                </a>
-              </span>
-            
-          
         </div>
 
         
@@ -1048,8 +733,9 @@
 
         
         
-		
+		<center>
 		 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1234266&auto=1&height=66"></iframe>
+		 </center>
 
         
 
@@ -1065,7 +751,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、选择-InnoDB-作为存储引擎"><span class="nav-number">1.</span> <span class="nav-text">1、选择 InnoDB 作为存储引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、优化数据库结构"><span class="nav-number">2.</span> <span class="nav-text">2、优化数据库结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、InnoDB-的-Change-Buffering-特性"><span class="nav-number">3.</span> <span class="nav-text">3、InnoDB 的 Change Buffering 特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、InnoDB-页面压缩"><span class="nav-number">4.</span> <span class="nav-text">4、InnoDB 页面压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、使用批量数据导入"><span class="nav-number">5.</span> <span class="nav-text">5、使用批量数据导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、SQL-语句优化"><span class="nav-number">6.</span> <span class="nav-text">6、SQL 语句优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、优化存储结构"><span class="nav-number">7.</span> <span class="nav-text">7、优化存储结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、优化-InnoDB-磁盘-I-O"><span class="nav-number">8.</span> <span class="nav-text">8、优化 InnoDB 磁盘 I/O</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、MySQL-的内存分配"><span class="nav-number">9.</span> <span class="nav-text">9、MySQL 的内存分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10、日常维护"><span class="nav-number">10.</span> <span class="nav-text">10、日常维护</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#文章摘录链接"><span class="nav-number">10.0.1.</span> <span class="nav-text">文章摘录链接</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">1、选择 InnoDB 作为存储引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">2、优化数据库结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">3、InnoDB 的 Change Buffering 特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">4、InnoDB 页面压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">5、使用批量数据导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">6、SQL 语句优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">7、优化存储结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">8、优化 InnoDB 磁盘 I/O</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">9、MySQL 的内存分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">10.</span> <span class="nav-text">10、日常维护</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">10.0.1.</span> <span class="nav-text"></span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1189,6 +875,14 @@
 
   <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/custom/custom.js?v=5.1.1"></script>
 
 
   

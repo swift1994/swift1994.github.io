@@ -114,7 +114,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -138,6 +138,8 @@
 
 
 
+
+<div class="top-scroll-bar"></div>
 
   <title>centOS环境搭建（一） | 老于丢的水稻田</title>
   
@@ -174,7 +176,7 @@
     
   
 
-  <div class="container sidebar-position-right page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -440,22 +442,22 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat"><a href="#阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat" class="headerlink" title="阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat"></a>阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</h1><p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错</p>
+        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1><span id="阿里云ecs服务器centos65安装jdkmysqltomcat">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></h1><p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错</p>
 <p><strong>前提</strong>下载安装xshell（具体如何是使用xshell请自行Google）和xftp</p>
-<h4 id="1-部署jdk"><a href="#1-部署jdk" class="headerlink" title="1 部署jdk"></a>1 部署jdk</h4><pre><code>查看系统是否安装了jdk
+<h4><span id="1-部署jdk">1 部署jdk</span></h4><pre><code>查看系统是否安装了jdk
 </code></pre><p> [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java</p>
 <p> 出现或者不出现以下内容：</p>
 <p>java version “1.7.0_24”<br>OpenJDK Runtime Environment (build 1.7.0_24-b18)<br>OpenJDK HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)</p>
 <p>进一步查看JDK信息：<br>[root@localhost ~]# rpm -qa | grep java<br>tzdata-java-2012c-1.el6.noarch<br>java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
 <p>卸载OpenJDK，执行以下操作：<br>[root@localhost ~]# rpm -e –nodeps tzdata-java-2012c-1.el6.noarch（解压jdk）<br>[root@localhost ~]# rpm -e –nodeps java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
 <p>若出现以上以上情况，按照以上步骤操作完后，用xftp上传jdk-7-linux-i586.rpm或者jdk-8u25-linux-x64.tar.gz（具体jdk版本看你自己选择，在Oracle官网上下载  ）到xftp上的/usr/local</p>
-<h5 id="2-安装jdk（JDK默认安装在-usr-java中）："><a href="#2-安装jdk（JDK默认安装在-usr-java中）：" class="headerlink" title="2 安装jdk（JDK默认安装在/usr/java中）："></a>2 安装jdk（JDK默认安装在/usr/java中）：</h5><p>[root@localhost  ~]#cd /usr/local (cd 空格后路径是你刚刚上传到xftp的路径，<strong>不要搞错了，我上是传到/usr/local</strong>，这一点很多博客文档都没说清楚，导致很多初学者会具体操作时出错)<br>[root@localhost ckb]# rpm -ivh jdk-7-linux-i586.rpm或者[root@localhost ckb]#tar –zxvf jdk-8u25-linux-x64.tar.gz</p>
-<h5 id="3-验证安装"><a href="#3-验证安装" class="headerlink" title="3 验证安装"></a>3 验证安装</h5><p>执行以下操作，查看信息是否正常：</p>
+<h5><span id="2-安装jdkjdk默认安装在usrjava中">2 安装jdk（JDK默认安装在/usr/java中）：</span></h5><p>[root@localhost  ~]#cd /usr/local (cd 空格后路径是你刚刚上传到xftp的路径，<strong>不要搞错了，我上是传到/usr/local</strong>，这一点很多博客文档都没说清楚，导致很多初学者会具体操作时出错)<br>[root@localhost ckb]# rpm -ivh jdk-7-linux-i586.rpm或者[root@localhost ckb]#tar –zxvf jdk-8u25-linux-x64.tar.gz</p>
+<h5><span id="3-验证安装">3 验证安装</span></h5><p>执行以下操作，查看信息是否正常：</p>
 <p>[root@localhost bin]# java</p>
 <p>[root@localhost bin]# javac</p>
 <p>[root@localhost bin]# java -version</p>
 <p>java version “1.7.0_45”<br>Java(TM) SE Runtime Environment (build 1.7.0_45-b18)<br>Java HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)</p>
-<h5 id="4-配置环境变量"><a href="#4-配置环境变量" class="headerlink" title="4 配置环境变量"></a>4 配置环境变量</h5><p>我的机器安装完jdk-7-linux-i586.rpm后不用配置环境变量也可以正常执行javac、java –version操作，因此我没有进行JDK环境变量的配置。</p>
+<h5><span id="4-配置环境变量">4 配置环境变量</span></h5><p>我的机器安装完jdk-7-linux-i586.rpm后不用配置环境变量也可以正常执行javac、java –version操作，因此我没有进行JDK环境变量的配置。</p>
 <p>但是为了以后的不适之需，这里还是记录一下怎么进行配置，操作如下：<br>修改系统环境变量文件<br>vi + /etc/profile<br>执行之后 按”i”建，INSERT出现表示可以编辑<br>向文件里面追加以下内容：</p>
 <p>在光标处添加<br>JAVA_HOME=/usr/java/jdk1.7.0_45</p>
 <p>JRE_HOME=/usr/java/jdk1.7.0_45/jre</p>
@@ -465,16 +467,16 @@
 <p>[root@localhost ~]# echo $PATH<br>（查看PATH值）</p>
 <p>查看系统环境状态</p>
 <p>[root@localhost ~]# echo $PATH<br>/usr/lib/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/java/jdk1.7.0_45/bin:<br>/usr/java/jdk1.7.0_45/jre/bin:/home/ckb/bin</p>
-<h3 id="二、部署tomcat-与配置jdk类似"><a href="#二、部署tomcat-与配置jdk类似" class="headerlink" title="二、部署tomcat(与配置jdk类似)"></a>二、部署tomcat(与配置jdk类似)</h3><p>在tomcat官网上下载 apache-tomcat-8.0.15.tar.gz并上传到/usr/local</p>
+<h3><span id="二-部署tomcat与配置jdk类似">二、部署tomcat(与配置jdk类似)</span></h3><p>在tomcat官网上下载 apache-tomcat-8.0.15.tar.gz并上传到/usr/local</p>
 <p>[root@localhost ~]#cd /usr/local</p>
 <p>[root@localhost local]#tar –zxvf apache-tomcat-8.0.15.tar.gz</p>
 <p>初始化配置：<br>[root@localhost ~]#vi catalina.sh<br>//设置环境变量</p>
 <p>末行添加：<br>JAVA_HOME=/usr/java<br>CATALINA_HOME=/usr/local/apache-tomcat-8.0.15<br>export JAVA_HOME PATH<br>（然后按Esc退出，”:”符+ wq保存并退出）</p>
-<h5 id="启动tomcat"><a href="#启动tomcat" class="headerlink" title="启动tomcat"></a>启动tomcat</h5><p>进入tomcat/bin目录</p>
+<h5><span id="启动tomcat">启动tomcat</span></h5><p>进入tomcat/bin目录</p>
 <p>[root@localhost ~]#cd /usr/local/apache-tomcat-8.0.15/lib</p>
 <p>[root@localhost bin] #  ./startup.sh<br>[root@localhost bin] # ./shutdown.sh //关闭tomcat</p>
 <p>启动之后就可以在浏览器输入你的公网ip:8080（tomcat默认端口），看到tomcat页面。</p>
-<h4 id="三-配置mysql"><a href="#三-配置mysql" class="headerlink" title="三  配置mysql"></a>三  配置mysql</h4><p>（我的这里参考了<a href="http://note.youdao.com/" target="_blank" rel="external">http://blog.csdn.net/sapce_fish/article/details/51619830?locationNum=12&amp;fps=1</a>这篇博客，版本为mysql.x86_64 5.1.73-7.el6，当然你也可以安装其他版本）</p>
+<h4><span id="三-配置mysql">三  配置mysql</span></h4><p>（我的这里参考了<a href="http://note.youdao.com/" target="_blank" rel="external">http://blog.csdn.net/sapce_fish/article/details/51619830?locationNum=12&amp;fps=1</a>这篇博客，版本为mysql.x86_64 5.1.73-7.el6，当然你也可以安装其他版本）</p>
 <p>安装mysql；==<strong>特别注意</strong>==：网上很多安装mysql的文章，都是不行的！！！！</p>
 <p>#我喜欢在home目录操作命令<br>cd /home</p>
 <p>#查看所有以mysql开头的软件</p>
@@ -685,10 +687,10 @@
             
             
             <div class="site-state-item site-state-categories">
-              
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
@@ -716,323 +718,6 @@
 
         <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="G" target="_blank" title="0">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  0
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="i" target="_blank" title="1">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  1
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="2">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  2
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="H" target="_blank" title="3">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  3
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="u" target="_blank" title="4">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  4
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="b" target="_blank" title="5">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  5
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="：" target="_blank" title="6">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  6
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="h" target="_blank" title="7">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  7
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="8">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  8
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="9">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  9
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="p" target="_blank" title="10">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  10
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="s" target="_blank" title="11">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  11
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href=":" target="_blank" title="12">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  12
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="/" target="_blank" title="13">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  13
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="/" target="_blank" title="14">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  14
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="g" target="_blank" title="15">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  15
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="i" target="_blank" title="16">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  16
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="17">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  17
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="h" target="_blank" title="18">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  18
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="u" target="_blank" title="19">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  19
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="b" target="_blank" title="20">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  20
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="." target="_blank" title="21">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  21
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="c" target="_blank" title="22">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  22
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="o" target="_blank" title="23">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  23
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="m" target="_blank" title="24">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  24
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="/" target="_blank" title="25">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  25
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="s" target="_blank" title="26">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  26
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="w" target="_blank" title="27">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  27
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="i" target="_blank" title="28">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  28
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="f" target="_blank" title="29">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  29
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="30">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  30
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="1" target="_blank" title="31">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  31
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="9" target="_blank" title="32">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  32
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="9" target="_blank" title="33">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  33
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="4" target="_blank" title="34">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  34
-                </a>
-              </span>
-            
-          
         </div>
 
         
@@ -1040,8 +725,9 @@
 
         
         
-		
+		<center>
 		 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1234266&auto=1&height=66"></iframe>
+		 </center>
 
         
 
@@ -1057,7 +743,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat"><span class="nav-number">1.</span> <span class="nav-text">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-部署jdk"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">1 部署jdk</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-安装jdk（JDK默认安装在-usr-java中）："><span class="nav-number">1.0.0.1.1.</span> <span class="nav-text">2 安装jdk（JDK默认安装在/usr/java中）：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-验证安装"><span class="nav-number">1.0.0.1.2.</span> <span class="nav-text">3 验证安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-配置环境变量"><span class="nav-number">1.0.0.1.3.</span> <span class="nav-text">4 配置环境变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、部署tomcat-与配置jdk类似"><span class="nav-number">1.0.1.</span> <span class="nav-text">二、部署tomcat(与配置jdk类似)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#启动tomcat"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">启动tomcat</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三-配置mysql"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">三  配置mysql</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">1 部署jdk</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.1.1.</span> <span class="nav-text">2 安装jdk（JDK默认安装在/usr/java中）：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.1.2.</span> <span class="nav-text">3 验证安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.1.3.</span> <span class="nav-text">4 配置环境变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">二、部署tomcat(与配置jdk类似)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">启动tomcat</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">三  配置mysql</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1181,6 +867,14 @@
 
   <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/custom/custom.js?v=5.1.1"></script>
 
 
   

@@ -116,7 +116,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -140,6 +140,8 @@
 
 
 
+
+<div class="top-scroll-bar"></div>
 
   <title>Java面试题总结（一） | 老于丢的水稻田</title>
   
@@ -176,7 +178,7 @@
     
   
 
-  <div class="container sidebar-position-right page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -442,20 +444,20 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2 id="1-Spring-MVC的工作原理是怎样的？"><a href="#1-Spring-MVC的工作原理是怎样的？" class="headerlink" title="1 Spring MVC的工作原理是怎样的？"></a>1 Spring MVC的工作原理是怎样的？</h2><p>客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。</p>
+        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2><span id="1-spring-mvc的工作原理是怎样的">1 Spring MVC的工作原理是怎样的？</span></h2><p>客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。</p>
 <p>DispatcherServlet收到请求后，将根据请求的信息（包括URL、HTTP协议方法、请求头、请求参数、Cookie等）以及HandlerMapping的配置找到处理该请求的Handler（任何一个对象都可以作为请求的Handler）。在这个地方Spring会通过HandlerAdapter（一个适配器，它用统一的接口对各种Handler中的方法进行调用。）对该处理器进行封装。</p>
 <p>Handler完成对用户请求的处理后，会返回一个ModelAndView（包含了数据模型以及相应的视图的信息）对象给DispatcherServlet。</p>
 <p>DispatcherServlet还要借助ViewResolver完成从逻辑视图到真实视图对象的解析工作。</p>
 <p>当得到真正的视图对象后，DispatcherServlet会利用视图对象对模型数据进行渲染。</p>
 <p>客户端得到响应，可能是一个普通的HTML页面，也可以是XML或JSON字符串，还可以是一张图片或者一个PDF文件。</p>
-<h2 id="2-什么是IoC和DI？DI是如何实现的？"><a href="#2-什么是IoC和DI？DI是如何实现的？" class="headerlink" title="2 什么是IoC和DI？DI是如何实现的？"></a>2 什么是IoC和DI？DI是如何实现的？</h2><p>IoC叫控制反转，是Inversion of Control的缩写，DI（Dependency Injection）叫依赖注入，是对IoC更简单的诠释。</p>
+<h2><span id="2-什么是ioc和didi是如何实现的">2 什么是IoC和DI？DI是如何实现的？</span></h2><p>IoC叫控制反转，是Inversion of Control的缩写，DI（Dependency Injection）叫依赖注入，是对IoC更简单的诠释。</p>
 <p>控制反转是把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的”控制反转”就是对组件对象控制权的转移，从程序代码本身转移到了外部容器，由容器来创建对象并管理对象之间的依赖关系。</p>
 <p>依赖注入的基本原则是应用组件不应该负责查找资源或者其他依赖的协作对象。配置对象的工作应该由容器负责，查找资源的逻辑应该从应用组件的代码中抽取出来，交给容器来完成。DI是对IoC更准确的描述，即组件之间的依赖关系由容器在运行期决定，形象的来说，即由容器动态的将某种依赖关系注入到组件之中。</p>
 <p>依赖注入可以通过setter方法注入（设值注入）、构造器注入和接口注入三种方式来实现，Spring支持setter注入和构造器注入，通常使用构造器注入来注入必须的依赖关系，对于可选的依赖关系，则setter注入是更好的选择，setter注入需要类提供无参构造器或者无参的静态工厂方法来创建对象。</p>
-<h2 id="3-MyBatis中使用-和-书写占位符有什么区别？"><a href="#3-MyBatis中使用-和-书写占位符有什么区别？" class="headerlink" title="3 MyBatis中使用#和$书写占位符有什么区别？"></a>3 MyBatis中使用#和$书写占位符有什么区别？</h2><p>#将传入的数据都当成一个字符串，会对传入的数据自动加上引号；</p>
+<h2><span id="3-mybatis中使用和书写占位符有什么区别">3 MyBatis中使用#和$书写占位符有什么区别？</span></h2><p>#将传入的数据都当成一个字符串，会对传入的数据自动加上引号；</p>
 <p>$将传入的数据直接显示生成在SQL中。</p>
 <p>注意：使用$占位符可能会导致SQL注射攻击，能用#的地方就不要使用$，写order by子句的时候应该用$而不是#。</p>
-<h2 id="4-JSP有9个内置对象："><a href="#4-JSP有9个内置对象：" class="headerlink" title="4 JSP有9个内置对象："></a>4 JSP有9个内置对象：</h2><ul>
+<h2><span id="4-jsp有9个内置对象">4 JSP有9个内置对象：</span></h2><ul>
 <li>request：封装客户端的请求，其中包含来自GET或POST请求的参数; </li>
 </ul>
 <ul>
@@ -470,7 +472,7 @@
 <li>page：JSP页面本身（相当于Java程序中的这个）;</li>
 <li>exception：封装页面抛出异常的对象。</li>
 </ul>
-<h2 id="5-讲解JSP中的四种作用域"><a href="#5-讲解JSP中的四种作用域" class="headerlink" title="5 讲解JSP中的四种作用域"></a>5 讲解JSP中的四种作用域</h2><p>答：JSP中的四种作用域包含page，request，session和application</p>
+<h2><span id="5-讲解jsp中的四种作用域">5 讲解JSP中的四种作用域</span></h2><p>答：JSP中的四种作用域包含page，request，session和application</p>
 <p>具体来说： </p>
 <ul>
 <li>page代表与一个页面相关的对象和属性.</li>
@@ -478,20 +480,20 @@
 <li>session代表与某个用户与服务器建立的一次会话相关的对象和属性。跟某个用户相关的数据应该放在用户自己的会话中。</li>
 <li>application是整个网络应用程序相关的对象和属性，它实质上是跨越整个网络应用程序，包括多个页面，请求 和会话的一个全局作用域。</li>
 </ul>
-<h2 id="6-你的项目中使用过哪些JSTL标签？"><a href="#6-你的项目中使用过哪些JSTL标签？" class="headerlink" title="6 你的项目中使用过哪些JSTL标签？"></a>6 你的项目中使用过哪些JSTL标签？</h2><p>答：项目中主要使用了JSTL的核心标签库，包括<c：if>，<c：choose>，<c：when>，<c：otherwise> <c：foreach>等，主要用于构造循环和分支结构以控制显示逻辑。</c：foreach></c：otherwise></c：when></c：choose></c：if></p>
-<h2 id="7-Jsp指令有那些？"><a href="#7-Jsp指令有那些？" class="headerlink" title="7 Jsp指令有那些？"></a>7 Jsp指令有那些？</h2><p>Include</p>
+<h2><span id="6-你的项目中使用过哪些jstl标签">6 你的项目中使用过哪些JSTL标签？</span></h2><p>答：项目中主要使用了JSTL的核心标签库，包括<c：if>，<c：choose>，<c：when>，<c：otherwise> <c：foreach>等，主要用于构造循环和分支结构以控制显示逻辑。</c：foreach></c：otherwise></c：when></c：choose></c：if></p>
+<h2><span id="7-jsp指令有那些">7 Jsp指令有那些？</span></h2><p>Include</p>
 <p>Taglib</p>
 <p>Page</p>
-<h2 id="8-会话跟踪技术有那些？"><a href="#8-会话跟踪技术有那些？" class="headerlink" title="8 会话跟踪技术有那些？"></a>8 会话跟踪技术有那些？</h2><p>Session</p>
+<h2><span id="8-会话跟踪技术有那些">8 会话跟踪技术有那些？</span></h2><p>Session</p>
 <p>Cookie</p>
 <p>表单隐藏域</p>
 <p>url重写</p>
-<h2 id="9-Session与cookie的区别？"><a href="#9-Session与cookie的区别？" class="headerlink" title="9 Session与cookie的区别？"></a>9 Session与cookie的区别？</h2><p>Session保存在服务端，cookie保存在客户端</p>
+<h2><span id="9-session与cookie的区别">9 Session与cookie的区别？</span></h2><p>Session保存在服务端，cookie保存在客户端</p>
 <p>Session保存是对象，cookie只能保存字符串</p>
 <p>Session不能设置路径，cookie可以设置保存路径。</p>
 <p>同一个网站不同网页的cookie可以保存到不通的路机构下，彼此是无法相互访问的。</p>
 <p>Session在服务器关闭后会自动消失，cookie则不会。</p>
-<h2 id="10-创建socket通讯的步骤？"><a href="#10-创建socket通讯的步骤？" class="headerlink" title="10 创建socket通讯的步骤？"></a>10 创建socket通讯的步骤？</h2><ul>
+<h2><span id="10-创建socket通讯的步骤">10 创建socket通讯的步骤？</span></h2><ul>
 <li><p>服务器程序创建一个ServerSocket，然后再用accept方法等待客户来连接</p>
 </li>
 <li><p>客户端程序创建一个Socket并请求与服务器建立连接</p>
@@ -503,7 +505,7 @@
 <li><p>服务器开始等待新的连接请求</p>
 </li>
 </ul>
-<h2 id="11-什么是事务？事务有那些特点？"><a href="#11-什么是事务？事务有那些特点？" class="headerlink" title="11 什么是事务？事务有那些特点？"></a>11 什么是事务？事务有那些特点？</h2><p>事务：<br>单个逻辑单元执行的一系列操作，要么全部执行，要么全部不执行。</p>
+<h2><span id="11-什么是事务事务有那些特点">11 什么是事务？事务有那些特点？</span></h2><p>事务：<br>单个逻辑单元执行的一系列操作，要么全部执行，要么全部不执行。</p>
 <p>特点：</p>
 <ul>
 <li><p>原子性（Atomicity）：事务中各元素不可分割，全部执行成功或者撤销所有的操作</p>
@@ -515,25 +517,25 @@
 <li><p>持久性（Durability）：事务完成后对系统的影响是永久性的。</p>
 </li>
 </ul>
-<h2 id="12-聚集索引与非聚集索引有什么区别？"><a href="#12-聚集索引与非聚集索引有什么区别？" class="headerlink" title="12 聚集索引与非聚集索引有什么区别？"></a>12 聚集索引与非聚集索引有什么区别？</h2><p>所有的索引都是为了更快地检索数据，索引存放在索引页中，数据存放在数据页中，索引以B（balance）树的形式存储</p>
+<h2><span id="12-聚集索引与非聚集索引有什么区别">12 聚集索引与非聚集索引有什么区别？</span></h2><p>所有的索引都是为了更快地检索数据，索引存放在索引页中，数据存放在数据页中，索引以B（balance）树的形式存储</p>
 <ul>
 <li><p>聚集索引：聚集索引用于决定数据表中的物理存储顺序，一张表最多有一个聚集索引。聚集索引的字段值尽量不能修改，因为修改后，因为修改后数据表的物理顺序需要重写排序。通常主键就是聚集索引</p>
 </li>
 <li><p>非聚集索引：非聚集索引的关键自是index，不会决定表的物理存储顺序，在一张表内最多可以有249个非聚集索引。</p>
 </li>
 </ul>
-<h2 id="13-Java-API解析xml主要有两种方式；"><a href="#13-Java-API解析xml主要有两种方式；" class="headerlink" title="13 Java API解析xml主要有两种方式；"></a>13 Java API解析xml主要有两种方式；</h2><ul>
+<h2><span id="13-java-api解析xml主要有两种方式">13 Java API解析xml主要有两种方式；</span></h2><ul>
 <li><p>Dom解析：一次性加载整个文档，生成树形结构。在生成的文档对象中，可以对节点进行增删改查的操作。当xml文本当较小的时候，可以使用dom解析。</p>
 </li>
 <li><p>Sax解析：基于事件的解析方式，解析速度比较快，解析的文档大小理论上是没有限制的。</p>
 </li>
 </ul>
 <p>还有一些开源的技术可以解析xml，dom4j或者jdom。</p>
-<h2 id="14-Sql中delete与truncate的区别"><a href="#14-Sql中delete与truncate的区别" class="headerlink" title="14 Sql中delete与truncate的区别"></a>14 Sql中delete与truncate的区别</h2><ul>
+<h2><span id="14-sql中delete与truncate的区别">14 Sql中delete与truncate的区别</span></h2><ul>
 <li>DELETE：选择性地删除数据，当删除整张表的数据时效率较低；</li>
 <li>truncate只能删除整张表的数据，但是效率高于使用DELETE语句；不能选择性地删除。当truncate执行删除之后，自动生成的主键值重新从默认值开始。</li>
 </ul>
-<h2 id="15-过滤器有哪些作用和用法？"><a href="#15-过滤器有哪些作用和用法？" class="headerlink" title="15 过滤器有哪些作用和用法？"></a>15 过滤器有哪些作用和用法？</h2><ul>
+<h2><span id="15-过滤器有哪些作用和用法">15 过滤器有哪些作用和用法？</span></h2><ul>
 <li><p>过滤器是一个驻留在服务器端的网络组件，它可以截取客户端和服务器之间的请求与响应信息，并对这些信息进行过滤。</p>
 </li>
 <li><p>当网络容器接受到一个对资源的请求时，它将判断是否有过滤器与这个资源相关联。如果有，那么容器将把请求交给过滤器进行处理。</p>
@@ -544,24 +546,24 @@
 </li>
 <li>和过滤器相关的接口主要有：过滤器，一个FilterConfig和FilterChain。</li>
 </ul>
-<h2 id="16-监听器有哪些作用和用法？"><a href="#16-监听器有哪些作用和用法？" class="headerlink" title="16 监听器有哪些作用和用法？"></a>16 监听器有哪些作用和用法？</h2><p>答：Java Web开发中的监听器（监听器）就是应用程序，会话，请求三个对象创建，销毁或者往其中添加修改删除属性时自动执行代码的功能组件，</p>
+<h2><span id="16-监听器有哪些作用和用法">16 监听器有哪些作用和用法？</span></h2><p>答：Java Web开发中的监听器（监听器）就是应用程序，会话，请求三个对象创建，销毁或者往其中添加修改删除属性时自动执行代码的功能组件，</p>
 <p>如下所示：<br>①ServletContextListener：对Servlet上下文的创建和销毁进行监听</p>
 <p>②ServletContextAttributeListener：监听Servlet上下文属性的添加，删除和替换</p>
 <p>③HttpSessionListener：对会话的创建和销毁进行监听。</p>
 <p>补充：session的销毁有两种情况：1). session超时（可以在web.xml中通过<session-config>/<session-timeout>标签配置超时时间）；</session-timeout></session-config></p>
 <p>2). 通过调用session对象的invalidate()方法使session失效。<br>⑤HttpSessionAttributeListener：对会话对象中属性的添加，删除和替换进行监听<br>⑤ServletRequestListener：对请求对象的初始化和销毁<br>​​进行监听<br>⑥ServletRequestAttributeListener：对请求对象属性的添加，删除和替换进行监听。</p>
-<h2 id="17-简述JVM内存分配"><a href="#17-简述JVM内存分配" class="headerlink" title="17 简述JVM内存分配"></a>17 简述JVM内存分配</h2><ol>
+<h2><span id="17-简述jvm内存分配">17 简述JVM内存分配</span></h2><ol>
 <li><p>基本数据类型变量和对象的引用都是在栈分配的</p>
 </li>
 <li><p>堆内存用来存放由new创建的对象和数组</p>
 </li>
 <li>类变量(static修饰的变量)，程序在加载的时候就在堆中为类变量分配内存，堆中的内存地址存放在栈中</li>
 <li>实例变量，当你使用java关键字new的时候，系统在堆中开辟并不一定是连续的空间分配给变量，是根据零散的堆内存地址，通过哈希算法换算为一长串数字以表征这个变量在堆中的物理位置。实例变量的生命周期: 当实例变量的引用丢失后，将被GC（垃圾回收器）列入可回收名单中，但并不是马上就释放堆中内存。</li>
-<li>局部变量: 由声明在某方法，或某代码段里（比如for循环），执行到它的时候在栈中开辟内存，当局部变量一但脱离作用域，内存立即释放<h2 id="18-JVM内存模型"><a href="#18-JVM内存模型" class="headerlink" title="18 JVM内存模型"></a>18 JVM内存模型</h2><img src="E:\java\2199827-3c88e62d92c1cfda.png" alt="image"></li>
+<li>局部变量: 由声明在某方法，或某代码段里（比如for循环），执行到它的时候在栈中开辟内存，当局部变量一但脱离作用域，内存立即释放<h2><span id="18-jvm内存模型">18 JVM内存模型</span></h2><img src="E:\java\2199827-3c88e62d92c1cfda.png" alt="image"></li>
 </ol>
-<h2 id="19-String对象的intern-是干什么的"><a href="#19-String对象的intern-是干什么的" class="headerlink" title="19 String对象的intern()是干什么的"></a>19 String对象的intern()是干什么的</h2><p>intern()方法会首先从常量池中查找是否存在该常量值, 如果常量池中不存在则先在常量池中创建, 如果已经存在则直接返回, </p>
+<h2><span id="19-string对象的intern是干什么的">19 String对象的intern()是干什么的</span></h2><p>intern()方法会首先从常量池中查找是否存在该常量值, 如果常量池中不存在则先在常量池中创建, 如果已经存在则直接返回, </p>
 <p>如:<br>String s1=”aa”;<br>String s2=s1.intern();<br>System.out.print(s1==s2);//返回true</p>
-<h2 id="20-你对static了解多少"><a href="#20-你对static了解多少" class="headerlink" title="20 你对static了解多少"></a>20 你对static了解多少</h2><ul>
+<h2><span id="20-你对static了解多少">20 你对static了解多少</span></h2><ul>
 <li><p>static成员变量是在类加载的时候生成的</p>
 </li>
 <li><p>static成员函数既可以通过类名直接调用，也可以通过对象名进行调用虚函数是C++中的，虚函数不可能是static的</p>
@@ -754,10 +756,10 @@
             
             
             <div class="site-state-item site-state-categories">
-              
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
@@ -785,323 +787,6 @@
 
         <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="G" target="_blank" title="0">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  0
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="i" target="_blank" title="1">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  1
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="2">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  2
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="H" target="_blank" title="3">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  3
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="u" target="_blank" title="4">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  4
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="b" target="_blank" title="5">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  5
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="：" target="_blank" title="6">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  6
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="h" target="_blank" title="7">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  7
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="8">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  8
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="9">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  9
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="p" target="_blank" title="10">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  10
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="s" target="_blank" title="11">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  11
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href=":" target="_blank" title="12">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  12
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="/" target="_blank" title="13">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  13
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="/" target="_blank" title="14">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  14
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="g" target="_blank" title="15">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  15
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="i" target="_blank" title="16">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  16
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="17">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  17
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="h" target="_blank" title="18">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  18
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="u" target="_blank" title="19">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  19
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="b" target="_blank" title="20">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  20
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="." target="_blank" title="21">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  21
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="c" target="_blank" title="22">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  22
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="o" target="_blank" title="23">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  23
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="m" target="_blank" title="24">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  24
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="/" target="_blank" title="25">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  25
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="s" target="_blank" title="26">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  26
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="w" target="_blank" title="27">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  27
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="i" target="_blank" title="28">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  28
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="f" target="_blank" title="29">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  29
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="t" target="_blank" title="30">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  30
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="1" target="_blank" title="31">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  31
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="9" target="_blank" title="32">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  32
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="9" target="_blank" title="33">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  33
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="4" target="_blank" title="34">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  34
-                </a>
-              </span>
-            
-          
         </div>
 
         
@@ -1109,8 +794,9 @@
 
         
         
-		
+		<center>
 		 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1234266&auto=1&height=66"></iframe>
+		 </center>
 
         
 
@@ -1126,7 +812,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Spring-MVC的工作原理是怎样的？"><span class="nav-number">1.</span> <span class="nav-text">1 Spring MVC的工作原理是怎样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-什么是IoC和DI？DI是如何实现的？"><span class="nav-number">2.</span> <span class="nav-text">2 什么是IoC和DI？DI是如何实现的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-MyBatis中使用-和-书写占位符有什么区别？"><span class="nav-number">3.</span> <span class="nav-text">3 MyBatis中使用#和$书写占位符有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-JSP有9个内置对象："><span class="nav-number">4.</span> <span class="nav-text">4 JSP有9个内置对象：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-讲解JSP中的四种作用域"><span class="nav-number">5.</span> <span class="nav-text">5 讲解JSP中的四种作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-你的项目中使用过哪些JSTL标签？"><span class="nav-number">6.</span> <span class="nav-text">6 你的项目中使用过哪些JSTL标签？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Jsp指令有那些？"><span class="nav-number">7.</span> <span class="nav-text">7 Jsp指令有那些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-会话跟踪技术有那些？"><span class="nav-number">8.</span> <span class="nav-text">8 会话跟踪技术有那些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Session与cookie的区别？"><span class="nav-number">9.</span> <span class="nav-text">9 Session与cookie的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-创建socket通讯的步骤？"><span class="nav-number">10.</span> <span class="nav-text">10 创建socket通讯的步骤？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-什么是事务？事务有那些特点？"><span class="nav-number">11.</span> <span class="nav-text">11 什么是事务？事务有那些特点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-聚集索引与非聚集索引有什么区别？"><span class="nav-number">12.</span> <span class="nav-text">12 聚集索引与非聚集索引有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-Java-API解析xml主要有两种方式；"><span class="nav-number">13.</span> <span class="nav-text">13 Java API解析xml主要有两种方式；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-Sql中delete与truncate的区别"><span class="nav-number">14.</span> <span class="nav-text">14 Sql中delete与truncate的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-过滤器有哪些作用和用法？"><span class="nav-number">15.</span> <span class="nav-text">15 过滤器有哪些作用和用法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-监听器有哪些作用和用法？"><span class="nav-number">16.</span> <span class="nav-text">16 监听器有哪些作用和用法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-简述JVM内存分配"><span class="nav-number">17.</span> <span class="nav-text">17 简述JVM内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-JVM内存模型"><span class="nav-number">18.</span> <span class="nav-text">18 JVM内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-String对象的intern-是干什么的"><span class="nav-number">19.</span> <span class="nav-text">19 String对象的intern()是干什么的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-你对static了解多少"><span class="nav-number">20.</span> <span class="nav-text">20 你对static了解多少</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">1 Spring MVC的工作原理是怎样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">2 什么是IoC和DI？DI是如何实现的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">3 MyBatis中使用#和$书写占位符有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">4 JSP有9个内置对象：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">5 讲解JSP中的四种作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">6 你的项目中使用过哪些JSTL标签？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">7 Jsp指令有那些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">8 会话跟踪技术有那些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">9 Session与cookie的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">10.</span> <span class="nav-text">10 创建socket通讯的步骤？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">11.</span> <span class="nav-text">11 什么是事务？事务有那些特点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">12.</span> <span class="nav-text">12 聚集索引与非聚集索引有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">13.</span> <span class="nav-text">13 Java API解析xml主要有两种方式；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">14.</span> <span class="nav-text">14 Sql中delete与truncate的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">15.</span> <span class="nav-text">15 过滤器有哪些作用和用法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">16.</span> <span class="nav-text">16 监听器有哪些作用和用法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">17.</span> <span class="nav-text">17 简述JVM内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">18.</span> <span class="nav-text">18 JVM内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">19.</span> <span class="nav-text">19 String对象的intern()是干什么的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">20.</span> <span class="nav-text">20 你对static了解多少</span></a></li></ol></div>
             
 
           </div>
@@ -1250,6 +936,14 @@
 
   <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/custom/custom.js?v=5.1.1"></script>
 
 
   
