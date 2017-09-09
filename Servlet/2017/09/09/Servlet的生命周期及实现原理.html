@@ -107,7 +107,7 @@
 <meta property="og:url" content="http://www.xiangyu520.top/Servlet/2017/09/09/Servlet的生命周期及实现原理.html">
 <meta property="og:site_name" content="老于丢的水稻田">
 <meta property="og:description" content="生命周期分为三个阶段： 　初始化阶段 调用init()方法 响应客户请求阶段　　 调用service()方法 终止阶段　　 调用destroy()方法  1、Servlet初始化阶段：　　在下列时刻Servlet容器装载Servlet： 　　  　　　　Servlet容器启动时自动装载某些Servlet，实现它只需要在web.XML文件中的之间添加如下代码：  1&amp;lt;loadon-startu">
-<meta property="og:updated_time" content="2017-09-09T13:17:56.462Z">
+<meta property="og:updated_time" content="2017-09-09T13:21:16.136Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Servlet的生命周期及实现原理">
 <meta name="twitter:description" content="生命周期分为三个阶段： 　初始化阶段 调用init()方法 响应客户请求阶段　　 调用service()方法 终止阶段　　 调用destroy()方法  1、Servlet初始化阶段：　　在下列时刻Servlet容器装载Servlet： 　　  　　　　Servlet容器启动时自动装载某些Servlet，实现它只需要在web.XML文件中的之间添加如下代码：  1&amp;lt;loadon-startu">
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  811
+                  812
                 </span>
               
 
@@ -470,7 +470,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private Hashtable&lt;String String[]&gt; paramHashStringArray = new Hashtable&lt;String String[]&gt;();</div></pre></td></tr></table></figure>
 <p>　　这是一个String–&gt;String[]的键值映射。<br>　　HashMap线程不安全的，Hashtable线程安全。</p>
 <h3><span id="3-servlet终止阶段">3、Servlet终止阶段：</span></h3><p>　　当WEB应用被终止，或Servlet容器终止运行，或Servlet容器重新装载Servlet新实例时，Servlet容器会先调用Servlet的destroy()方法，在destroy()方法中可以释放掉Servlet所占用的资源。</p>
-<h2><span id="servlet工作原理">Servlet工作原理：</span></h2><p>　　首先客户发送一个请求，Servlet是调用service()方法对请求进行响应的，service()方法中对请求的方式进行了匹配，选择调用doGet,doPost等这些方法，然后再进入对应的方法中调用逻辑层的方法，实现对客户的响应。<br>　　<br>　<br>在Servlet接口和GenericServlet中是没有doGet,doPost等等这些方法的，HttpServlet中定义了这些方法，但是都是返回error信息，所以，我们每次定义一个Servlet的时候，都必须实现doGet或doPost等这些方法。</p>
+<h2><span id="4-servlet工作原理">4、Servlet工作原理：</span></h2><p>　　首先客户发送一个请求，Servlet是调用service()方法对请求进行响应的，service()方法中对请求的方式进行了匹配，选择调用doGet,doPost等这些方法，然后再进入对应的方法中调用逻辑层的方法，实现对客户的响应。<br>　　<br>　<br>在Servlet接口和GenericServlet中是没有doGet,doPost等等这些方法的，HttpServlet中定义了这些方法，但是都是返回error信息，所以，我们每次定义一个Servlet的时候，都必须实现doGet或doPost等这些方法。</p>
 <p>　　每一个自定义的Servlet都必须实现Servlet的接口，Servlet接口中定义了五个方法，其中比较重要的三个方法涉及到Servlet的生命周期，分别是上文提到的init(),service(),destroy()方法。GenericServlet是一个通用的，不特定于任何协议的Servlet,它实现了Servlet接口。而HttpServlet继承于GenericServlet，因此HttpServlet也实现了Servlet接口。所以我们定义Servlet的时候只需要继承HttpServlet即可。<br>　　<br>　　<br>　　<br>　<br>　　Servlet接口和GenericServlet是不特定于任何协议的，而HttpServlet是特定于HTTP协议的类，所以HttpServlet中实现了service()方法，并将请求ServletRequest,ServletResponse强转为HttpRequest和HttpResponse。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public void service(ServletRequest req,ServletResponse res) </div><div class="line">  throws ServletException,IOException</div><div class="line">&#123;</div><div class="line">      HttpRequest request;</div><div class="line">      HttpResponse response;</div><div class="line"> </div><div class="line">     try</div><div class="line">     &#123;</div><div class="line">         req = (HttpRequest)request;</div><div class="line">         res = (HttpResponse)response;</div><div class="line">      &#125;catch(ClassCastException e)</div><div class="line">      &#123;</div><div class="line">         throw new ServletException(&quot;non-HTTP request response&quot;); </div><div class="line">      &#125;</div><div class="line">      service(request,response);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>代码的最后调用了HTTPServlet自己的service(request,response)方法，然后根据请求去调用对应的doXXX方法，因为HttpServlet中的doXXX方法都是返回错误信息，所以需要我们在自定义的Servlet中override这些方法。</p>
@@ -742,7 +742,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">生命周期分为三个阶段：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">　初始化阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">响应客户请求阶段　　</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">终止阶段　　</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">1、Servlet初始化阶段：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2、Servlet响应请求阶段：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3、Servlet终止阶段：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Servlet工作原理：</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">生命周期分为三个阶段：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">　初始化阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">响应客户请求阶段　　</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">终止阶段　　</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">1、Servlet初始化阶段：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2、Servlet响应请求阶段：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3、Servlet终止阶段：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4、Servlet工作原理：</span></a></div>
             
 
           </div>
