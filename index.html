@@ -90,8 +90,6 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="老于丢的水稻田" type="application/atom+xml" />
-
 
 
 
@@ -311,6 +309,186 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.xiangyu520.top/uncategorized/2017/09/09/Servlet的生命周期及实现原理.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Neo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/xiang1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老于丢的水稻田">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/uncategorized/2017/09/09/Servlet的生命周期及实现原理.html" itemprop="url">未命名</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-09T21:09:31+08:00">
+                2017-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+  
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/uncategorized/2017/09/09/Servlet的生命周期及实现原理.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="uncategorized/2017/09/09/Servlet的生命周期及实现原理.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  833
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <hr>
+<p>title: Servlet的生命周期及实现原理<br>categories: Servlet<br>tags: Java面试<br>abbrlink: ‘34037054’</p>
+<h2 id="description-null"><a href="#description-null" class="headerlink" title="description: null"></a>description: null</h2><h3 id="生命周期分为三个阶段："><a href="#生命周期分为三个阶段：" class="headerlink" title="生命周期分为三个阶段："></a>生命周期分为三个阶段：</h3><ul>
+<li><h4 id="初始化阶段"><a href="#初始化阶段" class="headerlink" title="　初始化阶段"></a>　初始化阶段</h4></li>
+<li>调用init()方法</li>
+<li><h4 id="响应客户请求阶段"><a href="#响应客户请求阶段" class="headerlink" title="响应客户请求阶段　　"></a>响应客户请求阶段　　</h4></li>
+<li>调用service()方法</li>
+<li><h4 id="终止阶段"><a href="#终止阶段" class="headerlink" title="终止阶段　　"></a>终止阶段　　</h4></li>
+<li>调用destroy()方法</li>
+</ul>
+<h3 id="1、Servlet初始化阶段："><a href="#1、Servlet初始化阶段：" class="headerlink" title="1、Servlet初始化阶段："></a><strong>1、Servlet初始化阶段</strong>：</h3><p>　　在下列时刻Servlet容器装载Servlet：
+　　</p>
+<ul>
+<li>　　　　Servlet容器启动时自动装载某些Servlet，实现它只需要在web.XML文件中的<servlet></servlet>之间添加如下代码：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;loadon-startup&gt;1&lt;/loadon-startup&gt;</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/uncategorized/2017/09/09/Servlet的生命周期及实现原理.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+<div style="text-align:center;color: #ccc;font-size:14px;">---------------- The End ----------------</div>
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+<div>
+	    <p id="div-border-left-red">
+	   <b>本文基于<a target="_blank" title="Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)" href="http://creativecommons.org/licenses/by-sa/4.0/"> 知识共享署名-相同方式共享 4.0 </a>国际许可协议发布</b><br/>
+	    <span>
+	    <b>本文地址：</b><a href="/index.html" title=""></a><br/><b>转载请注明出处，谢谢！</b>
+	    </span>
+	    </p>
+</div>
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1124,7 +1302,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1154,13 +1332,6 @@
 
         </nav>
 
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
         
 		<center>
 		 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1234266&auto=1&height=66"></iframe>
@@ -1244,7 +1415,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共7.2k字</span>
+  <span class="post-count">博客全站共8.0k字</span>
 </div>
         
 
