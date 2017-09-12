@@ -1,516 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[深入理解Java内存管理]]></title>
-      <url>/Java/2017/09/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html</url>
-      <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2><span id="运行时数据区域"><strong>运行时数据区域</strong></span></h2><p><img src="E:\blog\hexo\source\uploads\jvm_memory_1.png" alt="image"></p>
-<p><img src="E:\blog\hexo\source\uploads\stack_heap_info.png" alt="image"></p>
-<h2><span id="1-程序计数器pc">1 程序计数器PC</span></h2><p>程序计数器PC，当前线程所执行的字节码行号指示器。每个线程都有自己计数器，是私有内存空间，该区域是整个内存中较小的一块。<br>当线程正在执行一个Java方法时，PC计数器记录的是正在执行的虚拟机字节码的地址；当线程正在执行的一个Native方法时，PC计数器则为空（Undefined）。</p>
-<h2><span id="2-虚拟机栈">2 虚拟机栈</span></h2><p>虚拟机栈，生命周期与线程相同，是Java方法执行的内存模型。每个方法(不包含native方法)执行的同时都会创建一个栈帧结构，方法执行过程，对应着虚拟机栈的入栈到出栈的过程。<br>栈帧(Stack Frame)结构<br>栈帧是用于支持虚拟机进行方法执行的数据结构，是属性运行时数据区的虚拟机站的栈元素。见上图， 栈帧包括：</p>
-<ul>
-<li>局部变量表 (locals大小，编译期确定)，一组变量存储空间， 容量以slot为最小单位。</li>
-<li>操作栈(stack大小，编译期确定)，操作栈元素的数据类型必须与字节码指令序列严格匹配</li>
-<li>动态连接， 指向运行时常量池中该栈帧所属方法的引用，为了 动态连接使用。</li>
-<li>○ 前面的解析过程其实是静态解析；</li>
-<li>○ 对于运行期转化为直接引用，称为动态解析。</li>
-<li>方法返回地址</li>
-<li>○ 正常退出，执行引擎遇到方法返回的字节码，将返回值传递给调用者</li>
-<li>○ 异常退出，遇到Exception,并且方法未捕捉异常，那么不会有任何返回值。</li>
-<li><p>额外附加信息，虚拟机规范没有明确规定，由具体虚拟机实现。<br>异常(Exception)<br>Java虚拟机规范规定该区域有两种异常：<br>● StackOverFlowError：当线程请求栈深度超出虚拟机栈所允许的深度时抛出<br>● OutOfMemoryError：当Java虚拟机动态扩展到无法申请足够内存时抛出</p>
-<h2><span id="3-本地方法栈">3 本地方法栈</span></h2><p>本地方法栈则为虚拟机使用到的Native方法提供内存空间，而前面讲的虚拟机栈式为Java方法提供内存空间。有些虚拟机的实现直接把本地方法栈和虚拟机栈合二为一，比如非常典型的Sun HotSpot虚拟机。<br>异常(Exception)：Java虚拟机规范规定该区域可抛出StackOverFlowError和OutOfMemoryError。</p>
-<h2><span id="4-java堆">4 Java堆</span></h2><p>Java堆，是Java虚拟机管理的最大的一块内存，也是GC的主战场，里面存放的是几乎所有的对象实例和数组数据。JIT编译器有栈上分配、标量替换等优化技术的实现导致部分对象实例数据不存在Java堆，而是栈内存。</p>
-</li>
-<li><p>从内存回收角度，Java堆被分为新生代和老年代；这样划分的好处是为了更快的回收内存；</p>
-</li>
-<li>从内存分配角度，Java堆可以划分出线程私有的分配缓冲区(Thread Local Allocation Buffer,TLAB)；这样划分的好处是为了更快的分配内存；<br>对象创建的过程是在堆上分配着实例对象，那么对象实例的具体结构如下：</li>
-</ul>
-<p>对于填充数据不是一定存在的，仅仅是为了字节对齐。HotSpot VM的自动内存管理要求对象起始地址必须是8字节的整数倍。对象头本身是8的倍数，当对象的实例数据不是8的倍数，便需要填充数据来保证8字节的对齐。该功能类似于高速缓存行的对齐。</p>
-<p>另外，关于在堆上内存分配是并发进行的，虚拟机采用CAS加失败重试保证原子操作，或者是采用每个线程预先分配TLAB内存.<br>异常(Exception)：Java虚拟机规范规定该区域可抛出OutOfMemoryError。</p>
-<h2><span id="5-方法区">5 方法区</span></h2><p>方法区主要存放的是已被虚拟机加载的类信息、常量、静态变量、编译器编译后的代码等数据。GC在该区域出现的比较少。<br>异常(Exception)：Java虚拟机规范规定该区域可抛出OutOfMemoryError。</p>
-<h3><span id="运行时常量池">运行时常量池</span></h3><p>运行时常量池也是方法区的一部分，用于存放编译器生成的各种字面量和符号引用。运行时常量池除了编译期产生的Class文件的常量池，还可以在运行期间，将新的常量加入常量池，比较常见的是String类的intern()方法。</p>
-<ol>
-<li>字面量：与Java语言层面的常量概念相近，包含文本字符串、声明为final的常量值等。</li>
-<li>符号引用：编译语言层面的概念，包括以下3类：</li>
-</ol>
-<ul>
-<li>类和接口的全限定名</li>
-<li>字段的名称和描述符</li>
-<li>方法的名称和描述符</li>
-</ul>
-<p>但是该区域不会抛出OutOfMemoryError异常。</p>
-<h5><span id="详情请看深入理解jvm虚拟机第二章38页"><strong>==详情请看==</strong>《深入理解JVM虚拟机》第二章38页</span></h5>]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> JVM </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Servlet的生命周期及实现原理]]></title>
-      <url>/Servlet/2017/09/09/Servlet%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html</url>
-      <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h3><span id="生命周期分为三个阶段">生命周期分为三个阶段</span></h3><ul>
-<li><h4><span id="初始化阶段">　初始化阶段</span></h4></li>
-<li>调用init()方法</li>
-<li><h4><span id="响应客户请求阶段">响应客户请求阶段　　</span></h4></li>
-<li>调用service()方法</li>
-<li><h4><span id="终止阶段">终止阶段　　</span></h4></li>
-<li>调用destroy()方法</li>
-</ul>
-<h3><span id="1-servlet初始化阶段"><strong>1、Servlet初始化阶段</strong></span></h3><p>　　在下列时刻Servlet容器装载Servlet：
-　　</p>
-<ul>
-<li>　Servlet容器启动时自动装载某些Servlet，实现它只需要在web.XML文件中的<servlet></servlet>之间添加如下代码：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;loadon-startup&gt;1&lt;/loadon-startup&gt;</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<ul>
-<li>　在Servlet容器启动后，客户首次向Servlet发送请求</li>
-<li>　Servlet类文件被更新后，重新装载Servlet<br>　　Servlet被装载后，Servlet容器创建一个Servlet实例并且调用Servlet的init()方法进行初始化。<br>在Servlet的整个生命周期内，init()方法只被调用一次。</li>
-</ul>
-<h3><span id="2-servlet响应请求阶段">2、Servlet响应请求阶段</span></h3><p>　　对于用户到达Servlet的请求，Servlet容器会创建特定于这个请求的ServletRequest对象和ServletResponse对象，然后调用Servlet的service方法。service方法从ServletRequest对象获得客户请求信息，处理该请求，并通过ServletResponse对象向客户返回响应信息。<br>　　<br>对于Tomcat来说，它会将传递过来的参数放在一个Hashtable中，该Hashtable的定义是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private Hashtable&lt;String String[]&gt; paramHashStringArray = new Hashtable&lt;String String[]&gt;();</div></pre></td></tr></table></figure>
-<p>　　这是一个String–&gt;String[]的键值映射。<br>　　HashMap线程不安全的，Hashtable线程安全。</p>
-<h3><span id="3-servlet终止阶段">3、Servlet终止阶段</span></h3><p>　　当WEB应用被终止，或Servlet容器终止运行，或Servlet容器重新装载Servlet新实例时，Servlet容器会先调用Servlet的destroy()方法，在destroy()方法中可以释放掉Servlet所占用的资源。</p>
-<h3><span id="servlet工作原理">Servlet工作原理</span></h3><p>　　首先客户发送一个请求，Servlet是调用service()方法对请求进行响应的，service()方法中对请求的方式进行了匹配，选择调用doGet,doPost等这些方法，然后再进入对应的方法中调用逻辑层的方法，实现对客户的响应。<br>　　<br>在Servlet接口和GenericServlet中是没有doGet,doPost等等这些方法的，HttpServlet中定义了这些方法，但是都是返回error信息，所以，我们每次定义一个Servlet的时候，都必须实现doGet或doPost等这些方法。</p>
-<p>　　每一个自定义的Servlet都必须实现Servlet的接口，Servlet接口中定义了五个方法，其中比较重要的三个方法涉及到Servlet的生命周期，分别是上文提到的init(),service(),destroy()方法。GenericServlet是一个通用的，不特定于任何协议的Servlet,它实现了Servlet接口。而HttpServlet继承于GenericServlet，因此HttpServlet也实现了Servlet接口。所以我们定义Servlet的时候只需要继承HttpServlet即可。<br>　　<br>　　Servlet接口和GenericServlet是不特定于任何协议的，而HttpServlet是特定于HTTP协议的类，所以HttpServlet中实现了service()方法，并将请求ServletRequest,ServletResponse强转为HttpRequest和HttpResponse。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public void service(ServletRequest req,ServletResponse res) </div><div class="line">  throws ServletException,IOException</div><div class="line">&#123;</div><div class="line">      HttpRequest request;</div><div class="line">      HttpResponse response;</div><div class="line"> </div><div class="line">     try</div><div class="line">     &#123;</div><div class="line">         req = (HttpRequest)request;</div><div class="line">         res = (HttpResponse)response;</div><div class="line">      &#125;catch(ClassCastException e)</div><div class="line">      &#123;</div><div class="line">         throw new ServletException(&quot;non-HTTP request response&quot;); </div><div class="line">      &#125;</div><div class="line">      service(request,response);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>代码的最后调用了HTTPServlet自己的service(request,response)方法，然后根据请求去调用对应的doXXX方法，因为HttpServlet中的doXXX方法都是返回错误信息，所以需要我们在自定义的Servlet中override这些方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">protected void doGet(HttpServletRequest res,HttpServletResponse resp)</div><div class="line"> throws ServletException,IOException</div><div class="line">&#123;</div><div class="line"> String protocol = req.getProtocol();</div><div class="line"> String msg = IStrings.getString(&quot;http.method_get_not_supported&quot;);</div><div class="line"> if(protocol.equals(&quot;1.1&quot;))</div><div class="line"> &#123;</div><div class="line"> resp.sendError(HttpServletResponse.SC.METHOD.NOT.ALLOWED,msg);</div><div class="line"> &#125;</div><div class="line"> esle</div><div class="line"> &#123;</div><div class="line"> resp.sendError(HttpServletResponse.SC_BAD_REQUEST,msg);</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-      
-        <categories>
-            
-            <category> Servlet </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Java面试 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[深入理解HashMap]]></title>
-      <url>/Java/2017/09/06/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3HashMap.html</url>
-      <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h3><span id="hashmap概述">HashMap概述：</span></h3><p>HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
-<h3><span id="1-hashmap的数据结构">1、hashmap的数据结构</span></h3><p>要知道hashmap是什么，首先要搞清楚它的数据结构，在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，hashmap也不例外。Hashmap实际上是一个数组和链表的结合体（在数据结构中，一般称之为“链表散列“），请看下图（横排表示数组，纵排表示数组元素实际上是一个链表）。<br><a id="more"></a><br><img src="E:\blog\hexo\source\img\1.jpeg" alt="image"></p>
-<p>从图中我们可以看到一个hashmap就是一个数组结构，当新建一个hashmap的时候，就会初始化一个数组。我们来看看java代码： </p>
-<p>Java代码  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1. /** </div><div class="line">2.      * The table, resized as necessary. Length MUST Always be a power of two. </div><div class="line">3.      *  FIXME 这里需要注意这句话，至于原因后面会讲到 </div><div class="line">4.      */  </div><div class="line">5.     transient Entry[] table;</div></pre></td></tr></table></figure>
-<p>Java代码  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1. static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;  </div><div class="line">2.         final K key;  </div><div class="line">3.         V value;  </div><div class="line">4.         final int hash;  </div><div class="line">5.         Entry&lt;K,V&gt; next;  </div><div class="line">6. ..........  </div><div class="line">7. &#125;</div></pre></td></tr></table></figure>
-<p>上面的Entry就是数组中的元素，它持有一个指向下一个元素的引用，这就构成了链表。<br>当我们往hashmap中put元素的时候，先根据key的hash值得到这个元素在数组中的位置（即下标），然后就可以把这个元素放到对应的位置中了。如果这个元素所在的位子上已经存放有其他元素了，那么在同一个位子上的元素将以链表的形式存放，新加入的放在链头，最先加入的放在链尾。从hashmap中get元素时，首先计算key的hashcode，找到数组中对应位置的某一元素，然后通过key的equals方法在对应位置的链表中找到需要的元素。从这里我们可以想象得到，如果每个位置上的链表只有一个元素，那么hashmap的get效率将是最高的，但是理想总是美好的，现实总是有困难需要我们去克服，哈哈~</p>
-<h3><span id="2-hash算法">2、hash算法</span></h3><p>我们可以看到在hashmap中要找到某个元素，需要根据key的hash值来求得对应数组中的位置。如何计算这个位置就是hash算法。前面说过hashmap的数据结构是数组和链表的结合，所以我们当然希望这个hashmap里面的元素位置尽量的分布均匀些，尽量使得每个位置上的元素数量只有一个，那么当我们用hash算法求得这个位置的时候，马上就可以知道对应位置的元素就是我们要的，而不用再去遍历链表。 </p>
-<p>所以我们首先想到的就是把hashcode对数组长度取模运算，这样一来，元素的分布相对来说是比较均匀的。但是，“模”运算的消耗还是比较大的，能不能找一种更快速，消耗更小的方式那？java中时这样做的， </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Java代码  </div><div class="line"></div><div class="line">  1. static int indexFor(int h, int length) &#123;  </div><div class="line">  2.        return h &amp; (length-1);  </div><div class="line">  3.    &#125;</div></pre></td></tr></table></figure>
-<p>首先算得key得hashcode值，然后跟数组的长度-1做一次“与”运算（&amp;）。看上去很简单，其实比较有玄机。比如数组的长度是2的4次方，那么hashcode就会和2的4次方-1做“与”运算。很多人都有这个疑问，为什么hashmap的数组初始化大小都是2的次方大小时，hashmap的效率最高，我以2的4次方举例，来解释一下为什么数组大小为2的幂时hashmap访问的性能最高。 </p>
-<p>看下图，左边两组是数组长度为16（2的4次方），右边两组是数组长度为15。两组的hashcode均为8和9，但是很明显，当它们和1110“与”的时候，产生了相同的结果，也就是说它们会定位到数组中的同一个位置上去，这就产生了碰撞，8和9会被放到同一个链表上，那么查询的时候就需要遍历这个链表，得到8或者9，这样就降低了查询的效率。同时，我们也可以发现，当数组长度为15的时候，hashcode的值会与14（1110）进行“与”，那么最后一位永远是0，而0001，0011，0101，1001，1011，0111，1101这几个位置永远都不能存放元素了，空间浪费相当大，更糟的是这种情况中，数组可以使用的位置比数组长度小了很多，这意味着进一步增加了碰撞的几率，减慢了查询的效率！ </p>
-<p><img src="E:\blog\hexo\source\img\2.jpeg" alt="image"></p>
-<p> 所以说，当数组长度为2的n次幂的时候，不同的key算得得index相同的几率较小，那么数据在数组上分布就比较均匀，也就是说碰撞的几率小，相对的，查询的时候就不用遍历某个位置上的链表，这样查询效率也就较高了。 </p>
-<p>说到这里，我们再回头看一下hashmap中默认的数组大小是多少，查看源代码可以得知是16，为什么是16，而不是15，也不是20呢，看到上面annegu的解释之后我们就清楚了吧，显然是因为16是2的整数次幂的原因，在小数据量的情况下16比15和20更能减少key之间的碰撞，而加快查询的效率。 </p>
-<p>所以，在存储大容量数据的时候，最好预先指定hashmap的size为2的整数次幂次方。就算不指定的话，也会以大于且最接近指定值大小的2次幂来初始化的，代码如下(HashMap的构造方法中)： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Java代码  </div><div class="line"></div><div class="line">  1. // Find a power of 2 &gt;= initialCapacity  </div><div class="line">  2.         int capacity = 1;  </div><div class="line">  3.         while (capacity &lt; initialCapacity)   </div><div class="line">  4.             capacity &lt;&lt;= 1;</div></pre></td></tr></table></figure>
-<h3><span id="3-hashmap的resize">3、hashmap的resize</span></h3><p>当hashmap中的元素越来越多的时候，碰撞的几率也就越来越高（因为数组的长度是固定的），所以为了提高查询的效率，就要对hashmap的数组进行扩容，数组扩容这个操作也会出现在ArrayList中，所以这是一个通用的操作，很多人对它的性能表示过怀疑，不过想想我们的“均摊”原理，就释然了，而在hashmap数组扩容之后，最消耗性能的点就出现了：原数组中的数据必须重新计算其在新数组中的位置，并放进去，这就是resize。 </p>
-<p>那么hashmap什么时候进行扩容呢？当hashmap中的元素个数超过数组大小<em>loadFactor时，就会进行数组扩容，loadFactor的默认值为0.75，也就是说，默认情况下，数组大小为16，那么当hashmap中元素个数超过16</em>0.75=12的时候，就把数组的大小扩展为2<em>16=32，即扩大一倍，然后重新计算每个元素在数组中的位置，而这是一个非常消耗性能的操作，所以如果我们已经预知hashmap中元素的个数，那么预设元素的个数能够有效的提高hashmap的性能。比如说，我们有1000个元素new HashMap(1000), 但是理论上来讲new HashMap(1024)更合适，不过上面annegu已经说过，即使是1000，hashmap也自动会将其设置为1024。 但是new HashMap(1024)还不是更合适的，因为0.75</em>1000 &lt; 1000, 也就是说为了让0.75 * size &gt; 1000, 我们必须这样new HashMap(2048)才最合适，既考虑了&amp;的问题，也避免了resize的问题。 </p>
-<h3><span id="4-key的hashcode与equals方法改写">4、key的hashcode与equals方法改写</span></h3><p>在第一部分hashmap的数据结构中，annegu就写了get方法的过程：首先计算key的hashcode，找到数组中对应位置的某一元素，然后通过key的equals方法在对应位置的链表中找到需要的元素。所以，hashcode与equals方法对于找到对应元素是两个关键方法。 </p>
-<p>Hashmap的key可以是任何类型的对象，例如User这种对象，为了保证两个具有相同属性的user的hashcode相同，我们就需要改写hashcode方法，比方把hashcode值的计算与User对象的id关联起来，那么只要user对象拥有相同id，那么他们的hashcode也能保持一致了，这样就可以找到在hashmap数组中的位置了。如果这个位置上有多个元素，还需要用key的equals方法在对应位置的链表中找到需要的元素，所以只改写了hashcode方法是不够的，equals方法也是需要改写滴~当然啦，按正常思维逻辑，equals方法一般都会根据实际的业务内容来定义，例如根据user对象的id来判断两个user是否相等。<br>在改写equals方法的时候，需要满足以下三点： </p>
-<ul>
-<li>(1) 自反性：就是说a.equals(a)必须为true。 </li>
-<li>(2) 对称性：就是说a.equals(b)=true的话，b.equals(a)也必须为true。 </li>
-<li>(3) 传递性：就是说a.equals(b)=true，并且b.equals(c)=true的话，a.equals(c)也必须为true。<br>通过改写key对象的equals和hashcode方法，我们可以将任意的业务对象作为map的key(前提是你确实有这样的需要)。 </li>
-</ul>
-<h3><span id="总结">总结：</span></h3><p> 本文主要描述了HashMap的结构，和hashmap中hash函数的实现，以及该实现的特性，同时描述了hashmap中resize带来性能消耗的根本原因，以及将普通的域模型对象作为key的基本要求。尤其是hash函数的实现，可以说是整个HashMap的精髓所在，只有真正理解了这个hash函数，才可以说对HashMap有了一定的理解。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Java集合 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[深入理解ArrayList]]></title>
-      <url>/Java/2017/09/05/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3ArrayList.html</url>
-      <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><blockquote>
-<p><strong>ArrayList概述</strong></p>
-</blockquote>
-<p>ArrayList是List接口的可变数组的实现。实现了所有可选列表操作，并允许包括 null 在内的所有元素。除了实现 List 接口外，此类还提供一些方法来操作内部用来存储列表的数组的大小。</p>
-<p>   每个ArrayList实例都有一个容量，该容量是指用来存储列表元素的数组的大小。它总是至少等于列表的大小。随着向ArrayList中不断添加元素，其容量也自动增长。自动增长会带来数据向新数组的重新拷贝，因此，如果可预知数据量的多少，可在构造ArrayList时指定其容量。在添加大量元素前，应用程序也可以使用ensureCapacity操作来增加ArrayList实例的容量，这可以减少递增式再分配的数量。<br>   <a id="more"></a><br>   <strong><em>注意</em></strong>，此实现不是同步的。如果多个线程同时访问一个ArrayList实例，而其中至少一个线程从结构上修改了列表，那么它必须保持外部同步。</p>
-<blockquote>
-<p>ArrayList的实现</p>
-</blockquote>
-<p>   对于ArrayList而言，它实现List接口、底层使用数组保存所有元素。其操作基本上是对数组的操作。下面我们来分析ArrayList的源代码</p>
-<ul>
-<li><strong>底层使用数组实现</strong>：</li>
-</ul>
-<p>Java代码  </p>
-<pre><code>private transient Object[] elementData;  
-</code></pre><ul>
-<li><strong>构造方法</strong>：<br> ArrayList提供了三种方式的构造器，可以构造一个默认初始容量为10的空列表、构造一个指定初始容量的空列表以及构造一个包含指定collection的元素的列表，这些元素按照该collection的迭代器返回它们的顺序排列的。</li>
-</ul>
-<p>Java代码  </p>
-<pre><code>1. public ArrayList() {  
- 2.     this(10);  
- 3. }  
- 4.   
- 5. public ArrayList(int initialCapacity) {  
- 6.     super();  
- 7.     if (initialCapacity &lt; 0)  
- 8.         throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+ initialCapacity);  
- 9.     this.elementData = new Object[initialCapacity];  
- 10. }  
- 11.   
- 12. public ArrayList(Collection&lt;? extends E&gt; c) {  
- 13.     elementData = c.toArray();  
- 14.     size = elementData.length;  
- 15.     // c.toArray might (incorrectly) not return Object[] (see 6260652)  
- 16.     if (elementData.getClass() != Object[].class)  
- 17.         elementData = Arrays.copyOf(elementData, size, Object[].class);  
- 18. }  
-</code></pre><ul>
-<li><p><strong>存储</strong>：</p>
-<p>ArrayList提供了set(int index, E element)、add(E e)、add(int index, E element)、addAll(Collection&lt;? extends E&gt; c)、addAll(int index, Collection&lt;? extends E&gt; c)这些添加元素的方法。下面我们一一讲解：</p>
-</li>
-</ul>
-<p><em>Java代码</em>  </p>
-<pre><code>1. // 用指定的元素替代此列表中指定位置上的元素，并返回以前位于该位置上的元素。  
- 2. public E set(int index, E element) {  
- 3.     RangeCheck(index);  
- 4.   
- 5.     E oldValue = (E) elementData[index];  
- 6.     elementData[index] = element;  
- 7.     return oldValue;  
- 8. }  
-</code></pre><p>Java代码  </p>
-<pre><code>1. // 将指定的元素添加到此列表的尾部。  
-2. public boolean add(E e) {  
-3.     ensureCapacity(size + 1);   
-4.     elementData[size++] = e;  
-5.     return true;  
-6. }  
-</code></pre><p>Java代码  </p>
-<pre><code>1. // 将指定的元素插入此列表中的指定位置。  
-2. // 如果当前位置有元素，则向右移动当前位于该位置的元素以及所有后续元素（将其索引加1）。  
-3. public void add(int index, E element) {  
-4.     if (index &gt; size || index &lt; 0)  
-5.         throw new IndexOutOfBoundsException(&quot;Index: &quot;+index+&quot;, Size: &quot;+size);  
-6.     // 如果数组长度不足，将进行扩容。  
-7.     ensureCapacity(size+1);  // Increments modCount!!  
-8.     // 将 elementData中从Index位置开始、长度为size-index的元素，  
-
-9.     // 拷贝到从下标为index+1位置开始的新的elementData数组中
-
-
-10.     // 即将当前位于该位置的元素以及所有后续元素右移一个位置。  
-11.     System.arraycopy(elementData, index, elementData, index + 1, size - index);  
-12.     elementData[index] = element;  
-13.     size++;  
-14. }  
-</code></pre><p>Java代码  </p>
-<pre><code>1. // 按照指定collection的迭代器所返回的元素顺序，将该collection中的所有元素添加到此列表的尾部。  
-2. public boolean addAll(Collection&lt;? extends E&gt; c) {  
-3.     Object[] a = c.toArray();  
-4.     int numNew = a.length;  
-5.     ensureCapacity(size + numNew);  // Increments modCount  
-6.     System.arraycopy(a, 0, elementData, size, numNew);  
-7.     size += numNew;  
-8.     return numNew != 0;  
-9. }  
-</code></pre><p>Java代码  </p>
-<pre><code> 1. // 从指定的位置开始，将指定collection中的所有元素插入到此列表中。  
-  2. public boolean addAll(int index, Collection&lt;? extends E&gt; c) {  
-  3.     if (index &gt; size || index &lt; 0)  
-  4.         throw new IndexOutOfBoundsException(  
-  5.             &quot;Index: &quot; + index + &quot;, Size: &quot; + size);  
-  6.   
-  7.     Object[] a = c.toArray();  
-  8.     int numNew = a.length;  
-  9.     ensureCapacity(size + numNew);  // Increments modCount  
-  10.   
-  11.     int numMoved = size - index;  
-  12.     if (numMoved &gt; 0)  
-  13.         System.arraycopy(elementData, index, elementData, index + numNew, numMoved);  
-  14.   
-  15.     System.arraycopy(a, 0, elementData, index, numNew);  
-  16.     size += numNew;  
-  17.     return numNew != 0;  
-  18. }  
-    4) 读取：
-Java代码  
-
-  1. // 返回此列表中指定位置上的元素。  
-  2. public E get(int index) {  
-  3.     RangeCheck(index);  
-  4.   
-  5.     return (E) elementData[index];  
-  6. }  
-</code></pre><ul>
-<li><p><strong>删除</strong>： </p>
-<p> ArrayList提供了根据下标或者指定对象两种方式的删除功能。如下：<br>Java代码  </p>
-</li>
-</ul>
-<pre><code>1. // 移除此列表中指定位置上的元素。  
- 2. public E remove(int index) {  
- 3.     RangeCheck(index);  
- 4.   
- 5.     modCount++;  
- 6.     E oldValue = (E) elementData[index];  
- 7.   
- 8.     int numMoved = size - index - 1;  
- 9.     if (numMoved &gt; 0)  
- 10.         System.arraycopy(elementData, index+1, elementData, index, numMoved);  
- 11.     elementData[--size] = null; // Let gc do its work  
- 12.   
- 13.     return oldValue;  
- 14. }  
-</code></pre><p>Java代码  </p>
-<pre><code>1. // 移除此列表中首次出现的指定元素（如果存在）。这是应为ArrayList中允许存放重复的元素。  
-2. public boolean remove(Object o) {  
-3.     // 由于ArrayList中允许存放null，因此下面通过两种情况来分别处理。  
-4.     if (o == null) {  
-5.         for (int index = 0; index &lt; size; index++)  
-6.             if (elementData[index] == null) {  
-7.                 // 类似remove(int index)，移除列表中指定位置上的元素。  
-8.                 fastRemove(index);  
-9.                 return true;  
-10.             }  
-11. } else {  
-12.     for (int index = 0; index &lt; size; index++)  
-13.         if (o.equals(elementData[index])) {  
-14.             fastRemove(index);  
-15.             return true;  
-16.         }  
-17.     }  
-18.     return false;  
-19. }  
-</code></pre><p> <strong><em>注意</em></strong>：从数组中移除元素的操作，也会导致被移除的元素以后的所有元素的向左移动一个位置。</p>
-<ul>
-<li><strong>调整数组容量</strong>：<br>从上面介绍的向ArrayList中存储元素的代码中，我们看到，每当向数组中添加元素时，都要去检查添加后元素的个数是否会超出当前数组的长度，如果超出，数组将会进行扩容，以满足添加数据的需求。数组扩容通过一个公开的方法ensureCapacity(int minCapacity)来实现。在实际添加大量元素前，我也可以使用ensureCapacity来手动增加ArrayList实例的容量，以减少递增式再分配的数量。</li>
-</ul>
-<p>Java代码  </p>
-<pre><code>  public void ensureCapacity(int minCapacity) {  
-      Count++;  
-   int oldCapacity = elementData.length;  
-    if (minCapacity &gt; oldCapacity) {  
-        Object oldData[] = elementData;  
-        int newCapacity = (oldCapacity * 3)/2 + 1;  
-             if (newCapacity &lt; minCapacity)  
-                  newCapacity = minCapacity;  
-        // minCapacity is usually close to size, so this is a win:  
-        elementData = Arrays.copyOf(elementData, newCapacity);  
-       }  
-}  
-</code></pre><p>   从上述代码中可以看出，数组进行扩容时，会将老数组中的元素重新拷贝一份到新的数组中，每次数组容量的增长大约是其原容量的1.5倍。这种操作的代价是很高的，因此在实际使用时，我们应该尽量避免数组容量的扩张。当我们可预知要保存的元素的多少时，要在构造ArrayList实例时，就指定其容量，以避免数组扩容的发生。或者根据实际需求，通过调用ensureCapacity方法来手动增加ArrayList实例的容量。</p>
-<p>   ArrayList还给我们提供了将底层数组的容量调整为当前列表保存的实际元素的大小的功能。它可以通过trimToSize方法来实现。代码如下：<br>Java代码  </p>
-<pre><code>1. public void trimToSize() {  
-  2.     modCount++;  
-  3.     int oldCapacity = elementData.length;  
-  4.     if (size &lt; oldCapacity) {  
-  5.         elementData = Arrays.copyOf(elementData, size);  
-  6.     }  
-  7. }  
-</code></pre><ul>
-<li><strong>Fail-Fast机制</strong>：<br>ArrayList也采用了快速失败的机制，通过记录modCount参数来实现。在面对并发的修改时，迭代器很快就会完全失败，而不是冒着在将来某个不确定时间发生任意不确定行为的风险。具体介绍请参考我之前的文章深入Java集合学习系列：HashMap的实现原理 中的Fail-Fast机制。</li>
-</ul>
-]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Java面试 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[MySQL的性能和伸缩性优化]]></title>
-      <url>/MySQL/2017/08/01/MySQL%E7%9A%84%E6%80%A7%E8%83%BD%E5%92%8C%E4%BC%B8%E7%BC%A9%E6%80%A7%E4%BC%98%E5%8C%96.html</url>
-      <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h4><span id="1-选择-innodb-作为存储引擎">1、选择 InnoDB 作为存储引擎</span></h4><ul>
-<li>大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。</li>
-</ul>
-<h4><span id="2-优化数据库结构">2、优化数据库结构</span></h4><ul>
-<li><p>组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。</p>
-</li>
-<li><p>设计数据表应尽量使其占用的空间最小化，表的主键应尽可能短。</p>
-</li>
-<li><p>对于 InnoDB 表，主键所在的列在每个辅助索引条目中都是可复制的，因此如果有很多辅助索引，那么一个短的主键可以节省大量空间。</p>
-</li>
-<li><p>仅创建你需要改进查询性能的索引。索引有助于检索，但是会增加插入和更新操作的执行时间。</p>
-<a id="more"></a>
-<h4><span id="3-innodb-的-change-buffering-特性">3、InnoDB 的 Change Buffering 特性</span></h4></li>
-<li><p>InnoDB 提供了 change buffering 的配置，可减少维护辅助索引所需的磁盘 I/O。大规模的数据库可能会遇到大量的表操作和大量的 I/O，以保证辅助索引保持最新。当相关页面不在缓冲池里面时，InnoDB 的 change buffer 将会更改缓存到辅助索引条目，从而避免因不能立即从磁盘读取页面而导致耗时的 I/O 操作。当页面被加载到缓冲池时，缓冲的更改将被合并，更新的页面之后会刷新到磁盘。这样做可提高性能，适用于 MySQL 5.5 及更高版本。</p>
-</li>
-</ul>
-<h4><span id="4-innodb-页面压缩">4、InnoDB 页面压缩</span></h4><ul>
-<li><p>InnoDB 支持对表进行页面级的压缩。当写入数据页的时候，会有特定的压缩算法对其进行压缩。压缩后的数据会写入磁盘，其打孔机制会释放页面末尾的空块。如果压缩失败，数据会按原样写入。表和索引都会被压缩，因为索引通常是数据库总大小中占比很大的一部分，压缩可以显著节约内存，I/O 或处理时间，这样就达到了提高性能和伸缩性的目的。它还可以减少内存和磁盘之间传输的数据量。MySQL 5.1 及更高版本支持该功能。</p>
-</li>
-<li><p><strong>注意</strong>，页面压缩并不能支持共享表空间中的表。共享表空间包括系统表空间、临时表空间和常规表空间。</p>
-</li>
-</ul>
-<h4><span id="5-使用批量数据导入">5、使用批量数据导入</span></h4><p>在主键上使用已排序的数据源进行批量数据的导入可加快数据插入的过程。否则，可能需要在其他行之间插入行以维护排序，这会导致磁盘 I/O 变高，进而影响性能，增加页的拆分。关闭自动提交的模式也是有好处的，因为它会为每个插入执行日志刷新到磁盘。在批量插入期间临时转移唯一键和外键检查也可显著降低磁盘 I/O。对于新建的表，最好的做法是在批量导入后创建外键/唯一键约束。</p>
-<h4><span id="6-sql-语句优化">6、SQL 语句优化</span></h4><ul>
-<li><p>为了提升查询的速度，可以为 WHERE 字句中使用的列添加索引。此外，不要将主键索引用于太多或太长的列，因为这些列值在辅助索引进行复制的时候会增加读取所需要的 I/O 资源并占用缓存。</p>
-</li>
-<li><p>如果索引包含了不必要的数据，通过 I/O 读取这些数据并进行缓存就会减弱服务器的性能和伸缩性。也不要为不必要的列使用唯一键索引，因为它会禁用 change buffering。应该使用常规索引代替。</p>
-</li>
-<li><p>减少和隔离需要耗费大量时间的函数调用。</p>
-</li>
-<li><p>尽可能的减少查询中的全表扫描次数。</p>
-</li>
-<li><p>调整缓存区域的大小和属性，比如 InnoDB 缓冲池，MySQL 查询缓存等，这样会通过从内存而非从硬盘获取数据而让重复的查询变得更快。</p>
-</li>
-</ul>
-<h4><span id="7-优化存储结构">7、优化存储结构</span></h4><ul>
-<li><p>对于大型的表，或者包含大量重复文本或数值数据的表，应该考虑使用 COMPRESSED(压缩的) 行格式。这样只需要较少的 I/O 就可以把数据取到缓冲池，或执行全表扫描。</p>
-</li>
-<li><p>一旦你的数据达到稳定的大小，或者增长的表增加了几十或几百兆字节，就应该考虑使用 OPTIMIZE TABLE 语句重新组织表并压缩浪费的空间。对重新组织后的表进行全表扫描所需要的 I/O 会更少。</p>
-</li>
-</ul>
-<h4><span id="8-优化-innodb-磁盘-io">8、优化 InnoDB 磁盘 I/O</span></h4><ul>
-<li><p>增加 InnoDB 缓冲池大小可以让查询从缓冲池访问而不是通过磁盘 I/O 访问。通过调整系统变量 innodb_flush_method 来调整清除缓冲的指标使其达到最佳水平。</p>
-</li>
-<li><p>使用其它存储设备配置 RAID</p>
-</li>
-</ul>
-<h4><span id="9-mysql-的内存分配">9、MySQL 的内存分配</span></h4><ul>
-<li><p>在为 MySQL 分配足够的内存之前，请考虑不同领域对 MySQL 的内存需求。</p>
-</li>
-<li><p>要考虑的关键领域是：并发连接 —— 对于大量并发连接，排序和临时表将需要大量内存。在撰写本文时，对于处理 3000+ 并发连接的数据库，16GB 到 32GB的 RAM 是足够的。</p>
-</li>
-<li><p>内存碎片可以消耗大约 10％ 或更多的内存。像 innodb_buffer_pool_size、key_buffer_size、query_cache_size 等缓存和缓冲区要消耗大约 80％ 的已分配内存。</p>
-</li>
-</ul>
-<h4><span id="10-日常维护">10、日常维护</span></h4><ul>
-<li><p>定期检查慢的查询日志并优化查询机制以有效使用缓存来减少磁盘 I/O。优化它们，以扫描最少的行数，而不是进行全表扫描。</p>
-</li>
-<li><p>其他可以帮助 DBA 检查和分析性能的日志包括：错误日志、常规查询日志、二进制日志、DDL日志（元数据日志）。</p>
-</li>
-<li><p>定期刷新缓存和缓冲区以降低碎片化。使用 OPTIMIZE TABLE 语句重新组织表并压缩任何可能被浪费的空间。</p>
-</li>
-</ul>
-<h6><span id="文章摘录链接"></span></h6>]]></content>
-      
-        <categories>
-            
-            <category> MySQL </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> MySQL优化 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[centOS环境搭建（一）]]></title>
-      <url>/Linux/2017/07/31/linux%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%80%EF%BC%89.html</url>
-      <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1><span id="阿里云ecs服务器centos65安装jdkmysqltomcat">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></h1><p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错</p>
-<p><strong>前提</strong>下载安装xshell（具体如何是使用xshell请自行Google）和xftp</p>
-<h4><span id="1-部署jdk">1 部署jdk</span></h4><pre><code>查看系统是否安装了jdk
-</code></pre><p> [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java<br> <a id="more"></a><br> 出现或者不出现以下内容：</p>
-<p>java version “1.7.0_24”<br>OpenJDK Runtime Environment (build 1.7.0_24-b18)<br>OpenJDK HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)</p>
-<p>进一步查看JDK信息：<br>[root@localhost ~]# rpm -qa | grep java<br>tzdata-java-2012c-1.el6.noarch<br>java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
-<p>卸载OpenJDK，执行以下操作：<br>[root@localhost ~]# rpm -e –nodeps tzdata-java-2012c-1.el6.noarch（解压jdk）<br>[root@localhost ~]# rpm -e –nodeps java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
-<p>若出现以上以上情况，按照以上步骤操作完后，用xftp上传jdk-7-linux-i586.rpm或者jdk-8u25-linux-x64.tar.gz（具体jdk版本看你自己选择，在Oracle官网上下载  ）到xftp上的/usr/local</p>
-<h5><span id="2-安装jdkjdk默认安装在usrjava中">2 安装jdk（JDK默认安装在/usr/java中）：</span></h5><p>[root@localhost  ~]#cd /usr/local (cd 空格后路径是你刚刚上传到xftp的路径，<strong>不要搞错了，我上是传到/usr/local</strong>，这一点很多博客文档都没说清楚，导致很多初学者会具体操作时出错)<br>[root@localhost ckb]# rpm -ivh jdk-7-linux-i586.rpm或者[root@localhost ckb]#tar –zxvf jdk-8u25-linux-x64.tar.gz</p>
-<h5><span id="3-验证安装">3 验证安装</span></h5><p>执行以下操作，查看信息是否正常：</p>
-<p>[root@localhost bin]# java</p>
-<p>[root@localhost bin]# javac</p>
-<p>[root@localhost bin]# java -version</p>
-<p>java version “1.7.0_45”<br>Java(TM) SE Runtime Environment (build 1.7.0_45-b18)<br>Java HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)</p>
-<h5><span id="4-配置环境变量">4 配置环境变量</span></h5><p>我的机器安装完jdk-7-linux-i586.rpm后不用配置环境变量也可以正常执行javac、java –version操作，因此我没有进行JDK环境变量的配置。</p>
-<p>但是为了以后的不适之需，这里还是记录一下怎么进行配置，操作如下：<br>修改系统环境变量文件<br>vi + /etc/profile<br>执行之后 按”i”建，INSERT出现表示可以编辑<br>向文件里面追加以下内容：</p>
-<p>在光标处添加<br>JAVA_HOME=/usr/java/jdk1.7.0_45</p>
-<p>JRE_HOME=/usr/java/jdk1.7.0_45/jre</p>
-<p>PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</p>
-<p>CLASSPATH=:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib<br>export JAVA_HOME JRE_HOME PATH CLASSPATH<br>（然后按Esc退出，”:”符+ wq保存并退出）</p>
-<p>使修改生效<br>[root@localhost ~]# source /etc/profile<br>（使修改立即生效）</p>
-<p>[root@localhost ~]# echo $PATH<br>（查看PATH值）</p>
-<p>查看系统环境状态</p>
-<p>[root@localhost ~]# echo $PATH<br>/usr/lib/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/java/jdk1.7.0_45/bin:<br>/usr/java/jdk1.7.0_45/jre/bin:/home/ckb/bin</p>
-<h3><span id="二-部署tomcat与配置jdk类似">二、部署tomcat(与配置jdk类似)</span></h3><p>在tomcat官网上下载 apache-tomcat-8.0.15.tar.gz并上传到/usr/local</p>
-<p>[root@localhost ~]#cd /usr/local</p>
-<p>[root@localhost local]#tar –zxvf apache-tomcat-8.0.15.tar.gz</p>
-<p>初始化配置：<br>[root@localhost ~]#vi catalina.sh<br>//设置环境变量</p>
-<p>末行添加：<br>JAVA_HOME=/usr/java<br>CATALINA_HOME=/usr/local/apache-tomcat-8.0.15<br>export JAVA_HOME PATH<br>（然后按Esc退出，”:”符+ wq保存并退出）</p>
-<h5><span id="启动tomcat">启动tomcat</span></h5><p>进入tomcat/bin目录</p>
-<p>[root@localhost ~]#cd /usr/local/apache-tomcat-8.0.15/lib</p>
-<p>[root@localhost bin] #  ./startup.sh<br>[root@localhost bin] # ./shutdown.sh //关闭tomcat</p>
-<p>启动之后就可以在浏览器输入你的公网ip:8080（tomcat默认端口），看到tomcat页面。</p>
-<h4><span id="三-配置mysql">三  配置mysql</span></h4><p>（我的这里参考了<a href="http://note.youdao.com/" target="_blank" rel="external">http://blog.csdn.net/sapce_fish/article/details/51619830?locationNum=12&amp;fps=1</a>这篇博客，版本为mysql.x86_64 5.1.73-7.el6，当然你也可以安装其他版本）</p>
-<p>安装mysql；==<strong>特别注意</strong>==：网上很多安装mysql的文章，都是不行的！！！！</p>
-<p>#我喜欢在home目录操作命令<br>cd /home</p>
-<p>#查看所有以mysql开头的软件</p>
-<p>yum list mysql*</p>
-<p>#安装mysql</p>
-<p>yum install mysql-server* -y</p>
-<p>#启动mysql</p>
-<p>/etc/init.d/mysqld start</p>
-<p>#设定mysql自动启动，我亲自重启了ECS，确实ok</p>
-<p>chkconfig mysqld on</p>
-<p>#复制mysql的配置文件到etc目录，提示是否覆盖，选择y<br>cp /usr/share/mysql/my-medium.cnf   /etc/my.cnf</p>
-<p>#重新设定mysql密码，默认密码是【空】，输入新密码，注意提问，是否删除匿名账户？【y】  是否禁止远程登录？【n】是否移除test数据库?【y】是否重载权限文件【y】<br>mysql_secure_installation</p>
-<p>#重启mysql，此时用本机Navicat Premium还是连不上mysql的！<br>/etc/init.d/mysqld restart</p>
-<p>#用命令访问mysql<br>mysql -u root -p</p>
-<p>#使用mysql数据库<br>use mysql;</p>
-<p>#查询当前用户情况，显示有3条记录，127.0.0.1；localhost；izxxxxxxxdz；其中最后这个是ECS主机名</p>
-<p>select host, user from user;  </p>
-<p>#把localhost这条记录的host改为 %； 意思是root可以由任何主机登录mysql，网上很多写法，都没有and host=’localhost’这个条件，经常报错。<br>update user set host = ‘%’ where user = ‘root’ and host=’localhost’;</p>
-<p>#再次查询，可以看到host有3个；%；127.0.0.1；izxxxxxxxdz；其实user表的主键是user字段和host字段的联合主键。<br>select host, user from user;</p>
-<p>#保险起见，重启mysql，Navicat Premium连接正常！万岁！<br>/etc/init.d/mysqld restart</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Linux搭建 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[深入理解Java内存管理]]></title>
+    <url>%2FJava%2F2017%2F09%2F12%2F%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html</url>
+    <content type="text"><![CDATA[运行时数据区域 1 程序计数器PC程序计数器PC，当前线程所执行的字节码行号指示器。每个线程都有自己计数器，是私有内存空间，该区域是整个内存中较小的一块。当线程正在执行一个Java方法时，PC计数器记录的是正在执行的虚拟机字节码的地址；当线程正在执行的一个Native方法时，PC计数器则为空（Undefined）。 2 虚拟机栈虚拟机栈，生命周期与线程相同，是Java方法执行的内存模型。每个方法(不包含native方法)执行的同时都会创建一个栈帧结构，方法执行过程，对应着虚拟机栈的入栈到出栈的过程。栈帧(Stack Frame)结构栈帧是用于支持虚拟机进行方法执行的数据结构，是属性运行时数据区的虚拟机站的栈元素。见上图， 栈帧包括： 局部变量表 (locals大小，编译期确定)，一组变量存储空间， 容量以slot为最小单位。 操作栈(stack大小，编译期确定)，操作栈元素的数据类型必须与字节码指令序列严格匹配 动态连接， 指向运行时常量池中该栈帧所属方法的引用，为了 动态连接使用。 ○ 前面的解析过程其实是静态解析； ○ 对于运行期转化为直接引用，称为动态解析。 方法返回地址 ○ 正常退出，执行引擎遇到方法返回的字节码，将返回值传递给调用者 ○ 异常退出，遇到Exception,并且方法未捕捉异常，那么不会有任何返回值。 额外附加信息，虚拟机规范没有明确规定，由具体虚拟机实现。异常(Exception)Java虚拟机规范规定该区域有两种异常：● StackOverFlowError：当线程请求栈深度超出虚拟机栈所允许的深度时抛出● OutOfMemoryError：当Java虚拟机动态扩展到无法申请足够内存时抛出 3 本地方法栈本地方法栈则为虚拟机使用到的Native方法提供内存空间，而前面讲的虚拟机栈式为Java方法提供内存空间。有些虚拟机的实现直接把本地方法栈和虚拟机栈合二为一，比如非常典型的Sun HotSpot虚拟机。异常(Exception)：Java虚拟机规范规定该区域可抛出StackOverFlowError和OutOfMemoryError。 4 Java堆Java堆，是Java虚拟机管理的最大的一块内存，也是GC的主战场，里面存放的是几乎所有的对象实例和数组数据。JIT编译器有栈上分配、标量替换等优化技术的实现导致部分对象实例数据不存在Java堆，而是栈内存。 从内存回收角度，Java堆被分为新生代和老年代；这样划分的好处是为了更快的回收内存； 从内存分配角度，Java堆可以划分出线程私有的分配缓冲区(Thread Local Allocation Buffer,TLAB)；这样划分的好处是为了更快的分配内存；对象创建的过程是在堆上分配着实例对象，那么对象实例的具体结构如下： 对于填充数据不是一定存在的，仅仅是为了字节对齐。HotSpot VM的自动内存管理要求对象起始地址必须是8字节的整数倍。对象头本身是8的倍数，当对象的实例数据不是8的倍数，便需要填充数据来保证8字节的对齐。该功能类似于高速缓存行的对齐。 另外，关于在堆上内存分配是并发进行的，虚拟机采用CAS加失败重试保证原子操作，或者是采用每个线程预先分配TLAB内存.异常(Exception)：Java虚拟机规范规定该区域可抛出OutOfMemoryError。 5 方法区方法区主要存放的是已被虚拟机加载的类信息、常量、静态变量、编译器编译后的代码等数据。GC在该区域出现的比较少。异常(Exception)：Java虚拟机规范规定该区域可抛出OutOfMemoryError。 运行时常量池运行时常量池也是方法区的一部分，用于存放编译器生成的各种字面量和符号引用。运行时常量池除了编译期产生的Class文件的常量池，还可以在运行期间，将新的常量加入常量池，比较常见的是String类的intern()方法。 字面量：与Java语言层面的常量概念相近，包含文本字符串、声明为final的常量值等。 符号引用：编译语言层面的概念，包括以下3类： 类和接口的全限定名 字段的名称和描述符 方法的名称和描述符 但是该区域不会抛出OutOfMemoryError异常。 ==详情请看==《深入理解JVM虚拟机》第二章38页]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Servlet的生命周期及实现原理]]></title>
+    <url>%2FServlet%2F2017%2F09%2F09%2FServlet%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html</url>
+    <content type="text"><![CDATA[生命周期分为三个阶段 初始化阶段 调用init()方法 响应客户请求阶段 调用service()方法 终止阶段 调用destroy()方法 1、Servlet初始化阶段 在下列时刻Servlet容器装载Servlet： Servlet容器启动时自动装载某些Servlet，实现它只需要在web.XML文件中的之间添加如下代码： 1&lt;loadon-startup&gt;1&lt;/loadon-startup&gt; 在Servlet容器启动后，客户首次向Servlet发送请求 Servlet类文件被更新后，重新装载Servlet Servlet被装载后，Servlet容器创建一个Servlet实例并且调用Servlet的init()方法进行初始化。在Servlet的整个生命周期内，init()方法只被调用一次。 2、Servlet响应请求阶段 对于用户到达Servlet的请求，Servlet容器会创建特定于这个请求的ServletRequest对象和ServletResponse对象，然后调用Servlet的service方法。service方法从ServletRequest对象获得客户请求信息，处理该请求，并通过ServletResponse对象向客户返回响应信息。 对于Tomcat来说，它会将传递过来的参数放在一个Hashtable中，该Hashtable的定义是 1private Hashtable&lt;String String[]&gt; paramHashStringArray = new Hashtable&lt;String String[]&gt;(); 这是一个String–&gt;String[]的键值映射。 HashMap线程不安全的，Hashtable线程安全。 3、Servlet终止阶段 当WEB应用被终止，或Servlet容器终止运行，或Servlet容器重新装载Servlet新实例时，Servlet容器会先调用Servlet的destroy()方法，在destroy()方法中可以释放掉Servlet所占用的资源。 Servlet工作原理 首先客户发送一个请求，Servlet是调用service()方法对请求进行响应的，service()方法中对请求的方式进行了匹配，选择调用doGet,doPost等这些方法，然后再进入对应的方法中调用逻辑层的方法，实现对客户的响应。 在Servlet接口和GenericServlet中是没有doGet,doPost等等这些方法的，HttpServlet中定义了这些方法，但是都是返回error信息，所以，我们每次定义一个Servlet的时候，都必须实现doGet或doPost等这些方法。 每一个自定义的Servlet都必须实现Servlet的接口，Servlet接口中定义了五个方法，其中比较重要的三个方法涉及到Servlet的生命周期，分别是上文提到的init(),service(),destroy()方法。GenericServlet是一个通用的，不特定于任何协议的Servlet,它实现了Servlet接口。而HttpServlet继承于GenericServlet，因此HttpServlet也实现了Servlet接口。所以我们定义Servlet的时候只需要继承HttpServlet即可。 Servlet接口和GenericServlet是不特定于任何协议的，而HttpServlet是特定于HTTP协议的类，所以HttpServlet中实现了service()方法，并将请求ServletRequest,ServletResponse强转为HttpRequest和HttpResponse。 12345678910111213141516public void service(ServletRequest req,ServletResponse res) throws ServletException,IOException&#123; HttpRequest request; HttpResponse response; try &#123; req = (HttpRequest)request; res = (HttpResponse)response; &#125;catch(ClassCastException e) &#123; throw new ServletException(&quot;non-HTTP request response&quot;); &#125; service(request,response);&#125; 代码的最后调用了HTTPServlet自己的service(request,response)方法，然后根据请求去调用对应的doXXX方法，因为HttpServlet中的doXXX方法都是返回错误信息，所以需要我们在自定义的Servlet中override这些方法。 1234567891011121314protected void doGet(HttpServletRequest res,HttpServletResponse resp) throws ServletException,IOException&#123; String protocol = req.getProtocol(); String msg = IStrings.getString(&quot;http.method_get_not_supported&quot;); if(protocol.equals(&quot;1.1&quot;)) &#123; resp.sendError(HttpServletResponse.SC.METHOD.NOT.ALLOWED,msg); &#125; esle &#123; resp.sendError(HttpServletResponse.SC_BAD_REQUEST,msg); &#125;&#125;]]></content>
+      <categories>
+        <category>Servlet</category>
+      </categories>
+      <tags>
+        <tag>Java面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[深入理解HashMap]]></title>
+    <url>%2FJava%2F2017%2F09%2F06%2F%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3HashMap.html</url>
+    <content type="text"><![CDATA[HashMap概述：HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。 1、hashmap的数据结构要知道hashmap是什么，首先要搞清楚它的数据结构，在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，hashmap也不例外。Hashmap实际上是一个数组和链表的结合体（在数据结构中，一般称之为“链表散列“），请看下图（横排表示数组，纵排表示数组元素实际上是一个链表）。 从图中我们可以看到一个hashmap就是一个数组结构，当新建一个hashmap的时候，就会初始化一个数组。我们来看看java代码： Java代码 123451. /** 2. * The table, resized as necessary. Length MUST Always be a power of two. 3. * FIXME 这里需要注意这句话，至于原因后面会讲到 4. */ 5. transient Entry[] table; Java代码 12345671. static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123; 2. final K key; 3. V value; 4. final int hash; 5. Entry&lt;K,V&gt; next; 6. .......... 7. &#125; 上面的Entry就是数组中的元素，它持有一个指向下一个元素的引用，这就构成了链表。当我们往hashmap中put元素的时候，先根据key的hash值得到这个元素在数组中的位置（即下标），然后就可以把这个元素放到对应的位置中了。如果这个元素所在的位子上已经存放有其他元素了，那么在同一个位子上的元素将以链表的形式存放，新加入的放在链头，最先加入的放在链尾。从hashmap中get元素时，首先计算key的hashcode，找到数组中对应位置的某一元素，然后通过key的equals方法在对应位置的链表中找到需要的元素。从这里我们可以想象得到，如果每个位置上的链表只有一个元素，那么hashmap的get效率将是最高的，但是理想总是美好的，现实总是有困难需要我们去克服，哈哈~ 2、hash算法我们可以看到在hashmap中要找到某个元素，需要根据key的hash值来求得对应数组中的位置。如何计算这个位置就是hash算法。前面说过hashmap的数据结构是数组和链表的结合，所以我们当然希望这个hashmap里面的元素位置尽量的分布均匀些，尽量使得每个位置上的元素数量只有一个，那么当我们用hash算法求得这个位置的时候，马上就可以知道对应位置的元素就是我们要的，而不用再去遍历链表。 所以我们首先想到的就是把hashcode对数组长度取模运算，这样一来，元素的分布相对来说是比较均匀的。但是，“模”运算的消耗还是比较大的，能不能找一种更快速，消耗更小的方式那？java中时这样做的， 12345Java代码 1. static int indexFor(int h, int length) &#123; 2. return h &amp; (length-1); 3. &#125; 首先算得key得hashcode值，然后跟数组的长度-1做一次“与”运算（&amp;）。看上去很简单，其实比较有玄机。比如数组的长度是2的4次方，那么hashcode就会和2的4次方-1做“与”运算。很多人都有这个疑问，为什么hashmap的数组初始化大小都是2的次方大小时，hashmap的效率最高，我以2的4次方举例，来解释一下为什么数组大小为2的幂时hashmap访问的性能最高。 看下图，左边两组是数组长度为16（2的4次方），右边两组是数组长度为15。两组的hashcode均为8和9，但是很明显，当它们和1110“与”的时候，产生了相同的结果，也就是说它们会定位到数组中的同一个位置上去，这就产生了碰撞，8和9会被放到同一个链表上，那么查询的时候就需要遍历这个链表，得到8或者9，这样就降低了查询的效率。同时，我们也可以发现，当数组长度为15的时候，hashcode的值会与14（1110）进行“与”，那么最后一位永远是0，而0001，0011，0101，1001，1011，0111，1101这几个位置永远都不能存放元素了，空间浪费相当大，更糟的是这种情况中，数组可以使用的位置比数组长度小了很多，这意味着进一步增加了碰撞的几率，减慢了查询的效率！ 所以说，当数组长度为2的n次幂的时候，不同的key算得得index相同的几率较小，那么数据在数组上分布就比较均匀，也就是说碰撞的几率小，相对的，查询的时候就不用遍历某个位置上的链表，这样查询效率也就较高了。 说到这里，我们再回头看一下hashmap中默认的数组大小是多少，查看源代码可以得知是16，为什么是16，而不是15，也不是20呢，看到上面annegu的解释之后我们就清楚了吧，显然是因为16是2的整数次幂的原因，在小数据量的情况下16比15和20更能减少key之间的碰撞，而加快查询的效率。 所以，在存储大容量数据的时候，最好预先指定hashmap的size为2的整数次幂次方。就算不指定的话，也会以大于且最接近指定值大小的2次幂来初始化的，代码如下(HashMap的构造方法中)： 123456Java代码 1. // Find a power of 2 &gt;= initialCapacity 2. int capacity = 1; 3. while (capacity &lt; initialCapacity) 4. capacity &lt;&lt;= 1; 3、hashmap的resize当hashmap中的元素越来越多的时候，碰撞的几率也就越来越高（因为数组的长度是固定的），所以为了提高查询的效率，就要对hashmap的数组进行扩容，数组扩容这个操作也会出现在ArrayList中，所以这是一个通用的操作，很多人对它的性能表示过怀疑，不过想想我们的“均摊”原理，就释然了，而在hashmap数组扩容之后，最消耗性能的点就出现了：原数组中的数据必须重新计算其在新数组中的位置，并放进去，这就是resize。 那么hashmap什么时候进行扩容呢？当hashmap中的元素个数超过数组大小loadFactor时，就会进行数组扩容，loadFactor的默认值为0.75，也就是说，默认情况下，数组大小为16，那么当hashmap中元素个数超过160.75=12的时候，就把数组的大小扩展为216=32，即扩大一倍，然后重新计算每个元素在数组中的位置，而这是一个非常消耗性能的操作，所以如果我们已经预知hashmap中元素的个数，那么预设元素的个数能够有效的提高hashmap的性能。比如说，我们有1000个元素new HashMap(1000), 但是理论上来讲new HashMap(1024)更合适，不过上面annegu已经说过，即使是1000，hashmap也自动会将其设置为1024。 但是new HashMap(1024)还不是更合适的，因为0.751000 &lt; 1000, 也就是说为了让0.75 * size &gt; 1000, 我们必须这样new HashMap(2048)才最合适，既考虑了&amp;的问题，也避免了resize的问题。 4、key的hashcode与equals方法改写在第一部分hashmap的数据结构中，annegu就写了get方法的过程：首先计算key的hashcode，找到数组中对应位置的某一元素，然后通过key的equals方法在对应位置的链表中找到需要的元素。所以，hashcode与equals方法对于找到对应元素是两个关键方法。 Hashmap的key可以是任何类型的对象，例如User这种对象，为了保证两个具有相同属性的user的hashcode相同，我们就需要改写hashcode方法，比方把hashcode值的计算与User对象的id关联起来，那么只要user对象拥有相同id，那么他们的hashcode也能保持一致了，这样就可以找到在hashmap数组中的位置了。如果这个位置上有多个元素，还需要用key的equals方法在对应位置的链表中找到需要的元素，所以只改写了hashcode方法是不够的，equals方法也是需要改写滴~当然啦，按正常思维逻辑，equals方法一般都会根据实际的业务内容来定义，例如根据user对象的id来判断两个user是否相等。在改写equals方法的时候，需要满足以下三点： (1) 自反性：就是说a.equals(a)必须为true。 (2) 对称性：就是说a.equals(b)=true的话，b.equals(a)也必须为true。 (3) 传递性：就是说a.equals(b)=true，并且b.equals(c)=true的话，a.equals(c)也必须为true。通过改写key对象的equals和hashcode方法，我们可以将任意的业务对象作为map的key(前提是你确实有这样的需要)。 总结： 本文主要描述了HashMap的结构，和hashmap中hash函数的实现，以及该实现的特性，同时描述了hashmap中resize带来性能消耗的根本原因，以及将普通的域模型对象作为key的基本要求。尤其是hash函数的实现，可以说是整个HashMap的精髓所在，只有真正理解了这个hash函数，才可以说对HashMap有了一定的理解。]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java集合</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[深入理解ArrayList]]></title>
+    <url>%2FJava%2F2017%2F09%2F05%2F%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3ArrayList.html</url>
+    <content type="text"><![CDATA[ArrayList概述 ArrayList是List接口的可变数组的实现。实现了所有可选列表操作，并允许包括 null 在内的所有元素。除了实现 List 接口外，此类还提供一些方法来操作内部用来存储列表的数组的大小。 每个ArrayList实例都有一个容量，该容量是指用来存储列表元素的数组的大小。它总是至少等于列表的大小。随着向ArrayList中不断添加元素，其容量也自动增长。自动增长会带来数据向新数组的重新拷贝，因此，如果可预知数据量的多少，可在构造ArrayList时指定其容量。在添加大量元素前，应用程序也可以使用ensureCapacity操作来增加ArrayList实例的容量，这可以减少递增式再分配的数量。 注意，此实现不是同步的。如果多个线程同时访问一个ArrayList实例，而其中至少一个线程从结构上修改了列表，那么它必须保持外部同步。 ArrayList的实现 对于ArrayList而言，它实现List接口、底层使用数组保存所有元素。其操作基本上是对数组的操作。下面我们来分析ArrayList的源代码 底层使用数组实现： Java代码 private transient Object[] elementData; 构造方法： ArrayList提供了三种方式的构造器，可以构造一个默认初始容量为10的空列表、构造一个指定初始容量的空列表以及构造一个包含指定collection的元素的列表，这些元素按照该collection的迭代器返回它们的顺序排列的。 Java代码 1. public ArrayList() { 2. this(10); 3. } 4. 5. public ArrayList(int initialCapacity) { 6. super(); 7. if (initialCapacity &lt; 0) 8. throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+ initialCapacity); 9. this.elementData = new Object[initialCapacity]; 10. } 11. 12. public ArrayList(Collection&lt;? extends E&gt; c) { 13. elementData = c.toArray(); 14. size = elementData.length; 15. // c.toArray might (incorrectly) not return Object[] (see 6260652) 16. if (elementData.getClass() != Object[].class) 17. elementData = Arrays.copyOf(elementData, size, Object[].class); 18. } 存储： ArrayList提供了set(int index, E element)、add(E e)、add(int index, E element)、addAll(Collection&lt;? extends E&gt; c)、addAll(int index, Collection&lt;? extends E&gt; c)这些添加元素的方法。下面我们一一讲解： Java代码 1. // 用指定的元素替代此列表中指定位置上的元素，并返回以前位于该位置上的元素。 2. public E set(int index, E element) { 3. RangeCheck(index); 4. 5. E oldValue = (E) elementData[index]; 6. elementData[index] = element; 7. return oldValue; 8. } Java代码 1. // 将指定的元素添加到此列表的尾部。 2. public boolean add(E e) { 3. ensureCapacity(size + 1); 4. elementData[size++] = e; 5. return true; 6. } Java代码 1. // 将指定的元素插入此列表中的指定位置。 2. // 如果当前位置有元素，则向右移动当前位于该位置的元素以及所有后续元素（将其索引加1）。 3. public void add(int index, E element) { 4. if (index &gt; size || index &lt; 0) 5. throw new IndexOutOfBoundsException(&quot;Index: &quot;+index+&quot;, Size: &quot;+size); 6. // 如果数组长度不足，将进行扩容。 7. ensureCapacity(size+1); // Increments modCount!! 8. // 将 elementData中从Index位置开始、长度为size-index的元素， 9. // 拷贝到从下标为index+1位置开始的新的elementData数组中 10. // 即将当前位于该位置的元素以及所有后续元素右移一个位置。 11. System.arraycopy(elementData, index, elementData, index + 1, size - index); 12. elementData[index] = element; 13. size++; 14. } Java代码 1. // 按照指定collection的迭代器所返回的元素顺序，将该collection中的所有元素添加到此列表的尾部。 2. public boolean addAll(Collection&lt;? extends E&gt; c) { 3. Object[] a = c.toArray(); 4. int numNew = a.length; 5. ensureCapacity(size + numNew); // Increments modCount 6. System.arraycopy(a, 0, elementData, size, numNew); 7. size += numNew; 8. return numNew != 0; 9. } Java代码 1. // 从指定的位置开始，将指定collection中的所有元素插入到此列表中。 2. public boolean addAll(int index, Collection&lt;? extends E&gt; c) { 3. if (index &gt; size || index &lt; 0) 4. throw new IndexOutOfBoundsException( 5. &quot;Index: &quot; + index + &quot;, Size: &quot; + size); 6. 7. Object[] a = c.toArray(); 8. int numNew = a.length; 9. ensureCapacity(size + numNew); // Increments modCount 10. 11. int numMoved = size - index; 12. if (numMoved &gt; 0) 13. System.arraycopy(elementData, index, elementData, index + numNew, numMoved); 14. 15. System.arraycopy(a, 0, elementData, index, numNew); 16. size += numNew; 17. return numNew != 0; 18. } 4) 读取： Java代码 1. // 返回此列表中指定位置上的元素。 2. public E get(int index) { 3. RangeCheck(index); 4. 5. return (E) elementData[index]; 6. } 删除： ArrayList提供了根据下标或者指定对象两种方式的删除功能。如下：Java代码 1. // 移除此列表中指定位置上的元素。 2. public E remove(int index) { 3. RangeCheck(index); 4. 5. modCount++; 6. E oldValue = (E) elementData[index]; 7. 8. int numMoved = size - index - 1; 9. if (numMoved &gt; 0) 10. System.arraycopy(elementData, index+1, elementData, index, numMoved); 11. elementData[--size] = null; // Let gc do its work 12. 13. return oldValue; 14. } Java代码 1. // 移除此列表中首次出现的指定元素（如果存在）。这是应为ArrayList中允许存放重复的元素。 2. public boolean remove(Object o) { 3. // 由于ArrayList中允许存放null，因此下面通过两种情况来分别处理。 4. if (o == null) { 5. for (int index = 0; index &lt; size; index++) 6. if (elementData[index] == null) { 7. // 类似remove(int index)，移除列表中指定位置上的元素。 8. fastRemove(index); 9. return true; 10. } 11. } else { 12. for (int index = 0; index &lt; size; index++) 13. if (o.equals(elementData[index])) { 14. fastRemove(index); 15. return true; 16. } 17. } 18. return false; 19. } 注意：从数组中移除元素的操作，也会导致被移除的元素以后的所有元素的向左移动一个位置。 调整数组容量：从上面介绍的向ArrayList中存储元素的代码中，我们看到，每当向数组中添加元素时，都要去检查添加后元素的个数是否会超出当前数组的长度，如果超出，数组将会进行扩容，以满足添加数据的需求。数组扩容通过一个公开的方法ensureCapacity(int minCapacity)来实现。在实际添加大量元素前，我也可以使用ensureCapacity来手动增加ArrayList实例的容量，以减少递增式再分配的数量。 Java代码 public void ensureCapacity(int minCapacity) { Count++; int oldCapacity = elementData.length; if (minCapacity &gt; oldCapacity) { Object oldData[] = elementData; int newCapacity = (oldCapacity * 3)/2 + 1; if (newCapacity &lt; minCapacity) newCapacity = minCapacity; // minCapacity is usually close to size, so this is a win: elementData = Arrays.copyOf(elementData, newCapacity); } } 从上述代码中可以看出，数组进行扩容时，会将老数组中的元素重新拷贝一份到新的数组中，每次数组容量的增长大约是其原容量的1.5倍。这种操作的代价是很高的，因此在实际使用时，我们应该尽量避免数组容量的扩张。当我们可预知要保存的元素的多少时，要在构造ArrayList实例时，就指定其容量，以避免数组扩容的发生。或者根据实际需求，通过调用ensureCapacity方法来手动增加ArrayList实例的容量。 ArrayList还给我们提供了将底层数组的容量调整为当前列表保存的实际元素的大小的功能。它可以通过trimToSize方法来实现。代码如下：Java代码 1. public void trimToSize() { 2. modCount++; 3. int oldCapacity = elementData.length; 4. if (size &lt; oldCapacity) { 5. elementData = Arrays.copyOf(elementData, size); 6. } 7. } Fail-Fast机制：ArrayList也采用了快速失败的机制，通过记录modCount参数来实现。在面对并发的修改时，迭代器很快就会完全失败，而不是冒着在将来某个不确定时间发生任意不确定行为的风险。具体介绍请参考我之前的文章深入Java集合学习系列：HashMap的实现原理 中的Fail-Fast机制。]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySQL的性能和伸缩性优化]]></title>
+    <url>%2FMySQL%2F2017%2F08%2F01%2FMySQL%E7%9A%84%E6%80%A7%E8%83%BD%E5%92%8C%E4%BC%B8%E7%BC%A9%E6%80%A7%E4%BC%98%E5%8C%96.html</url>
+    <content type="text"><![CDATA[1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。 2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。 设计数据表应尽量使其占用的空间最小化，表的主键应尽可能短。 对于 InnoDB 表，主键所在的列在每个辅助索引条目中都是可复制的，因此如果有很多辅助索引，那么一个短的主键可以节省大量空间。 仅创建你需要改进查询性能的索引。索引有助于检索，但是会增加插入和更新操作的执行时间。 3、InnoDB 的 Change Buffering 特性 InnoDB 提供了 change buffering 的配置，可减少维护辅助索引所需的磁盘 I/O。大规模的数据库可能会遇到大量的表操作和大量的 I/O，以保证辅助索引保持最新。当相关页面不在缓冲池里面时，InnoDB 的 change buffer 将会更改缓存到辅助索引条目，从而避免因不能立即从磁盘读取页面而导致耗时的 I/O 操作。当页面被加载到缓冲池时，缓冲的更改将被合并，更新的页面之后会刷新到磁盘。这样做可提高性能，适用于 MySQL 5.5 及更高版本。 4、InnoDB 页面压缩 InnoDB 支持对表进行页面级的压缩。当写入数据页的时候，会有特定的压缩算法对其进行压缩。压缩后的数据会写入磁盘，其打孔机制会释放页面末尾的空块。如果压缩失败，数据会按原样写入。表和索引都会被压缩，因为索引通常是数据库总大小中占比很大的一部分，压缩可以显著节约内存，I/O 或处理时间，这样就达到了提高性能和伸缩性的目的。它还可以减少内存和磁盘之间传输的数据量。MySQL 5.1 及更高版本支持该功能。 注意，页面压缩并不能支持共享表空间中的表。共享表空间包括系统表空间、临时表空间和常规表空间。 5、使用批量数据导入在主键上使用已排序的数据源进行批量数据的导入可加快数据插入的过程。否则，可能需要在其他行之间插入行以维护排序，这会导致磁盘 I/O 变高，进而影响性能，增加页的拆分。关闭自动提交的模式也是有好处的，因为它会为每个插入执行日志刷新到磁盘。在批量插入期间临时转移唯一键和外键检查也可显著降低磁盘 I/O。对于新建的表，最好的做法是在批量导入后创建外键/唯一键约束。 6、SQL 语句优化 为了提升查询的速度，可以为 WHERE 字句中使用的列添加索引。此外，不要将主键索引用于太多或太长的列，因为这些列值在辅助索引进行复制的时候会增加读取所需要的 I/O 资源并占用缓存。 如果索引包含了不必要的数据，通过 I/O 读取这些数据并进行缓存就会减弱服务器的性能和伸缩性。也不要为不必要的列使用唯一键索引，因为它会禁用 change buffering。应该使用常规索引代替。 减少和隔离需要耗费大量时间的函数调用。 尽可能的减少查询中的全表扫描次数。 调整缓存区域的大小和属性，比如 InnoDB 缓冲池，MySQL 查询缓存等，这样会通过从内存而非从硬盘获取数据而让重复的查询变得更快。 7、优化存储结构 对于大型的表，或者包含大量重复文本或数值数据的表，应该考虑使用 COMPRESSED(压缩的) 行格式。这样只需要较少的 I/O 就可以把数据取到缓冲池，或执行全表扫描。 一旦你的数据达到稳定的大小，或者增长的表增加了几十或几百兆字节，就应该考虑使用 OPTIMIZE TABLE 语句重新组织表并压缩浪费的空间。对重新组织后的表进行全表扫描所需要的 I/O 会更少。 8、优化 InnoDB 磁盘 I/O 增加 InnoDB 缓冲池大小可以让查询从缓冲池访问而不是通过磁盘 I/O 访问。通过调整系统变量 innodb_flush_method 来调整清除缓冲的指标使其达到最佳水平。 使用其它存储设备配置 RAID 9、MySQL 的内存分配 在为 MySQL 分配足够的内存之前，请考虑不同领域对 MySQL 的内存需求。 要考虑的关键领域是：并发连接 —— 对于大量并发连接，排序和临时表将需要大量内存。在撰写本文时，对于处理 3000+ 并发连接的数据库，16GB 到 32GB的 RAM 是足够的。 内存碎片可以消耗大约 10％ 或更多的内存。像 innodb_buffer_pool_size、key_buffer_size、query_cache_size 等缓存和缓冲区要消耗大约 80％ 的已分配内存。 10、日常维护 定期检查慢的查询日志并优化查询机制以有效使用缓存来减少磁盘 I/O。优化它们，以扫描最少的行数，而不是进行全表扫描。 其他可以帮助 DBA 检查和分析性能的日志包括：错误日志、常规查询日志、二进制日志、DDL日志（元数据日志）。 定期刷新缓存和缓冲区以降低碎片化。使用 OPTIMIZE TABLE 语句重新组织表并压缩任何可能被浪费的空间。]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[centOS环境搭建（一）]]></title>
+    <url>%2FLinux%2F2017%2F07%2F31%2Flinux%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%80%EF%BC%89.html</url>
+    <content type="text"><![CDATA[阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错 前提下载安装xshell（具体如何是使用xshell请自行Google）和xftp 1 部署jdk查看系统是否安装了jdk [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java 出现或者不出现以下内容： java version “1.7.0_24”OpenJDK Runtime Environment (build 1.7.0_24-b18)OpenJDK HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing) 进一步查看JDK信息：[root@localhost ~]# rpm -qa | grep javatzdata-java-2012c-1.el6.noarchjava-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64 卸载OpenJDK，执行以下操作：[root@localhost ~]# rpm -e –nodeps tzdata-java-2012c-1.el6.noarch（解压jdk）[root@localhost ~]# rpm -e –nodeps java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64 若出现以上以上情况，按照以上步骤操作完后，用xftp上传jdk-7-linux-i586.rpm或者jdk-8u25-linux-x64.tar.gz（具体jdk版本看你自己选择，在Oracle官网上下载 ）到xftp上的/usr/local 2 安装jdk（JDK默认安装在/usr/java中）：[root@localhost ~]#cd /usr/local (cd 空格后路径是你刚刚上传到xftp的路径，不要搞错了，我上是传到/usr/local，这一点很多博客文档都没说清楚，导致很多初学者会具体操作时出错)[root@localhost ckb]# rpm -ivh jdk-7-linux-i586.rpm或者[root@localhost ckb]#tar –zxvf jdk-8u25-linux-x64.tar.gz 3 验证安装执行以下操作，查看信息是否正常： [root@localhost bin]# java [root@localhost bin]# javac [root@localhost bin]# java -version java version “1.7.0_45”Java(TM) SE Runtime Environment (build 1.7.0_45-b18)Java HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing) 4 配置环境变量我的机器安装完jdk-7-linux-i586.rpm后不用配置环境变量也可以正常执行javac、java –version操作，因此我没有进行JDK环境变量的配置。 但是为了以后的不适之需，这里还是记录一下怎么进行配置，操作如下：修改系统环境变量文件vi + /etc/profile执行之后 按”i”建，INSERT出现表示可以编辑向文件里面追加以下内容： 在光标处添加JAVA_HOME=/usr/java/jdk1.7.0_45 JRE_HOME=/usr/java/jdk1.7.0_45/jre PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin CLASSPATH=:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/libexport JAVA_HOME JRE_HOME PATH CLASSPATH（然后按Esc退出，”:”符+ wq保存并退出） 使修改生效[root@localhost ~]# source /etc/profile（使修改立即生效） [root@localhost ~]# echo $PATH（查看PATH值） 查看系统环境状态 [root@localhost ~]# echo $PATH/usr/lib/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/java/jdk1.7.0_45/bin:/usr/java/jdk1.7.0_45/jre/bin:/home/ckb/bin 二、部署tomcat(与配置jdk类似)在tomcat官网上下载 apache-tomcat-8.0.15.tar.gz并上传到/usr/local [root@localhost ~]#cd /usr/local [root@localhost local]#tar –zxvf apache-tomcat-8.0.15.tar.gz 初始化配置：[root@localhost ~]#vi catalina.sh//设置环境变量 末行添加：JAVA_HOME=/usr/javaCATALINA_HOME=/usr/local/apache-tomcat-8.0.15export JAVA_HOME PATH（然后按Esc退出，”:”符+ wq保存并退出） 启动tomcat进入tomcat/bin目录 [root@localhost ~]#cd /usr/local/apache-tomcat-8.0.15/lib [root@localhost bin] # ./startup.sh[root@localhost bin] # ./shutdown.sh //关闭tomcat 启动之后就可以在浏览器输入你的公网ip:8080（tomcat默认端口），看到tomcat页面。 三 配置mysql（我的这里参考了http://blog.csdn.net/sapce_fish/article/details/51619830?locationNum=12&amp;fps=1这篇博客，版本为mysql.x86_64 5.1.73-7.el6，当然你也可以安装其他版本） 安装mysql；==特别注意==：网上很多安装mysql的文章，都是不行的！！！！ #我喜欢在home目录操作命令cd /home #查看所有以mysql开头的软件 yum list mysql* #安装mysql yum install mysql-server* -y #启动mysql /etc/init.d/mysqld start #设定mysql自动启动，我亲自重启了ECS，确实ok chkconfig mysqld on #复制mysql的配置文件到etc目录，提示是否覆盖，选择ycp /usr/share/mysql/my-medium.cnf /etc/my.cnf #重新设定mysql密码，默认密码是【空】，输入新密码，注意提问，是否删除匿名账户？【y】 是否禁止远程登录？【n】是否移除test数据库?【y】是否重载权限文件【y】mysql_secure_installation #重启mysql，此时用本机Navicat Premium还是连不上mysql的！/etc/init.d/mysqld restart #用命令访问mysqlmysql -u root -p #使用mysql数据库use mysql; #查询当前用户情况，显示有3条记录，127.0.0.1；localhost；izxxxxxxxdz；其中最后这个是ECS主机名 select host, user from user; #把localhost这条记录的host改为 %； 意思是root可以由任何主机登录mysql，网上很多写法，都没有and host=’localhost’这个条件，经常报错。update user set host = ‘%’ where user = ‘root’ and host=’localhost’; #再次查询，可以看到host有3个；%；127.0.0.1；izxxxxxxxdz；其实user表的主键是user字段和host字段的联合主键。select host, user from user; #保险起见，重启mysql，Navicat Premium连接正常！万岁！/etc/init.d/mysqld restart]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux搭建</tag>
+      </tags>
+  </entry>
 </search>
