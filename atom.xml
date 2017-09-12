@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangyu520.top/"/>
-  <updated>2017-09-12T12:33:28.263Z</updated>
+  <updated>2017-09-12T12:36:31.871Z</updated>
   <id>http://www.xiangyu520.top/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.xiangyu520.top/Java/2017/09/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html"/>
     <id>http://www.xiangyu520.top/Java/2017/09/12/深入理解Java内存管理.html</id>
     <published>2017-09-12T12:28:00.099Z</published>
-    <updated>2017-09-12T12:33:28.263Z</updated>
+    <updated>2017-09-12T12:36:31.871Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2><span id="运行时数据区域"><strong>运行时数据区域</strong></span></h2><p><img src="/uploads/jvm_memory_1.png" alt="image"></p>
 <p><img src="/uploads/stack_heap_info.png" alt="image"></p>
@@ -57,7 +57,7 @@
 <li>方法的名称和描述符</li>
 </ul>
 <p>但是该区域不会抛出OutOfMemoryError异常。</p>
-<h5><span id="详情请看深入理解jvm虚拟机第二章38页"><strong>==详情请看==</strong>《深入理解JVM虚拟机》第二章38页</span></h5>]]></content>
+<h5><span id="详情请看深入理解jvm虚拟机第二章38页"><strong>详情请看</strong>《深入理解JVM虚拟机》第二章38页</span></h5>]]></content>
     
     <summary type="html">
     
