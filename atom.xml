@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangyu520.top/"/>
-  <updated>2017-09-12T12:36:31.871Z</updated>
+  <updated>2017-09-13T13:31:02.865Z</updated>
   <id>http://www.xiangyu520.top/</id>
   
   <author>
@@ -14,6 +14,59 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>创建并运行java线程</title>
+    <link href="http://www.xiangyu520.top/Java/2017/09/13/%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%BF%90%E8%A1%8Cjava%E7%BA%BF%E7%A8%8B.html"/>
+    <id>http://www.xiangyu520.top/Java/2017/09/13/创建并运行java线程.html</id>
+    <published>2017-09-13T13:29:05.574Z</published>
+    <updated>2017-09-13T13:31:02.865Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2><span id="编写线程运行时执行的代码有两种方式">编写线程运行时执行的代码有两种方式</span></h2><h3><span id="第一种是创建thread子类的一个实例并重写run方法">第一种是创建Thread子类的一个实例并重写run方法</span></h3><h3><span id="第二种是创建类的时候实现runnable接口">第二种是创建类的时候实现Runnable接口</span></h3><h3><span id="创建thread的子类">创建Thread的子类</span></h3><p>创建Thread子类的一个实例并重写run方法，run方法会在调用start()方法之后被执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class MyThread extends Thread &#123;</div><div class="line">   public void run()&#123;</div><div class="line">     System.out.println(&quot;MyThread running&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以用如下方式创建并运行上述Thread子类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MyThread myThread = new MyThread();</div><div class="line">myTread.start();</div></pre></td></tr></table></figure>
+<p>一旦线程启动后start方法就会立即返回，而不会等待到run方法执行完毕才返回。就好像run方法是在另外一个cpu上执行一样。当run方法执行后，将会打印出字符串MyThread running。<br><a id="more"></a></p>
+<p>你也可以如下创建一个Thread的匿名子类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Thread thread = new Thread()&#123;</div><div class="line">   public void run()&#123;</div><div class="line">     System.out.println(&quot;Thread Running&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;;</div><div class="line">thread.start();</div></pre></td></tr></table></figure>
+<p>当新的线程的run方法执行以后，计算机将会打印出字符串”Thread Running”。</p>
+<h3><span id="实现runnable接口">实现Runnable接口</span></h3><p>第二种编写线程执行代码的方式是新建一个实现了java.lang.Runnable接口的类的实例，实例中的方法可以被线程调用。<br>下面给出例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class MyRunnable implements Runnable &#123;</div><div class="line">   public void run()&#123;</div><div class="line">    System.out.println(&quot;MyRunnable running&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>为了使线程能够执行run()方法，需要在Thread类的构造函数中传入 MyRunnable的实例对象。示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Thread thread = new Thread(new MyRunnable());</div><div class="line">thread.start();</div></pre></td></tr></table></figure>
+<p>   当线程运行时，它将会调用实现了Runnable接口的run方法。上例中将会打印出”MyRunnable running”。</p>
+<p>同样，也可以创建一个实现了Runnable接口的匿名类，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Runnable myRunnable = new Runnable()&#123;</div><div class="line">   public void run()&#123;</div><div class="line">     System.out.println(&quot;Runnable running&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">Thread thread = new Thread(myRunnable);</div><div class="line">thread.start();</div></pre></td></tr></table></figure>
+<h3><span id="创建子类还是实现runnable接口">创建子类还是实现Runnable接口？</span></h3><p>对于这两种方式哪种好并没有一个确定的答案，它们都能满足要求。就我个人意见，我更倾向于实现Runnable接口这种方法。</p>
+<p>因为线程池可以有效的管理实现了Runnable接口的线程，如果线程池满了，新的线程就会排队等候执行，直到线程池空闲出来为止。而如果线程是通过实现Thread子类实现的，这将会复杂一些。</p>
+<p>有时我们要同时融合实现Runnable接口和Thread子类两种方式。例如，实现了Thread子类的实例可以执行多个实现了Runnable接口的线程。一个典型的应用就是线程池。</p>
+<h3><span id="常见错误调用run方法而非start方法">常见错误：调用run()方法而非start()方法</span></h3><p>创建并运行一个线程所犯的常见错误是调用线程的run()方法而非start()方法，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Thread newThread = new Thread(MyRunnable());</div><div class="line">newThread.run();  //should be start();</div></pre></td></tr></table></figure>
+<p>起初你并不会感觉到有什么不妥，因为run()方法的确如你所愿的被调用了。但是，事实上,run()方法并非是由刚创建的新线程所执行的，而是被创建新线程的当前线程所执行了。也就是被执行上面两行代码的线程所执行的。想要让创建的新线程执行run()方法，必须调用新线程的start方法。</p>
+<h3><span id="线程名">线程名</span></h3><p>当创建一个线程的时候，可以给线程起一个名字。它有助于我们区分不同的线程。例如：如果有多个线程写入System.out，我们就能够通过线程名容易的找出是哪个线程正在输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">MyRunnable runnable = new MyRunnable();</div><div class="line">Thread thread = new Thread(runnable, &quot;New Thread&quot;);</div><div class="line">thread.start();</div><div class="line">System.out.println(thread.getName());</div></pre></td></tr></table></figure>
+<p>需要注意的是，因为MyRunnable并非Thread的子类，所以MyRunnable类并没有getName()方法。可以通过以下方式得到当前线程的引用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Thread.currentThread();</div></pre></td></tr></table></figure>
+<p>因此，通过如下代码可以得到当前线程的名字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String threadName = Thread.currentThread().getName();</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;编写线程运行时执行的代码有两种方式&quot;&gt;&lt;a href=&quot;#编写线程运行时执行的代码有两种方式&quot; class=&quot;headerlink&quot; title=&quot;编写线程运行时执行的代码有两种方式&quot;&gt;&lt;/a&gt;编写线程运行时执行的代码有两种方式&lt;/h2&gt;&lt;h3 id=&quot;第一种是创建Thread子类的一个实例并重写run方法&quot;&gt;&lt;a href=&quot;#第一种是创建Thread子类的一个实例并重写run方法&quot; class=&quot;headerlink&quot; title=&quot;第一种是创建Thread子类的一个实例并重写run方法&quot;&gt;&lt;/a&gt;第一种是创建Thread子类的一个实例并重写run方法&lt;/h3&gt;&lt;h3 id=&quot;第二种是创建类的时候实现Runnable接口&quot;&gt;&lt;a href=&quot;#第二种是创建类的时候实现Runnable接口&quot; class=&quot;headerlink&quot; title=&quot;第二种是创建类的时候实现Runnable接口&quot;&gt;&lt;/a&gt;第二种是创建类的时候实现Runnable接口&lt;/h3&gt;&lt;h3 id=&quot;创建Thread的子类&quot;&gt;&lt;a href=&quot;#创建Thread的子类&quot; class=&quot;headerlink&quot; title=&quot;创建Thread的子类&quot;&gt;&lt;/a&gt;创建Thread的子类&lt;/h3&gt;&lt;p&gt;创建Thread子类的一个实例并重写run方法，run方法会在调用start()方法之后被执行。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;public class MyThread extends Thread &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   public void run()&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     System.out.println(&amp;quot;MyThread running&amp;quot;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以用如下方式创建并运行上述Thread子类&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;MyThread myThread = new MyThread();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;myTread.start();&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;一旦线程启动后start方法就会立即返回，而不会等待到run方法执行完毕才返回。就好像run方法是在另外一个cpu上执行一样。当run方法执行后，将会打印出字符串MyThread running。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://www.xiangyu520.top/categories/Java/"/>
+    
+    
+      <category term="多线程" scheme="http://www.xiangyu520.top/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>深入理解Java内存管理</title>
