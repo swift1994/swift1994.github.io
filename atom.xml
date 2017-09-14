@@ -52,13 +52,14 @@
     <link href="http://www.xiangyu520.top/Java/2017/09/13/%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%BF%90%E8%A1%8Cjava%E7%BA%BF%E7%A8%8B.html"/>
     <id>http://www.xiangyu520.top/Java/2017/09/13/创建并运行java线程.html</id>
     <published>2017-09-13T13:29:05.574Z</published>
-    <updated>2017-09-13T13:31:02.865Z</updated>
+    <updated>2017-09-14T11:26:41.799Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2><span id="编写线程运行时执行的代码有两种方式">编写线程运行时执行的代码有两种方式</span></h2><h3><span id="第一种是创建thread子类的一个实例并重写run方法">第一种是创建Thread子类的一个实例并重写run方法</span></h3><h3><span id="第二种是创建类的时候实现runnable接口">第二种是创建类的时候实现Runnable接口</span></h3><h3><span id="创建thread的子类">创建Thread的子类</span></h3><p>创建Thread子类的一个实例并重写run方法，run方法会在调用start()方法之后被执行。</p>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/homberg-1959229_1920.jpg" alt="image"><br><a id="more"></a></p>
+<h2><span id="编写线程运行时执行的代码有两种方式">编写线程运行时执行的代码有两种方式</span></h2><h3><span id="第一种是创建thread子类的一个实例并重写run方法">第一种是创建Thread子类的一个实例并重写run方法</span></h3><h3><span id="第二种是创建类的时候实现runnable接口">第二种是创建类的时候实现Runnable接口</span></h3><h3><span id="创建thread的子类">创建Thread的子类</span></h3><p>创建Thread子类的一个实例并重写run方法，run方法会在调用start()方法之后被执行。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class MyThread extends Thread &#123;</div><div class="line">   public void run()&#123;</div><div class="line">     System.out.println(&quot;MyThread running&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>可以用如下方式创建并运行上述Thread子类</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MyThread myThread = new MyThread();</div><div class="line">myTread.start();</div></pre></td></tr></table></figure>
-<p>一旦线程启动后start方法就会立即返回，而不会等待到run方法执行完毕才返回。就好像run方法是在另外一个cpu上执行一样。当run方法执行后，将会打印出字符串MyThread running。<br><a id="more"></a></p>
+<p>一旦线程启动后start方法就会立即返回，而不会等待到run方法执行完毕才返回。就好像run方法是在另外一个cpu上执行一样。当run方法执行后，将会打印出字符串MyThread running。</p>
 <p>你也可以如下创建一个Thread的匿名子类：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Thread thread = new Thread()&#123;</div><div class="line">   public void run()&#123;</div><div class="line">     System.out.println(&quot;Thread Running&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;;</div><div class="line">thread.start();</div></pre></td></tr></table></figure>
 <p>当新的线程的run方法执行以后，计算机将会打印出字符串”Thread Running”。</p>
@@ -85,11 +86,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;编写线程运行时执行的代码有两种方式&quot;&gt;&lt;a href=&quot;#编写线程运行时执行的代码有两种方式&quot; class=&quot;headerlink&quot; title=&quot;编写线程运行时执行的代码有两种方式&quot;&gt;&lt;/a&gt;编写线程运行时执行的代码有两种方式&lt;/h2&gt;&lt;h3 id=&quot;第一种是创建Thread子类的一个实例并重写run方法&quot;&gt;&lt;a href=&quot;#第一种是创建Thread子类的一个实例并重写run方法&quot; class=&quot;headerlink&quot; title=&quot;第一种是创建Thread子类的一个实例并重写run方法&quot;&gt;&lt;/a&gt;第一种是创建Thread子类的一个实例并重写run方法&lt;/h3&gt;&lt;h3 id=&quot;第二种是创建类的时候实现Runnable接口&quot;&gt;&lt;a href=&quot;#第二种是创建类的时候实现Runnable接口&quot; class=&quot;headerlink&quot; title=&quot;第二种是创建类的时候实现Runnable接口&quot;&gt;&lt;/a&gt;第二种是创建类的时候实现Runnable接口&lt;/h3&gt;&lt;h3 id=&quot;创建Thread的子类&quot;&gt;&lt;a href=&quot;#创建Thread的子类&quot; class=&quot;headerlink&quot; title=&quot;创建Thread的子类&quot;&gt;&lt;/a&gt;创建Thread的子类&lt;/h3&gt;&lt;p&gt;创建Thread子类的一个实例并重写run方法，run方法会在调用start()方法之后被执行。&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;public class MyThread extends Thread &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   public void run()&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     System.out.println(&amp;quot;MyThread running&amp;quot;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;可以用如下方式创建并运行上述Thread子类&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;MyThread myThread = new MyThread();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;myTread.start();&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;一旦线程启动后start方法就会立即返回，而不会等待到run方法执行完毕才返回。就好像run方法是在另外一个cpu上执行一样。当run方法执行后，将会打印出字符串MyThread running。&lt;br&gt;
+      &lt;p&gt;&lt;img src=&quot;/uploads/homberg-1959229_1920.jpg&quot; alt=&quot;image&quot;&gt;&lt;br&gt;
     
     </summary>
     
@@ -105,9 +102,10 @@
     <link href="http://www.xiangyu520.top/Java/2017/09/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html"/>
     <id>http://www.xiangyu520.top/Java/2017/09/12/深入理解Java内存管理.html</id>
     <published>2017-09-12T12:28:00.099Z</published>
-    <updated>2017-09-12T12:36:31.871Z</updated>
+    <updated>2017-09-14T11:27:37.360Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2><span id="运行时数据区域"><strong>运行时数据区域</strong></span></h2><p><img src="/uploads/jvm_memory_1.png" alt="image"></p>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/surfer-2212948__480.jpg" alt="image"><br><a id="more"></a></p>
+<h2><span id="运行时数据区域"><strong>运行时数据区域</strong></span></h2><p><img src="/uploads/jvm_memory_1.png" alt="image"></p>
 <p><img src="/uploads/stack_heap_info.png" alt="image"></p>
 <h2><span id="1-程序计数器pc">1 程序计数器PC</span></h2><p>程序计数器PC，当前线程所执行的字节码行号指示器。每个线程都有自己计数器，是私有内存空间，该区域是整个内存中较小的一块。<br>当线程正在执行一个Java方法时，PC计数器记录的是正在执行的虚拟机字节码的地址；当线程正在执行的一个Native方法时，PC计数器则为空（Undefined）。</p>
 <h2><span id="2-虚拟机栈">2 虚拟机栈</span></h2><p>虚拟机栈，生命周期与线程相同，是Java方法执行的内存模型。每个方法(不包含native方法)执行的同时都会创建一个栈帧结构，方法执行过程，对应着虚拟机栈的入栈到出栈的过程。<br>栈帧(Stack Frame)结构<br>栈帧是用于支持虚拟机进行方法执行的数据结构，是属性运行时数据区的虚拟机站的栈元素。见上图， 栈帧包括：</p>
@@ -146,7 +144,7 @@
     
     <summary type="html">
     
-      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/assets/css/DPlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/as
+      &lt;p&gt;&lt;img src=&quot;/uploads/surfer-2212948__480.jpg&quot; alt=&quot;image&quot;&gt;&lt;br&gt;
     
     </summary>
     
@@ -162,9 +160,10 @@
     <link href="http://www.xiangyu520.top/Servlet/2017/09/09/Servlet%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html"/>
     <id>http://www.xiangyu520.top/Servlet/2017/09/09/Servlet的生命周期及实现原理.html</id>
     <published>2017-09-09T13:09:31.592Z</published>
-    <updated>2017-09-09T13:30:40.336Z</updated>
+    <updated>2017-09-14T11:28:35.483Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h3><span id="生命周期分为三个阶段">生命周期分为三个阶段</span></h3><ul>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/swan-1908290.jpg" alt="image"><br><a id="more"></a></p>
+<h3><span id="生命周期分为三个阶段">生命周期分为三个阶段</span></h3><ul>
 <li><h4><span id="初始化阶段">　初始化阶段</span></h4></li>
 <li>调用init()方法</li>
 <li><h4><span id="响应客户请求阶段">响应客户请求阶段　　</span></h4></li>
@@ -178,7 +177,6 @@
 <li>　Servlet容器启动时自动装载某些Servlet，实现它只需要在web.XML文件中的<servlet></servlet>之间添加如下代码：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;loadon-startup&gt;1&lt;/loadon-startup&gt;</div></pre></td></tr></table></figure>
-<a id="more"></a>
 <ul>
 <li>　在Servlet容器启动后，客户首次向Servlet发送请求</li>
 <li>　Servlet类文件被更新后，重新装载Servlet<br>　　Servlet被装载后，Servlet容器创建一个Servlet实例并且调用Servlet的init()方法进行初始化。<br>在Servlet的整个生命周期内，init()方法只被调用一次。</li>
@@ -196,20 +194,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;生命周期分为三个阶段&quot;&gt;&lt;a href=&quot;#生命周期分为三个阶段&quot; class=&quot;headerlink&quot; title=&quot;生命周期分为三个阶段&quot;&gt;&lt;/a&gt;生命周期分为三个阶段&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;h4 id=&quot;初始化阶段&quot;&gt;&lt;a href=&quot;#初始化阶段&quot; class=&quot;headerlink&quot; title=&quot;　初始化阶段&quot;&gt;&lt;/a&gt;　初始化阶段&lt;/h4&gt;&lt;/li&gt;
-&lt;li&gt;调用init()方法&lt;/li&gt;
-&lt;li&gt;&lt;h4 id=&quot;响应客户请求阶段&quot;&gt;&lt;a href=&quot;#响应客户请求阶段&quot; class=&quot;headerlink&quot; title=&quot;响应客户请求阶段　　&quot;&gt;&lt;/a&gt;响应客户请求阶段　　&lt;/h4&gt;&lt;/li&gt;
-&lt;li&gt;调用service()方法&lt;/li&gt;
-&lt;li&gt;&lt;h4 id=&quot;终止阶段&quot;&gt;&lt;a href=&quot;#终止阶段&quot; class=&quot;headerlink&quot; title=&quot;终止阶段　　&quot;&gt;&lt;/a&gt;终止阶段　　&lt;/h4&gt;&lt;/li&gt;
-&lt;li&gt;调用destroy()方法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;1、Servlet初始化阶段&quot;&gt;&lt;a href=&quot;#1、Servlet初始化阶段&quot; class=&quot;headerlink&quot; title=&quot;1、Servlet初始化阶段&quot;&gt;&lt;/a&gt;&lt;strong&gt;1、Servlet初始化阶段&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;　　在下列时刻Servlet容器装载Servlet：
-　　&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;　Servlet容器启动时自动装载某些Servlet，实现它只需要在web.XML文件中的&lt;servlet&gt;&lt;/servlet&gt;之间添加如下代码：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;loadon-startup&amp;gt;1&amp;lt;/loadon-startup&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+      &lt;p&gt;&lt;img src=&quot;/uploads/swan-1908290.jpg&quot; alt=&quot;image&quot;&gt;&lt;br&gt;
     
     </summary>
     
@@ -225,10 +210,12 @@
     <link href="http://www.xiangyu520.top/Java/2017/09/06/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3HashMap.html"/>
     <id>http://www.xiangyu520.top/Java/2017/09/06/深入理解HashMap.html</id>
     <published>2017-09-06T13:10:53.817Z</published>
-    <updated>2017-09-12T12:48:54.693Z</updated>
+    <updated>2017-09-14T11:29:19.267Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h3><span id="hashmap概述">HashMap概述：</span></h3><p>HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
-<h3><span id="1-hashmap的数据结构">1、hashmap的数据结构</span></h3><p>要知道hashmap是什么，首先要搞清楚它的数据结构，在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，hashmap也不例外。Hashmap实际上是一个数组和链表的结合体（在数据结构中，一般称之为“链表散列“），请看下图（横排表示数组，纵排表示数组元素实际上是一个链表）。<br><a id="more"></a><br><img src="/uploads/beaa96fea07.jpeg" alt="image"></p>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/surfing.jpg" alt="image"><br><a id="more"></a></p>
+<h3><span id="hashmap概述">HashMap概述：</span></h3><p>HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
+<h3><span id="1-hashmap的数据结构">1、hashmap的数据结构</span></h3><p>要知道hashmap是什么，首先要搞清楚它的数据结构，在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，hashmap也不例外。Hashmap实际上是一个数组和链表的结合体（在数据结构中，一般称之为“链表散列“），请看下图（横排表示数组，纵排表示数组元素实际上是一个链表）。 </p>
+<p><img src="/uploads/beaa96fea07.jpeg" alt="image"></p>
 <p>从图中我们可以看到一个hashmap就是一个数组结构，当新建一个hashmap的时候，就会初始化一个数组。我们来看看java代码： </p>
 <p>Java代码  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1. /** </div><div class="line">2.      * The table, resized as necessary. Length MUST Always be a power of two. </div><div class="line">3.      *  FIXME 这里需要注意这句话，至于原因后面会讲到 </div><div class="line">4.      */  </div><div class="line">5.     transient Entry[] table;</div></pre></td></tr></table></figure>
@@ -259,8 +246,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;HashMap概述：&quot;&gt;&lt;a href=&quot;#HashMap概述：&quot; class=&quot;headerlink&quot; title=&quot;HashMap概述：&quot;&gt;&lt;/a&gt;HashMap概述：&lt;/h3&gt;&lt;p&gt;HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。&lt;/p&gt;
-&lt;h3 id=&quot;1、hashmap的数据结构&quot;&gt;&lt;a href=&quot;#1、hashmap的数据结构&quot; class=&quot;headerlink&quot; title=&quot;1、hashmap的数据结构&quot;&gt;&lt;/a&gt;1、hashmap的数据结构&lt;/h3&gt;&lt;p&gt;要知道hashmap是什么，首先要搞清楚它的数据结构，在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，hashmap也不例外。Hashmap实际上是一个数组和链表的结合体（在数据结构中，一般称之为“链表散列“），请看下图（横排表示数组，纵排表示数组元素实际上是一个链表）。&lt;br&gt;
+      &lt;p&gt;&lt;img src=&quot;/uploads/surfing.jpg&quot; alt=&quot;image&quot;&gt;&lt;br&gt;
     
     </summary>
     
@@ -276,13 +262,15 @@
     <link href="http://www.xiangyu520.top/Java/2017/09/05/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3ArrayList.html"/>
     <id>http://www.xiangyu520.top/Java/2017/09/05/深入理解ArrayList.html</id>
     <published>2017-09-05T11:11:10.279Z</published>
-    <updated>2017-09-06T09:53:01.798Z</updated>
+    <updated>2017-09-14T11:36:47.395Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><blockquote>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/waterfall-2271231__480.jpg" alt="image"><br><a id="more"></a></p>
+<blockquote>
 <p><strong>ArrayList概述</strong></p>
 </blockquote>
 <p>ArrayList是List接口的可变数组的实现。实现了所有可选列表操作，并允许包括 null 在内的所有元素。除了实现 List 接口外，此类还提供一些方法来操作内部用来存储列表的数组的大小。</p>
-<p>   每个ArrayList实例都有一个容量，该容量是指用来存储列表元素的数组的大小。它总是至少等于列表的大小。随着向ArrayList中不断添加元素，其容量也自动增长。自动增长会带来数据向新数组的重新拷贝，因此，如果可预知数据量的多少，可在构造ArrayList时指定其容量。在添加大量元素前，应用程序也可以使用ensureCapacity操作来增加ArrayList实例的容量，这可以减少递增式再分配的数量。<br>   <a id="more"></a><br>   <strong><em>注意</em></strong>，此实现不是同步的。如果多个线程同时访问一个ArrayList实例，而其中至少一个线程从结构上修改了列表，那么它必须保持外部同步。</p>
+<p>   每个ArrayList实例都有一个容量，该容量是指用来存储列表元素的数组的大小。它总是至少等于列表的大小。随着向ArrayList中不断添加元素，其容量也自动增长。自动增长会带来数据向新数组的重新拷贝，因此，如果可预知数据量的多少，可在构造ArrayList时指定其容量。在添加大量元素前，应用程序也可以使用ensureCapacity操作来增加ArrayList实例的容量，这可以减少递增式再分配的数量。 </p>
+<p>   <strong><em>注意</em></strong>，此实现不是同步的。如果多个线程同时访问一个ArrayList实例，而其中至少一个线程从结构上修改了列表，那么它必须保持外部同步。</p>
 <blockquote>
 <p>ArrayList的实现</p>
 </blockquote>
@@ -463,11 +451,7 @@ Java代码
     
     <summary type="html">
     
-      &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;ArrayList概述&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;ArrayList是List接口的可变数组的实现。实现了所有可选列表操作，并允许包括 null 在内的所有元素。除了实现 List 接口外，此类还提供一些方法来操作内部用来存储列表的数组的大小。&lt;/p&gt;
-&lt;p&gt;   每个ArrayList实例都有一个容量，该容量是指用来存储列表元素的数组的大小。它总是至少等于列表的大小。随着向ArrayList中不断添加元素，其容量也自动增长。自动增长会带来数据向新数组的重新拷贝，因此，如果可预知数据量的多少，可在构造ArrayList时指定其容量。在添加大量元素前，应用程序也可以使用ensureCapacity操作来增加ArrayList实例的容量，这可以减少递增式再分配的数量。&lt;br&gt;
+      &lt;p&gt;&lt;img src=&quot;/uploads/waterfall-2271231__480.jpg&quot; alt=&quot;image&quot;&gt;&lt;br&gt;
     
     </summary>
     
@@ -483,9 +467,10 @@ Java代码
     <link href="http://www.xiangyu520.top/MySQL/2017/08/01/MySQL%E7%9A%84%E6%80%A7%E8%83%BD%E5%92%8C%E4%BC%B8%E7%BC%A9%E6%80%A7%E4%BC%98%E5%8C%96.html"/>
     <id>http://www.xiangyu520.top/MySQL/2017/08/01/MySQL的性能和伸缩性优化.html</id>
     <published>2017-08-01T02:20:37.202Z</published>
-    <updated>2017-09-06T09:52:43.586Z</updated>
+    <updated>2017-09-14T11:37:36.649Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h4><span id="1-选择-innodb-作为存储引擎">1、选择 InnoDB 作为存储引擎</span></h4><ul>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/desert-2340326__480.jpg" alt="image"><br><a id="more"></a></p>
+<h4><span id="1-选择-innodb-作为存储引擎">1、选择 InnoDB 作为存储引擎</span></h4><ul>
 <li>大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。</li>
 </ul>
 <h4><span id="2-优化数据库结构">2、优化数据库结构</span></h4><ul>
@@ -496,10 +481,10 @@ Java代码
 <li><p>对于 InnoDB 表，主键所在的列在每个辅助索引条目中都是可复制的，因此如果有很多辅助索引，那么一个短的主键可以节省大量空间。</p>
 </li>
 <li><p>仅创建你需要改进查询性能的索引。索引有助于检索，但是会增加插入和更新操作的执行时间。</p>
-<a id="more"></a>
-<h4><span id="3-innodb-的-change-buffering-特性">3、InnoDB 的 Change Buffering 特性</span></h4></li>
-<li><p>InnoDB 提供了 change buffering 的配置，可减少维护辅助索引所需的磁盘 I/O。大规模的数据库可能会遇到大量的表操作和大量的 I/O，以保证辅助索引保持最新。当相关页面不在缓冲池里面时，InnoDB 的 change buffer 将会更改缓存到辅助索引条目，从而避免因不能立即从磁盘读取页面而导致耗时的 I/O 操作。当页面被加载到缓冲池时，缓冲的更改将被合并，更新的页面之后会刷新到磁盘。这样做可提高性能，适用于 MySQL 5.5 及更高版本。</p>
 </li>
+</ul>
+<h4><span id="3-innodb-的-change-buffering-特性">3、InnoDB 的 Change Buffering 特性</span></h4><ul>
+<li>InnoDB 提供了 change buffering 的配置，可减少维护辅助索引所需的磁盘 I/O。大规模的数据库可能会遇到大量的表操作和大量的 I/O，以保证辅助索引保持最新。当相关页面不在缓冲池里面时，InnoDB 的 change buffer 将会更改缓存到辅助索引条目，从而避免因不能立即从磁盘读取页面而导致耗时的 I/O 操作。当页面被加载到缓冲池时，缓冲的更改将被合并，更新的页面之后会刷新到磁盘。这样做可提高性能，适用于 MySQL 5.5 及更高版本。</li>
 </ul>
 <h4><span id="4-innodb-页面压缩">4、InnoDB 页面压缩</span></h4><ul>
 <li><p>InnoDB 支持对表进行页面级的压缩。当写入数据页的时候，会有特定的压缩算法对其进行压缩。压缩后的数据会写入磁盘，其打孔机制会释放页面末尾的空块。如果压缩失败，数据会按原样写入。表和索引都会被压缩，因为索引通常是数据库总大小中占比很大的一部分，压缩可以显著节约内存，I/O 或处理时间，这样就达到了提高性能和伸缩性的目的。它还可以减少内存和磁盘之间传输的数据量。MySQL 5.1 及更高版本支持该功能。</p>
@@ -552,17 +537,7 @@ Java代码
     
     <summary type="html">
     
-      &lt;h4 id=&quot;1、选择-InnoDB-作为存储引擎&quot;&gt;&lt;a href=&quot;#1、选择-InnoDB-作为存储引擎&quot; class=&quot;headerlink&quot; title=&quot;1、选择 InnoDB 作为存储引擎&quot;&gt;&lt;/a&gt;1、选择 InnoDB 作为存储引擎&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;2、优化数据库结构&quot;&gt;&lt;a href=&quot;#2、优化数据库结构&quot; class=&quot;headerlink&quot; title=&quot;2、优化数据库结构&quot;&gt;&lt;/a&gt;2、优化数据库结构&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;设计数据表应尽量使其占用的空间最小化，表的主键应尽可能短。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;对于 InnoDB 表，主键所在的列在每个辅助索引条目中都是可复制的，因此如果有很多辅助索引，那么一个短的主键可以节省大量空间。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;仅创建你需要改进查询性能的索引。索引有助于检索，但是会增加插入和更新操作的执行时间。&lt;/p&gt;
+      &lt;p&gt;&lt;img src=&quot;/uploads/desert-2340326__480.jpg&quot; alt=&quot;image&quot;&gt;&lt;br&gt;
     
     </summary>
     
@@ -578,12 +553,14 @@ Java代码
     <link href="http://www.xiangyu520.top/Linux/2017/07/31/linux%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%80%EF%BC%89.html"/>
     <id>http://www.xiangyu520.top/Linux/2017/07/31/linux搭建（一）.html</id>
     <published>2017-07-31T10:17:05.421Z</published>
-    <updated>2017-09-06T09:52:19.801Z</updated>
+    <updated>2017-09-14T11:38:27.042Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1><span id="阿里云ecs服务器centos65安装jdkmysqltomcat">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></h1><p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错</p>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/cherries-1465801__480.jpg" alt="image"><br><a id="more"></a></p>
+<h1><span id="阿里云ecs服务器centos65安装jdkmysqltomcat">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></h1><p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错</p>
 <p><strong>前提</strong>下载安装xshell（具体如何是使用xshell请自行Google）和xftp</p>
 <h4><span id="1-部署jdk">1 部署jdk</span></h4><pre><code>查看系统是否安装了jdk
-</code></pre><p> [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java<br> <a id="more"></a><br> 出现或者不出现以下内容：</p>
+</code></pre><p> [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java</p>
+<p> 出现或者不出现以下内容：</p>
 <p>java version “1.7.0_24”<br>OpenJDK Runtime Environment (build 1.7.0_24-b18)<br>OpenJDK HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)</p>
 <p>进一步查看JDK信息：<br>[root@localhost ~]# rpm -qa | grep java<br>tzdata-java-2012c-1.el6.noarch<br>java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
 <p>卸载OpenJDK，执行以下操作：<br>[root@localhost ~]# rpm -e –nodeps tzdata-java-2012c-1.el6.noarch（解压jdk）<br>[root@localhost ~]# rpm -e –nodeps java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64</p>
@@ -638,10 +615,7 @@ Java代码
     
     <summary type="html">
     
-      &lt;h1 id=&quot;阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat&quot;&gt;&lt;a href=&quot;#阿里云ECS服务器-centos6-5安装jdk，mysql，tomcat&quot; class=&quot;headerlink&quot; title=&quot;阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat&quot;&gt;&lt;/a&gt;阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat&lt;/h1&gt;&lt;p&gt;现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;前提&lt;/strong&gt;下载安装xshell（具体如何是使用xshell请自行Google）和xftp&lt;/p&gt;
-&lt;h4 id=&quot;1-部署jdk&quot;&gt;&lt;a href=&quot;#1-部署jdk&quot; class=&quot;headerlink&quot; title=&quot;1 部署jdk&quot;&gt;&lt;/a&gt;1 部署jdk&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;查看系统是否安装了jdk
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; [root@localhost ~]# java -version或者 [root@localhost ~]#rpm -qa |grep java&lt;br&gt;
+      &lt;p&gt;&lt;img src=&quot;/uploads/cherries-1465801__480.jpg&quot; alt=&quot;image&quot;&gt;&lt;br&gt;
     
     </summary>
     

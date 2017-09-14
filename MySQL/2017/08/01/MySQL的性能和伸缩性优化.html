@@ -100,17 +100,16 @@
 
 
 
-<meta name="description" content="1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的空间最小化，表的主键应尽可能短。">
 <meta name="keywords" content="MySQL优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL的性能和伸缩性优化">
 <meta property="og:url" content="http://www.xiangyu520.top/MySQL/2017/08/01/MySQL的性能和伸缩性优化.html">
 <meta property="og:site_name" content="老于丢的水稻田">
-<meta property="og:description" content="1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的空间最小化，表的主键应尽可能短。">
-<meta property="og:updated_time" content="2017-09-06T09:52:43.586Z">
+<meta property="og:image" content="http://www.xiangyu520.top/uploads/desert-2340326__480.jpg">
+<meta property="og:updated_time" content="2017-09-14T11:37:36.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL的性能和伸缩性优化">
-<meta name="twitter:description" content="1、选择 InnoDB 作为存储引擎 大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。  2、优化数据库结构 组织数据库的 schema、表和字段以降低 I/O 的开销，将相关项保存在一起，并提前规划，以便随着数据量的增长，性能可以保持较高的水平。  设计数据表应尽量使其占用的空间最小化，表的主键应尽可能短。">
+<meta name="twitter:image" content="http://www.xiangyu520.top/uploads/desert-2340326__480.jpg">
 
 
 
@@ -364,8 +363,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-09-06T17:52:43+08:00">
-                2017-09-06
+              <time title="更新于" itemprop="dateModified" datetime="2017-09-14T19:37:36+08:00">
+                2017-09-14
               </time>
             
           </span>
@@ -459,7 +458,8 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h4><span id="1-选择-innodb-作为存储引擎">1、选择 InnoDB 作为存储引擎</span></h4><ul>
+        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/desert-2340326__480.jpg" alt="image"><br><a id="more"></a></p>
+<h4><span id="1-选择-innodb-作为存储引擎">1、选择 InnoDB 作为存储引擎</span></h4><ul>
 <li>大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。</li>
 </ul>
 <h4><span id="2-优化数据库结构">2、优化数据库结构</span></h4><ul>
@@ -470,10 +470,10 @@
 <li><p>对于 InnoDB 表，主键所在的列在每个辅助索引条目中都是可复制的，因此如果有很多辅助索引，那么一个短的主键可以节省大量空间。</p>
 </li>
 <li><p>仅创建你需要改进查询性能的索引。索引有助于检索，但是会增加插入和更新操作的执行时间。</p>
-<a id="more"></a>
-<h4><span id="3-innodb-的-change-buffering-特性">3、InnoDB 的 Change Buffering 特性</span></h4></li>
-<li><p>InnoDB 提供了 change buffering 的配置，可减少维护辅助索引所需的磁盘 I/O。大规模的数据库可能会遇到大量的表操作和大量的 I/O，以保证辅助索引保持最新。当相关页面不在缓冲池里面时，InnoDB 的 change buffer 将会更改缓存到辅助索引条目，从而避免因不能立即从磁盘读取页面而导致耗时的 I/O 操作。当页面被加载到缓冲池时，缓冲的更改将被合并，更新的页面之后会刷新到磁盘。这样做可提高性能，适用于 MySQL 5.5 及更高版本。</p>
 </li>
+</ul>
+<h4><span id="3-innodb-的-change-buffering-特性">3、InnoDB 的 Change Buffering 特性</span></h4><ul>
+<li>InnoDB 提供了 change buffering 的配置，可减少维护辅助索引所需的磁盘 I/O。大规模的数据库可能会遇到大量的表操作和大量的 I/O，以保证辅助索引保持最新。当相关页面不在缓冲池里面时，InnoDB 的 change buffer 将会更改缓存到辅助索引条目，从而避免因不能立即从磁盘读取页面而导致耗时的 I/O 操作。当页面被加载到缓冲池时，缓冲的更改将被合并，更新的页面之后会刷新到磁盘。这样做可提高性能，适用于 MySQL 5.5 及更高版本。</li>
 </ul>
 <h4><span id="4-innodb-页面压缩">4、InnoDB 页面压缩</span></h4><ul>
 <li><p>InnoDB 支持对表进行页面级的压缩。当写入数据页的时候，会有特定的压缩算法对其进行压缩。压缩后的数据会写入磁盘，其打孔机制会释放页面末尾的空块。如果压缩失败，数据会按原样写入。表和索引都会被压缩，因为索引通常是数据库总大小中占比很大的一部分，压缩可以显著节约内存，I/O 或处理时间，这样就达到了提高性能和伸缩性的目的。它还可以减少内存和磁盘之间传输的数据量。MySQL 5.1 及更高版本支持该功能。</p>

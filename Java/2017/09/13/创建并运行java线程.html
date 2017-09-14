@@ -100,17 +100,16 @@
 
 
 
-<meta name="description" content="编写线程运行时执行的代码有两种方式第一种是创建Thread子类的一个实例并重写run方法第二种是创建类的时候实现Runnable接口创建Thread的子类创建Thread子类的一个实例并重写run方法，run方法会在调用start()方法之后被执行。 12345public class MyThread extends Thread &amp;#123;   public void run()&amp;#123;">
 <meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="创建并运行java线程">
 <meta property="og:url" content="http://www.xiangyu520.top/Java/2017/09/13/创建并运行java线程.html">
 <meta property="og:site_name" content="老于丢的水稻田">
-<meta property="og:description" content="编写线程运行时执行的代码有两种方式第一种是创建Thread子类的一个实例并重写run方法第二种是创建类的时候实现Runnable接口创建Thread的子类创建Thread子类的一个实例并重写run方法，run方法会在调用start()方法之后被执行。 12345public class MyThread extends Thread &amp;#123;   public void run()&amp;#123;">
-<meta property="og:updated_time" content="2017-09-13T13:31:02.865Z">
+<meta property="og:image" content="http://www.xiangyu520.top/uploads/homberg-1959229_1920.jpg">
+<meta property="og:updated_time" content="2017-09-14T11:26:41.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建并运行java线程">
-<meta name="twitter:description" content="编写线程运行时执行的代码有两种方式第一种是创建Thread子类的一个实例并重写run方法第二种是创建类的时候实现Runnable接口创建Thread的子类创建Thread子类的一个实例并重写run方法，run方法会在调用start()方法之后被执行。 12345public class MyThread extends Thread &amp;#123;   public void run()&amp;#123;">
+<meta name="twitter:image" content="http://www.xiangyu520.top/uploads/homberg-1959229_1920.jpg">
 
 
 
@@ -364,8 +363,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-09-13T21:31:02+08:00">
-                2017-09-13
+              <time title="更新于" itemprop="dateModified" datetime="2017-09-14T19:26:41+08:00">
+                2017-09-14
               </time>
             
           </span>
@@ -459,11 +458,12 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2><span id="编写线程运行时执行的代码有两种方式">编写线程运行时执行的代码有两种方式</span></h2><h3><span id="第一种是创建thread子类的一个实例并重写run方法">第一种是创建Thread子类的一个实例并重写run方法</span></h3><h3><span id="第二种是创建类的时候实现runnable接口">第二种是创建类的时候实现Runnable接口</span></h3><h3><span id="创建thread的子类">创建Thread的子类</span></h3><p>创建Thread子类的一个实例并重写run方法，run方法会在调用start()方法之后被执行。</p>
+        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/homberg-1959229_1920.jpg" alt="image"><br><a id="more"></a></p>
+<h2><span id="编写线程运行时执行的代码有两种方式">编写线程运行时执行的代码有两种方式</span></h2><h3><span id="第一种是创建thread子类的一个实例并重写run方法">第一种是创建Thread子类的一个实例并重写run方法</span></h3><h3><span id="第二种是创建类的时候实现runnable接口">第二种是创建类的时候实现Runnable接口</span></h3><h3><span id="创建thread的子类">创建Thread的子类</span></h3><p>创建Thread子类的一个实例并重写run方法，run方法会在调用start()方法之后被执行。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class MyThread extends Thread &#123;</div><div class="line">   public void run()&#123;</div><div class="line">     System.out.println(&quot;MyThread running&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>可以用如下方式创建并运行上述Thread子类</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MyThread myThread = new MyThread();</div><div class="line">myTread.start();</div></pre></td></tr></table></figure>
-<p>一旦线程启动后start方法就会立即返回，而不会等待到run方法执行完毕才返回。就好像run方法是在另外一个cpu上执行一样。当run方法执行后，将会打印出字符串MyThread running。<br><a id="more"></a></p>
+<p>一旦线程启动后start方法就会立即返回，而不会等待到run方法执行完毕才返回。就好像run方法是在另外一个cpu上执行一样。当run方法执行后，将会打印出字符串MyThread running。</p>
 <p>你也可以如下创建一个Thread的匿名子类：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Thread thread = new Thread()&#123;</div><div class="line">   public void run()&#123;</div><div class="line">     System.out.println(&quot;Thread Running&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;;</div><div class="line">thread.start();</div></pre></td></tr></table></figure>
 <p>当新的线程的run方法执行以后，计算机将会打印出字符串”Thread Running”。</p>
