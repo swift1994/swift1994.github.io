@@ -450,7 +450,7 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2><span id="运行时数据区域"><strong>运行时数据区域</strong></span></h2><p><img src="/uploads/jvm_memory_1.png" alt="image"></p>
+        <script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><h2><span id="运行时数据区域"><strong>运行时数据区域</strong></span></h2><p><img src="/uploads/jvm_memory_1.png" alt="image"></p>
 <p><img src="/uploads/stack_heap_info.png" alt="image"></p>
 <h2><span id="1-程序计数器pc">1 程序计数器PC</span></h2><p>程序计数器PC，当前线程所执行的字节码行号指示器。每个线程都有自己计数器，是私有内存空间，该区域是整个内存中较小的一块。<br>当线程正在执行一个Java方法时，PC计数器记录的是正在执行的虚拟机字节码的地址；当线程正在执行的一个Native方法时，PC计数器则为空（Undefined）。</p>
 <h2><span id="2-虚拟机栈">2 虚拟机栈</span></h2><p>虚拟机栈，生命周期与线程相同，是Java方法执行的内存模型。每个方法(不包含native方法)执行的同时都会创建一个栈帧结构，方法执行过程，对应着虚拟机栈的入栈到出栈的过程。<br>栈帧(Stack Frame)结构<br>栈帧是用于支持虚拟机进行方法执行的数据结构，是属性运行时数据区的虚拟机站的栈元素。见上图， 栈帧包括：</p>
