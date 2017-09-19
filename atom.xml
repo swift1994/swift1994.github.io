@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangyu520.top/"/>
-  <updated>2017-09-19T13:16:35.074Z</updated>
+  <updated>2017-09-19T13:27:43.942Z</updated>
   <id>http://www.xiangyu520.top/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.xiangyu520.top/Java/2017/09/19/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%BA%BF%E7%A8%8B%E6%B1%A0.html"/>
     <id>http://www.xiangyu520.top/Java/2017/09/19/深入理解Java线程池.html</id>
     <published>2017-09-19T13:14:05.400Z</published>
-    <updated>2017-09-19T13:16:35.074Z</updated>
+    <updated>2017-09-19T13:27:43.942Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/mountains-1828596__480.jpg" alt="image"><br><a id="more"></a></p>
 <h3><span id="线程池的作用">线程池的作用：</span></h3><ol>
@@ -45,12 +45,10 @@
 <h5><span id="runnabletaskqueue任务队列">● runnableTaskQueue（任务队列）</span></h5><p>用于保存等待执行的任务的阻塞队列。可以选择以下几个阻塞队列。</p>
 <blockquote>
 <ol>
-<li>ArrayBlockingQueue：是一个基于数组结构的有界阻塞队列，此队列按 FIFO（先进先出）原则对元素进行排序。<ol>
+<li>ArrayBlockingQueue：是一个基于数组结构的有界阻塞队列，此队列按 FIFO（先进先出）原则对元素进行排序。</li>
 <li>LinkedBlockingQueue：一个基于链表结构的阻塞队列，此队列按FIFO （先进先出） 排序元素，吞吐量通常要高于ArrayBlockingQueue。静态工厂方法Executors.newFixedThreadPool()使用了这个队列。</li>
 <li>SynchronousQueue：一个不存储元素的阻塞队列。每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于LinkedBlockingQueue，静态工厂方法Executors.newCachedThreadPool使用了这个队列。</li>
 <li>PriorityBlockingQueue：一个具有优先级得无限阻塞队列。</li>
-</ol>
-</li>
 </ol>
 </blockquote>
 <h5><span id="maximumpoolsize线程池最大大小">● maximumPoolSize（线程池最大大小）</span></h5><p>线程池允许创建的最大线程数。如果队列满了，并且已创建的线程数小于最大线程数，则线程池会再创建新的线程执行任务。值得注意的是如果使用了无界的任务队列这个参数就没什么效果。</p>
@@ -62,7 +60,8 @@
 <ol>
 <li>CallerRunsPolicy：只用调用者所在线程来运行任务。</li>
 <li>DiscardOldestPolicy：丢弃队列里最近的一个任务，并执行当前任务。</li>
-<li>DiscardPolicy：不处理，丢弃掉。<br>1.当然也可以根据应用场景需要来实现RejectedExecutionHandler接口自定义策略。如记录日志或持久化不能处理的任务。</li>
+<li>DiscardPolicy：不处理，丢弃掉。</li>
+<li>也可以根据应用场景需要来实现RejectedExecutionHandler接口自定义策略。如记录日志或持久化不能处理的任务。</li>
 </ol>
 </blockquote>
 <h3><span id="线程池任务submit及执行流程">线程池任务submit及执行流程</span></h3><p>流程分析：线程池的主要工作流程如下图：</p>
