@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangyu520.top/"/>
-  <updated>2017-09-19T13:27:43.942Z</updated>
+  <updated>2017-09-19T13:34:13.213Z</updated>
   <id>http://www.xiangyu520.top/</id>
   
   <author>
@@ -20,10 +20,10 @@
     <link href="http://www.xiangyu520.top/Java/2017/09/19/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%BA%BF%E7%A8%8B%E6%B1%A0.html"/>
     <id>http://www.xiangyu520.top/Java/2017/09/19/深入理解Java线程池.html</id>
     <published>2017-09-19T13:14:05.400Z</published>
-    <updated>2017-09-19T13:27:43.942Z</updated>
+    <updated>2017-09-19T13:34:13.213Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/mountains-1828596__480.jpg" alt="image"><br><a id="more"></a></p>
-<h3><span id="线程池的作用">线程池的作用：</span></h3><ol>
+<h3><span id="线程池的作用">线程池的作用</span></h3><ol>
 <li><p>降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</p>
 </li>
 <li><p>提高响应速度。当任务到达时，任务可以不需要的等到线程创建就能立即执行。</p>
