@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangyu520.top/"/>
-  <updated>2017-09-26T13:23:46.068Z</updated>
+  <updated>2017-09-26T13:27:27.916Z</updated>
   <id>http://www.xiangyu520.top/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://www.xiangyu520.top/GIt/2017/09/26/Git%E5%85%A5%E9%97%A8.html"/>
     <id>http://www.xiangyu520.top/GIt/2017/09/26/Git入门.html</id>
     <published>2017-09-26T13:21:48.892Z</published>
-    <updated>2017-09-26T13:23:46.068Z</updated>
+    <updated>2017-09-26T13:27:27.916Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/countryside-2326787__480.jpg" alt="image"><br><a id="more"></a></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/uploads/countryside-2326787__480.jpg" alt="image"><br><a id="more"></a></p>
 <h1><span id="git工作流程">Git工作流程</span></h1><p><img src="/uploads/clipboard4.png" alt="image"></p>
 <ul>
 <li>Workspace：工作区</li>
@@ -43,7 +43,7 @@
 <li>与协作者分享本地的修改，可以把它们push到远程仓库来共享。</li>
 </ul>
 <p><img src="/uploads/clipboard6.png" alt="image"></p>
-<h2><span id="二-常用git命令">二、常用Git命令</span></h2><p><img src="/uploads/clipboard7.png" alt="image"></p>
+<h2><span id="常用git命令">常用Git命令</span></h2><p><img src="/uploads/clipboard7.png" alt="image"></p>
 <p><img src="/uploads/clipboard8.png" alt="image"></p>
 <p>HEAD，它始终指向当前所处分支的最新的提交点。你所处的分支变化了，或者产生了新的提交点，HEAD就会跟着改变。</p>
 <h3><span id="add">add</span></h3><p><img src="/uploads/f1d0e6733039.png" alt="image"></p>
@@ -104,9 +104,9 @@
 <p>让工作区回到上次提交时的状态</p>
 </li>
 </ul>
-<h3><span id="revert">revert</span></h3><p><img src="/uploads/dbb35de9e4b8.png" alt="image"></p>
+<h3><span id="revert">revert</span></h3><p><img src="/uploads/dbb35de9e4b8.jpeg" alt="image"></p>
 <p>git revert用一个新提交来消除一个历史提交所做的任何修改。<br>revert与reset的区别</p>
-<p><img src="/uploads/1a88762c6189.png" alt="image"></p>
+<p><img src="/uploads/1a88762c6189.jpeg" alt="image"></p>
 <ul>
 <li><p>git revert是用一次新的commit来回滚之前的commit，git reset是直接删除指定的commit。</p>
 </li>
@@ -162,7 +162,7 @@
     <published>2017-09-19T13:14:05.400Z</published>
     <updated>2017-09-19T13:34:13.213Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/mountains-1828596__480.jpg" alt="image"><br><a id="more"></a></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/uploads/mountains-1828596__480.jpg" alt="image"><br><a id="more"></a></p>
 <h3><span id="线程池的作用">线程池的作用</span></h3><ol>
 <li><p>降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</p>
 </li>
@@ -258,7 +258,7 @@
     <published>2017-09-14T10:03:35.773Z</published>
     <updated>2017-09-14T11:21:56.405Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/blue.jpg" alt="image"><br><a id="more"></a></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/uploads/blue.jpg" alt="image"><br><a id="more"></a></p>
 <h2><span id="1-使用filestreams复制">1. 使用FileStreams复制</span></h2><p>这是最经典的方式将一个文件的内容复制到另一个文件中。 使用FileInputStream读取文件A的字节，使用FileOutputStream写入到文件B。 这是第一个方法的代码:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">private static void copyFileUsingFileStreams(File source, File dest)</div><div class="line">        throws IOException &#123;    </div><div class="line">    InputStream input = null;    </div><div class="line">    OutputStream output = null;    </div><div class="line">    try &#123;</div><div class="line">           input = new FileInputStream(source);</div><div class="line">           output = new FileOutputStream(dest);        </div><div class="line">           byte[] buf = new byte[1024];        </div><div class="line">           int bytesRead;        </div><div class="line">           while ((bytesRead = input.read(buf)) &gt; 0) &#123;</div><div class="line">               output.write(buf, 0, bytesRead);</div><div class="line">           &#125;</div><div class="line">    &#125; finally &#123;</div><div class="line">        input.close();</div><div class="line">        output.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>正如你所看到的我们执行几个读和写操作try的数据,所以这应该是一个低效率的,下一个方法我们将看到新的方式。</p>
@@ -290,7 +290,7 @@
     <published>2017-09-13T13:29:05.574Z</published>
     <updated>2017-09-14T11:26:41.799Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/homberg-1959229_1920.jpg" alt="image"><br><a id="more"></a></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/uploads/homberg-1959229_1920.jpg" alt="image"><br><a id="more"></a></p>
 <h2><span id="编写线程运行时执行的代码有两种方式">编写线程运行时执行的代码有两种方式</span></h2><h3><span id="第一种是创建thread子类的一个实例并重写run方法">第一种是创建Thread子类的一个实例并重写run方法</span></h3><h3><span id="第二种是创建类的时候实现runnable接口">第二种是创建类的时候实现Runnable接口</span></h3><h3><span id="创建thread的子类">创建Thread的子类</span></h3><p>创建Thread子类的一个实例并重写run方法，run方法会在调用start()方法之后被执行。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class MyThread extends Thread &#123;</div><div class="line">   public void run()&#123;</div><div class="line">     System.out.println(&quot;MyThread running&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>可以用如下方式创建并运行上述Thread子类</p>
@@ -340,7 +340,7 @@
     <published>2017-09-12T12:28:00.099Z</published>
     <updated>2017-09-14T11:27:37.360Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/surfer-2212948__480.jpg" alt="image"><br><a id="more"></a></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/uploads/surfer-2212948__480.jpg" alt="image"><br><a id="more"></a></p>
 <h2><span id="运行时数据区域"><strong>运行时数据区域</strong></span></h2><p><img src="/uploads/jvm_memory_1.png" alt="image"></p>
 <p><img src="/uploads/stack_heap_info.png" alt="image"></p>
 <h2><span id="1-程序计数器pc">1 程序计数器PC</span></h2><p>程序计数器PC，当前线程所执行的字节码行号指示器。每个线程都有自己计数器，是私有内存空间，该区域是整个内存中较小的一块。<br>当线程正在执行一个Java方法时，PC计数器记录的是正在执行的虚拟机字节码的地址；当线程正在执行的一个Native方法时，PC计数器则为空（Undefined）。</p>
@@ -398,7 +398,7 @@
     <published>2017-09-09T13:09:31.592Z</published>
     <updated>2017-09-14T11:28:35.483Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/swan-1908290.jpg" alt="image"><br><a id="more"></a></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/uploads/swan-1908290.jpg" alt="image"><br><a id="more"></a></p>
 <h3><span id="生命周期分为三个阶段">生命周期分为三个阶段</span></h3><ul>
 <li><h4><span id="初始化阶段">　初始化阶段</span></h4></li>
 <li>调用init()方法</li>
@@ -448,7 +448,7 @@
     <published>2017-09-06T13:10:53.817Z</published>
     <updated>2017-09-14T11:29:19.267Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/surfing.jpg" alt="image"><br><a id="more"></a></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/uploads/surfing.jpg" alt="image"><br><a id="more"></a></p>
 <h3><span id="hashmap概述">HashMap概述：</span></h3><p>HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
 <h3><span id="1-hashmap的数据结构">1、hashmap的数据结构</span></h3><p>要知道hashmap是什么，首先要搞清楚它的数据结构，在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，hashmap也不例外。Hashmap实际上是一个数组和链表的结合体（在数据结构中，一般称之为“链表散列“），请看下图（横排表示数组，纵排表示数组元素实际上是一个链表）。 </p>
 <p><img src="/uploads/beaa96fea07.jpeg" alt="image"></p>
@@ -500,7 +500,7 @@
     <published>2017-09-05T11:11:10.279Z</published>
     <updated>2017-09-14T11:36:47.395Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/waterfall-2271231__480.jpg" alt="image"><br><a id="more"></a></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/uploads/waterfall-2271231__480.jpg" alt="image"><br><a id="more"></a></p>
 <blockquote>
 <p><strong>ArrayList概述</strong></p>
 </blockquote>
@@ -705,7 +705,7 @@ Java代码
     <published>2017-08-01T02:20:37.202Z</published>
     <updated>2017-09-14T11:37:36.649Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/desert-2340326__480.jpg" alt="image"><br><a id="more"></a></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/uploads/desert-2340326__480.jpg" alt="image"><br><a id="more"></a></p>
 <h4><span id="1-选择-innodb-作为存储引擎">1、选择 InnoDB 作为存储引擎</span></h4><ul>
 <li>大型产品的数据库对于可靠性和并发性的要求较高，InnoDB 作为默认的 MySQL 存储引擎，相对于 MyISAM 来说是个更佳的选择。</li>
 </ul>
@@ -791,7 +791,7 @@ Java代码
     <published>2017-07-31T10:17:05.421Z</published>
     <updated>2017-09-14T11:38:27.042Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/cherries-1465801__480.jpg" alt="image"><br><a id="more"></a></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/uploads/cherries-1465801__480.jpg" alt="image"><br><a id="more"></a></p>
 <h1><span id="阿里云ecs服务器centos65安装jdkmysqltomcat">阿里云ECS服务器,centos6.5安装jdk，mysql，tomcat</span></h1><p>现在很多博客上都有很多莫名的错误，我试着总结以下吧，希望减少时间的浪费，说实话我搭建了1天多才完全弄好，原因就是很多文档博客都不缜密，会出现很多错</p>
 <p><strong>前提</strong>下载安装xshell（具体如何是使用xshell请自行Google）和xftp</p>
 <h4><span id="1-部署jdk">1 部署jdk</span></h4><pre><code>查看系统是否安装了jdk
