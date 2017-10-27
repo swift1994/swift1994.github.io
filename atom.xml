@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangyu520.top/"/>
-  <updated>2017-09-26T13:29:41.907Z</updated>
+  <updated>2017-10-27T13:31:09.674Z</updated>
   <id>http://www.xiangyu520.top/</id>
   
   <author>
@@ -14,6 +14,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringMVC执行流程</title>
+    <link href="http://www.xiangyu520.top/Spring/2017/10/27/SpringMVC%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E5%8F%8A%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html"/>
+    <id>http://www.xiangyu520.top/Spring/2017/10/27/SpringMVC执行流程及工作原理.html</id>
+    <published>2017-10-27T13:13:06.955Z</published>
+    <updated>2017-10-27T13:31:09.674Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/uploads/orange-15047__480.jpg" alt="image"><br><a id="more"></a><br>1.在web.xml文件中进行声明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;servlet&gt;</div><div class="line">    &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;</div><div class="line">    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">        &lt;!--Defaults to WEB-INF\dispatcher-servlet.xml --&gt;</div><div class="line">        &lt;param-value&gt;classpath:mvc-config.xml&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">&lt;/servlet&gt; </div><div class="line">&lt;servlet-mapping&gt; </div><div class="line">    &lt;servlet-name&gt; dispatcher &lt;/ servlet-name&gt; </div><div class="line">    &lt;url-pattern&gt; / * &lt;/ url-pattern&gt; </div><div class="line">&lt;/ servlet-mapping&gt;</div></pre></td></tr></table></figure>
+<p>2、服务器启动时就会初始化servlet，然后会根据url-pattern设定的规则拦截用户发来的请求</p>
+<p><img src="/uploads/clipboard11.png" alt="image"></p>
+<h3><span id="springmvc执行流程">SpringMVC执行流程</span></h3><p>1.用户发送请求至前端控制器DispatcherServlet </p>
+<p>2.DispatcherServlet收到请求调用处理器映射器HandlerMapping。 </p>
+<p>3.处理器映射器根据请求url找到具体的处理器，生成处理器执行链HandlerExecutionChain(包括处理器对象和处理器拦截器)一并返回给DispatcherServlet。 </p>
+<p>4.DispatcherServlet根据处理器Handler获取处理器适配器HandlerAdapter执行HandlerAdapter处理一系列的操作，如：参数封装，数据格式转换，数据验证等操作 </p>
+<p>5.执行处理器Handler(Controller，也叫页面控制器)。 </p>
+<p>6.Handler执行完成返回ModelAndView </p>
+<p>7.HandlerAdapter将Handler执行结果ModelAndView返回到DispatcherServlet </p>
+<p>8.DispatcherServlet将ModelAndView传给ViewReslover视图解析器 </p>
+<p>9.ViewReslover解析后返回具体View </p>
+<p>10.DispatcherServlet对View进行渲染视图（即将模型数据model填充至视图中）。 </p>
+<p>11.DispatcherServlet响应用户。</p>
+<p><strong>组件说明</strong>：</p>
+<p>1.DispatcherServlet：前端控制器。用户请求到达前端控制器，它就相当于mvc模式中的c，dispatcherServlet是整个流程控制的中心，由它调用其它组件处理用户的请求，dispatcherServlet的存在降低了组件之间的耦合性,系统扩展性提高。</p>
+<p>2.HandlerMapping：处理器映射器。HandlerMapping负责根据用户请求的url找到Handler即处理器，springmvc提供了不同的映射器实现不同的映射方式，根据一定的规则去查找,例如：xml配置方式，实现接口方式，注解方式等。</p>
+<p>3.Handler：处理器。Handler 是继DispatcherServlet前端控制器的后端控制器，在DispatcherServlet的控制下Handler对具体的用户请求进行处理。由于Handler涉及到具体的用户业务请求，所以一般情况需要程序员根据业务需求开发Handler。</p>
+<p>4.HandlAdapter：处理器适配器。通过HandlerAdapter对处理器进行执行，这是适配器模式的应用，通过扩展适配器可以对更多类型的处理器进行执行。由框架实现。</p>
+<p>5.ModelAndView是springmvc的封装对象，将model和view封装在一起。</p>
+<p>6.ViewResolver：视图解析器。ViewResolver负责将处理结果生成View视图，ViewResolver首先根据逻辑视图名解析成物理视图名即具体的页面地址，再生成View视图对象，最后对View进行渲染将处理结果通过页面展示给用户。</p>
+<p>7.View:是springmvc的封装对象，是一个接口, springmvc框架提供了很多的View视图类型，包括：jspview，pdfview,jstlView、freemarkerView、pdfView等。一般情况下需要通过页面标签或页面模版技术将模型数据通过页面展示给用户，需要由程序员根据业务需求开发具体的页面。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/uploads/orange-15047__480.jpg&quot; alt=&quot;image&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Spring" scheme="http://www.xiangyu520.top/categories/Spring/"/>
+    
+    
+      <category term="SpringMVC" scheme="http://www.xiangyu520.top/tags/SpringMVC/"/>
+    
+  </entry>
   
   <entry>
     <title>Git工作流程</title>
