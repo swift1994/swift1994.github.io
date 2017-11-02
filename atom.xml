@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>老于丢的水稻田</title>
+  <title>平湖烟雨</title>
   
   <link href="/atom.xml" rel="self"/>
   
@@ -10,7 +10,7 @@
   
   <author>
     <name>Neo</name>
-    <email>robertneon94@gmail.com</email>
+    <email>robertneon@163.com</email>
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
